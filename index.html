@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Delivery Plan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Program Delivery Plan</h1>
+
+            <div class="summary-card">
+                <h2>Executive Summary</h2>
+
+                <p>
+                    Customer launch dependent on specification approval and
+                    downstream configuration readiness.
+                </p>
+
+                <div class="summary-grid">
+                    <div>
+                        <span class="label">Status</span>
+                        <span class="status at-risk">At Risk</span>
+                    </div>
+
+                    <div>
+                        <span class="label">Target Launch</span>
+                        <span>2026-09-30</span>
+                    </div>
+
+                    <div>
+                        <span class="label">Last Updated</span>
+                        <span id="last-updated"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="health-strip">
+                <div class="health-metric">
+                    <span class="metric-label">Delivery Confidence</span>
+                    <span class="metric-value">68%</span>
+                </div>
+
+                <div class="health-metric">
+                    <span class="metric-label">Active Risks</span>
+                    <span class="metric-value">4</span>
+                </div>
+
+                <div class="health-metric">
+                    <span class="metric-label">Blocked Dependencies</span>
+                    <span class="metric-value">2</span>
+                </div>
+
+                <div class="health-metric">
+                    <span class="metric-label">Pending Decisions</span>
+                    <span class="metric-value">3</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="cockpit-grid">
+            <section class="panel panel-large">
+                <h2>Milestones</h2>
+
+                <div id="milestones-container"></div>
+            </section>
+
+            <section class="panel">
+                <h2>Program Risks</h2>
+
+                <div id="risks-container"></div>
+            </section>
+
+            <section class="panel">
+                <h2>Feature Delivery</h2>
+
+                <div id="features-container"></div>
+            </section>
+
+            <section class="panel panel-wide">
+                <h2>Decision Log</h2>
+
+                <div class="card">
+                    <h3>Specification Path Still Undefined</h3>
+
+                    <p>
+                        Awaiting alignment between governance process and
+                        accelerated customer delivery expectations.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Parallel Validation Approved</h3>
+
+                    <p>
+                        Teams agreed to begin technical validation before
+                        full specification completion.
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+</body>
+</html>
