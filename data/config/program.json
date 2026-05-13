@@ -1,0 +1,23 @@
+{
+    "programName": "Customer Configuration Program",
+
+    "executiveSummary":
+        "Customer launch dependent on specification approval and downstream configuration readiness.",
+
+    "targetLaunch":
+        "2026-09-30",
+
+    "sections": {
+        "milestones": "Milestones",
+        "risks": "Program Risks",
+        "features": "Feature Delivery",
+        "decisionLog": "Decision Log"
+    },
+
+    "healthMetrics": [
+        "Delivery Confidence",
+        "Active Risks",
+        "Blocked Dependencies",
+        "Pending Decisions"
+    ]
+}

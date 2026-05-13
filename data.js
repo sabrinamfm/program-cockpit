@@ -1,117 +1,239 @@
-const milestones = [
-    {
-        title: "Specification Approval",
-        date: "2026-06-15",
-        status: "At Risk"
-    },
-    {
-        title: "Configuration Validation",
-        date: "2026-07-10",
-        status: "On Track"
-    },
-    {
-        title: "Customer Delivery",
-        date: "2026-09-30",
-        status: "At Risk"
-    }
-];
+async function loadData() {
+    const programResponse = await fetch(
+        "data/config/program.json"
+    );
 
-const features = [
-    {
-        title: "Customer Configuration Flow",
-        estimate: "5 weeks",
-        owner: "Platform Team",
-        status: "In Progress"
-    },
-    {
-        title: "Reporting Dashboard",
-        estimate: "3 weeks",
-        owner: "Analytics Team",
-        status: "Planned"
-    }
-];
+    const snapshotResponse = await fetch(
+        "data/snapshots/2026-05-13.json"
+    );
 
-const risks = [
-    {
-        title: "Specification still under discussion",
-        impact: "High",
-        mitigation: "Parallel validation and early alignment meetings."
-    },
-    {
-        title: "External configuration dependency",
-        impact: "Medium",
-        mitigation: "Escalation path identified."
-    }
-];
+    const program = await programResponse.json();
+
+    const snapshot = await snapshotResponse.json();
+
+    renderProgram(program, snapshot);
+}
 
 function createCard(content) {
     const div = document.createElement("div");
+
     div.className = "card";
+
     div.innerHTML = content;
 
     return div;
 }
 
-const milestonesContainer = document.getElementById("milestones-container");
+function renderProgram(program, snapshot) {
+    renderHeader(program, snapshot);
 
-const timeline = document.createElement("div");
-timeline.className = "timeline";
+    renderMilestones(snapshot.milestones);
 
-milestones.forEach((milestone) => {
-    const item = document.createElement("div");
+    renderFeatures(snapshot.features);
 
-    item.className = "timeline-item";
+    renderRisks(snapshot.risks);
 
-    const statusClass =
-        milestone.status === "On Track"
-            ? "on-track"
-            : "at-risk";
+    renderDecisions(snapshot.decisions);
+}
 
-    item.innerHTML = `
-        <div class="timeline-marker ${statusClass}"></div>
+function renderHeader(program, snapshot) {
+    document.getElementById("program-name").innerText =
+        program.programName;
 
-        <div class="timeline-content">
-            <h3>${milestone.title}</h3>
+    document.getElementById("executive-summary").innerText =
+        program.executiveSummary;
 
-            <p>${milestone.date}</p>
+    document.getElementById("target-launch").innerText =
+        program.targetLaunch;
 
-            <span class="status ${statusClass}">
-                ${milestone.status}
-            </span>
-        </div>
-    `;
+    document.getElementById("last-updated").innerText =
+        snapshot.lastUpdated;
 
-    timeline.appendChild(item);
-});
+    document.getElementById("milestones-title").innerText =
+        program.sections.milestones;
 
-milestonesContainer.appendChild(timeline);
+    document.getElementById("risks-title").innerText =
+        program.sections.risks;
 
-const featuresContainer = document.getElementById("features-container");
+    document.getElementById("features-title").innerText =
+        program.sections.features;
 
-features.forEach((feature) => {
-    featuresContainer.appendChild(
-        createCard(`
-            <h3>${feature.title}</h3>
+    document.getElementById("decisions-title").innerText =
+        program.sections.decisionLog;
 
-            <p><strong>Estimate:</strong> ${feature.estimate}</p>
-            <p><strong>Owner:</strong> ${feature.owner}</p>
-            <p><strong>Status:</strong> ${feature.status}</p>
-        `)
-    );
-});
+    const labels =
+        document.querySelectorAll(".metric-label");
 
-const risksContainer = document.getElementById("risks-container");
+    const values =
+        document.querySelectorAll(".metric-value");
 
-risks.forEach((risk) => {
-    risksContainer.appendChild(
-        createCard(`
-            <h3>${risk.title}</h3>
+    program.healthMetrics.forEach((metric, index) => {
+        labels[index].innerText = metric;
+    });
 
-            <p><strong>Impact:</strong> ${risk.impact}</p>
-            <p><strong>Mitigation:</strong> ${risk.mitigation}</p>
-        `)
-    );
-});
+    values[0].innerText =
+        `${snapshot.deliveryConfidence}%`;
 
-document.getElementById("last-updated").innerText =
-    new Date().toLocaleDateString();
+    values[1].innerText =
+        snapshot.activeRisks;
+
+    values[2].innerText =
+        snapshot.blockedDependencies;
+
+    values[3].innerText =
+        snapshot.pendingDecisions;
+}
+
+function renderMilestones(milestones) {
+    const container =
+        document.getElementById("milestones-container");
+
+    container.innerHTML = "";
+
+    const timeline = document.createElement("div");
+
+    timeline.className = "timeline";
+
+    milestones.forEach((milestone) => {
+        const item = document.createElement("div");
+
+        item.className = "timeline-item";
+
+        const statusClass =
+            milestone.status === "On Track"
+                ? "on-track"
+                : "at-risk";
+
+        item.innerHTML = `
+            <div class="timeline-marker ${statusClass}">
+            </div>
+
+            <div class="timeline-content">
+                <h3>${milestone.title}</h3>
+
+                <p>${milestone.date}</p>
+
+                <span class="status ${statusClass}">
+                    ${milestone.status}
+                </span>
+            </div>
+        `;
+
+        timeline.appendChild(item);
+    });
+
+    container.appendChild(timeline);
+}
+
+function renderFeatures(features) {
+    const container =
+        document.getElementById("features-container");
+
+    container.innerHTML = "";
+
+    features.forEach((feature) => {
+        const riskClass =
+            feature.risk === "Elevated"
+                ? "risk-high"
+                : "risk-low";
+
+        const dependenciesHtml =
+            feature.dependencies
+                .map((dependency) => {
+                    return `
+                        <div class="dependency-pill">
+                            ${dependency}
+                        </div>
+                    `;
+                })
+                .join("");
+
+        container.appendChild(
+            createCard(`
+                <div class="feature-header">
+                    <h3>${feature.title}</h3>
+
+                    <span class="risk-pill ${riskClass}">
+                        ${feature.risk} Risk
+                    </span>
+                </div>
+
+                <p><strong>Estimate:</strong>
+                    ${feature.estimate}</p>
+
+                <p><strong>Owner:</strong>
+                    ${feature.owner}</p>
+
+                <p><strong>Status:</strong>
+                    ${feature.status}</p>
+
+                <p><strong>Confidence:</strong>
+                    ${feature.confidence}</p>
+
+                <div class="dependencies-section">
+                    <span class="dependency-label">
+                        Dependencies
+                    </span>
+
+                    <div class="dependencies-container">
+                        ${dependenciesHtml}
+                    </div>
+                </div>
+            `)
+        );
+    });
+}
+
+function renderRisks(risks) {
+    const container =
+        document.getElementById("risks-container");
+
+    container.innerHTML = "";
+
+    risks.forEach((risk) => {
+        container.appendChild(
+            createCard(`
+                <h3>${risk.title}</h3>
+
+                <p><strong>Impact:</strong>
+                    ${risk.impact}</p>
+
+                <p><strong>Attention:</strong>
+                    ${risk.attention}</p>
+
+                <div class="dependencies-section">
+                    <span class="dependency-label">
+                        Mitigation
+                    </span>
+
+                    <p>
+                        ${risk.mitigation.description}
+                    </p>
+
+                    <div class="dependency-pill">
+                        ${risk.mitigation.status}
+                    </div>
+                </div>
+            `)
+        );
+    });
+}
+
+function renderDecisions(decisions) {
+    const container =
+        document.getElementById("decisions-container");
+
+    container.innerHTML = "";
+
+    decisions.forEach((decision) => {
+        container.appendChild(
+            createCard(`
+                <h3>${decision.title}</h3>
+
+                <p>${decision.description}</p>
+            `)
+        );
+    });
+}
+
+loadData();

@@ -1,0 +1,31 @@
+{
+    "status": {
+        "onTrack": "On Track",
+        "atRisk": "At Risk"
+    },
+
+    "attentionLevels": [
+        "Critical",
+        "Needs Discussion",
+        "Watch",
+        "Stable",
+        "Resolved"
+    ],
+
+    "mitigationStates": [
+        "Proposed",
+        "Under Review",
+        "Accepted",
+        "In Progress",
+        "Validated",
+        "Rejected",
+        "Blocked"
+    ],
+
+    "riskLevels": [
+        "Low",
+        "Medium",
+        "Elevated",
+        "High"
+    ]
+}

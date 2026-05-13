@@ -293,3 +293,72 @@ section {
         grid-template-columns: 1fr;
     }
 }
+
+.feature-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 14px;
+}
+
+.risk-pill {
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.risk-high {
+    background: rgba(153, 27, 27, 0.08);
+    color: var(--risk);
+}
+
+.risk-low {
+    background: rgba(15, 118, 110, 0.08);
+    color: var(--success);
+}
+
+.dependencies-section {
+    margin-top: 18px;
+}
+
+.dependency-label {
+    display: block;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    color: var(--text-secondary);
+
+    margin-bottom: 10px;
+}
+
+.dependencies-container {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.dependency-pill {
+    background: #F3F4F6;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 999px;
+
+    padding: 8px 12px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #374151;
+}

@@ -18,30 +18,37 @@
 
 <body>
     <div class="container">
+
         <header>
-            <h1>Program Delivery Plan</h1>
+            <h1 id="program-name"></h1>
 
             <div class="summary-card">
                 <h2>Executive Summary</h2>
 
-                <p>
-                    Customer launch dependent on specification approval and
-                    downstream configuration readiness.
-                </p>
+                <p id="executive-summary"></p>
 
                 <div class="summary-grid">
                     <div>
                         <span class="label">Status</span>
-                        <span class="status at-risk">At Risk</span>
+
+                        <span class="status at-risk">
+                            At Risk
+                        </span>
                     </div>
 
                     <div>
-                        <span class="label">Target Launch</span>
-                        <span>2026-09-30</span>
+                        <span class="label">
+                            Target Launch
+                        </span>
+
+                        <span id="target-launch"></span>
                     </div>
 
                     <div>
-                        <span class="label">Last Updated</span>
+                        <span class="label">
+                            Last Updated
+                        </span>
+
                         <span id="last-updated"></span>
                     </div>
                 </div>
@@ -49,67 +56,57 @@
 
             <div class="health-strip">
                 <div class="health-metric">
-                    <span class="metric-label">Delivery Confidence</span>
-                    <span class="metric-value">68%</span>
+                    <span class="metric-label"></span>
+
+                    <span class="metric-value"></span>
                 </div>
 
                 <div class="health-metric">
-                    <span class="metric-label">Active Risks</span>
-                    <span class="metric-value">4</span>
+                    <span class="metric-label"></span>
+
+                    <span class="metric-value"></span>
                 </div>
 
                 <div class="health-metric">
-                    <span class="metric-label">Blocked Dependencies</span>
-                    <span class="metric-value">2</span>
+                    <span class="metric-label"></span>
+
+                    <span class="metric-value"></span>
                 </div>
 
                 <div class="health-metric">
-                    <span class="metric-label">Pending Decisions</span>
-                    <span class="metric-value">3</span>
+                    <span class="metric-label"></span>
+
+                    <span class="metric-value"></span>
                 </div>
             </div>
         </header>
 
         <main class="cockpit-grid">
+
             <section class="panel panel-large">
-                <h2>Milestones</h2>
+                <h2 id="milestones-title"></h2>
 
                 <div id="milestones-container"></div>
             </section>
 
             <section class="panel">
-                <h2>Program Risks</h2>
+                <h2 id="risks-title"></h2>
 
                 <div id="risks-container"></div>
             </section>
 
             <section class="panel">
-                <h2>Feature Delivery</h2>
+                <h2 id="features-title"></h2>
 
                 <div id="features-container"></div>
             </section>
 
             <section class="panel panel-wide">
-                <h2>Decision Log</h2>
+                <h2 id="decisions-title"></h2>
 
-                <div class="card">
-                    <h3>Specification Path Still Undefined</h3>
-
-                    <p>
-                        Awaiting alignment between governance process and
-                        accelerated customer delivery expectations.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>Parallel Validation Approved</h3>
-
-                    <p>
-                        Teams agreed to begin technical validation before
-                        full specification completion.
-                    </p>
-                </div>
+                <div id="decisions-container"></div>
             </section>
+
         </main>
     </div>
 

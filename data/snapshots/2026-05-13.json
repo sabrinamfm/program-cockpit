@@ -1,0 +1,76 @@
+{
+    "deliveryConfidence": 68,
+
+    "activeRisks": 4,
+
+    "blockedDependencies": 2,
+
+    "pendingDecisions": 3,
+
+    "lastUpdated": "2026-05-13",
+
+    "milestones": [
+        {
+            "title": "Specification Approval",
+            "date": "2026-06-15",
+            "status": "At Risk"
+        },
+        {
+            "title": "Configuration Validation",
+            "date": "2026-07-10",
+            "status": "On Track"
+        }
+    ],
+
+    "features": [
+        {
+            "title": "Customer Configuration Flow",
+            "estimate": "5 weeks",
+            "owner": "Platform Team",
+            "status": "In Progress",
+            "confidence": "Medium",
+            "risk": "Elevated",
+
+            "dependencies": [
+                "Platform Approval",
+                "Security Review",
+                "Customer Validation"
+            ]
+        }
+    ],
+
+    "risks": [
+        {
+            "title": "Specification still under discussion",
+
+            "impact": "High",
+
+            "attention": "Needs Discussion",
+
+            "mitigation": {
+                "description":
+                    "Parallel validation and early alignment meetings.",
+
+                "status": "Accepted"
+            }
+        }
+    ],
+
+    "decisions": [
+        {
+            "title":
+                "Specification Path Still Undefined",
+
+            "description":
+                "Awaiting alignment between governance process and accelerated customer delivery expectations."
+        },
+
+        {
+            "title":
+                "Parallel Validation Approved",
+
+            "description":
+                "Teams agreed to begin technical validation before full specification completion."
+        }
+    ]
+}
