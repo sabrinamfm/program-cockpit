@@ -1,27 +1,51 @@
 {
     "deliveryConfidence": 68,
-
     "activeRisks": 4,
-
     "blockedDependencies": 2,
-
     "pendingDecisions": 3,
-
     "lastUpdated": "2026-05-13",
-
+    "weeklySummary": {
+        "highlights": [
+            "Parallel validation path approved by platform teams.",
+            "Customer configuration workflow implementation started."
+        ],
+        "lowlights": [
+            "Specification governance path still unresolved.",
+            "Validation throughput decreased due to review bottlenecks."
+        ]
+    },
     "milestones": [
         {
-            "title": "Specification Approval",
-            "date": "2026-06-15",
+            "title": "Cross-Org Specification Alignment",
+            "date": "2026-05-20",
             "status": "At Risk"
         },
         {
-            "title": "Configuration Validation",
-            "date": "2026-07-10",
+            "title": "Platform Governance Approval",
+            "date": "2026-06-03",
+            "status": "At Risk"
+        },
+        {
+            "title": "Security & Compliance Validation",
+            "date": "2026-06-14",
             "status": "On Track"
+        },
+        {
+            "title": "Customer Configuration Integration Testing",
+            "date": "2026-06-28",
+            "status": "On Track"
+        },
+        {
+            "title": "Operational Readiness & Support Enablement",
+            "date": "2026-07-12",
+            "status": "At Risk"
+        },
+        {
+            "title": "Customer Launch Go/No-Go Decision",
+            "date": "2026-07-25",
+            "status": "At Risk"
         }
     ],
-
     "features": [
         {
             "title": "Customer Configuration Flow",
@@ -30,7 +54,6 @@
             "status": "In Progress",
             "confidence": "Medium",
             "risk": "Elevated",
-
             "dependencies": [
                 "Platform Approval",
                 "Security Review",
@@ -38,39 +61,45 @@
             ]
         }
     ],
-
     "risks": [
         {
             "title": "Specification still under discussion",
-
             "impact": "High",
-
             "attention": "Needs Discussion",
-
             "mitigation": {
-                "description":
-                    "Parallel validation and early alignment meetings.",
-
+                "description": "Parallel validation and early alignment meetings.",
                 "status": "Accepted"
             }
         }
     ],
-
     "decisions": [
         {
-            "title":
-                "Specification Path Still Undefined",
-
-            "description":
-                "Awaiting alignment between governance process and accelerated customer delivery expectations."
+            "title": "Specification Path Still Undefined",
+            "description": "Awaiting alignment between governance process and accelerated customer delivery expectations."
         },
-
         {
-            "title":
-                "Parallel Validation Approved",
-
-            "description":
-                "Teams agreed to begin technical validation before full specification completion."
+            "title": "Parallel Validation Approved",
+            "description": "Teams agreed to begin technical validation before full specification completion."
+        }
+    ],
+    "attentionQueue": [
+        {
+            "title": "Specification approval blocked",
+            "type": "Critical",
+            "owner": "Governance Team",
+            "reason": "Customer launch path cannot finalize without approval alignment."
+        },
+        {
+            "title": "Customer dependency ownership unclear",
+            "type": "Needs Discussion",
+            "owner": "Platform Team",
+            "reason": "Multiple teams assume partial ownership of downstream validation."
+        },
+        {
+            "title": "Validation throughput decreasing",
+            "type": "Watch",
+            "owner": "QA Team",
+            "reason": "Average validation turnaround increased from 2 to 5 days."
         }
     ]
 }

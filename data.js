@@ -26,89 +26,81 @@ function createCard(content) {
 
 function renderProgram(program, snapshot) {
     renderHeader(program, snapshot);
-
+    renderWeeklySummary(snapshot.weeklySummary);
     renderMilestones(snapshot.milestones);
-
     renderFeatures(snapshot.features);
-
     renderRisks(snapshot.risks);
-
     renderDecisions(snapshot.decisions);
+    renderAttentionQueue(snapshot.attentionQueue);
 }
 
 function renderHeader(program, snapshot) {
-    document.getElementById("program-name").innerText =
-        program.programName;
+    document.getElementById("program-name").innerText = program.programName;
+    document.getElementById("executive-summary").innerText = program.executiveSummary;
+    document.getElementById("target-launch").innerText = program.targetLaunch;
+    document.getElementById("last-updated").innerText = snapshot.lastUpdated;
+    document.getElementById("milestones-title").innerText = program.sections.milestones;
+    document.getElementById("risks-title").innerText = program.sections.risks;
+    document.getElementById("features-title").innerText = program.sections.features;
+    document.getElementById("decisions-title").innerText = program.sections.decisionLog;
 
-    document.getElementById("executive-summary").innerText =
-        program.executiveSummary;
-
-    document.getElementById("target-launch").innerText =
-        program.targetLaunch;
-
-    document.getElementById("last-updated").innerText =
-        snapshot.lastUpdated;
-
-    document.getElementById("milestones-title").innerText =
-        program.sections.milestones;
-
-    document.getElementById("risks-title").innerText =
-        program.sections.risks;
-
-    document.getElementById("features-title").innerText =
-        program.sections.features;
-
-    document.getElementById("decisions-title").innerText =
-        program.sections.decisionLog;
-
-    const labels =
-        document.querySelectorAll(".metric-label");
-
-    const values =
-        document.querySelectorAll(".metric-value");
+    const labels = document.querySelectorAll(".metric-label");
+    const values = document.querySelectorAll(".metric-value");
 
     program.healthMetrics.forEach((metric, index) => {
         labels[index].innerText = metric;
     });
 
-    values[0].innerText =
-        `${snapshot.deliveryConfidence}%`;
+    values[0].innerText = `${snapshot.deliveryConfidence}%`;
+    values[1].innerText = snapshot.activeRisks;
+    values[2].innerText = snapshot.blockedDependencies;
+    values[3].innerText = snapshot.pendingDecisions;
+}
 
-    values[1].innerText =
-        snapshot.activeRisks;
+function renderWeeklySummary(summary) {
+    const highlights = document.getElementById("highlights-list");
+    const lowlights = document.getElementById("lowlights-list");
 
-    values[2].innerText =
-        snapshot.blockedDependencies;
+    highlights.innerHTML = "";
+    lowlights.innerHTML = "";
 
-    values[3].innerText =
-        snapshot.pendingDecisions;
+    summary.highlights.forEach((item) => {
+        highlights.innerHTML += `
+            <li>${item}</li>
+        `;
+    });
+
+    summary.lowlights.forEach((item) => {
+        lowlights.innerHTML += `
+            <li>${item}</li>
+        `;
+    });
 }
 
 function renderMilestones(milestones) {
-    const container =
-        document.getElementById("milestones-container");
-
+    const container = document.getElementById("milestones-container");
     container.innerHTML = "";
 
     const timeline = document.createElement("div");
-
-    timeline.className = "timeline";
+    timeline.className = "horizontal-timeline";
 
     milestones.forEach((milestone) => {
         const item = document.createElement("div");
-
-        item.className = "timeline-item";
 
         const statusClass =
             milestone.status === "On Track"
                 ? "on-track"
                 : "at-risk";
 
-        item.innerHTML = `
-            <div class="timeline-marker ${statusClass}">
-            </div>
+        item.className = "horizontal-timeline-item";
 
-            <div class="timeline-content">
+        item.innerHTML = `
+            <div class="
+                horizontal-marker
+                ${statusClass}
+            "></div>
+
+            <div class="horizontal-content">
                 <h3>${milestone.title}</h3>
 
                 <p>${milestone.date}</p>
@@ -118,10 +110,8 @@ function renderMilestones(milestones) {
                 </span>
             </div>
         `;
-
         timeline.appendChild(item);
     });
-
     container.appendChild(timeline);
 }
 
@@ -231,6 +221,42 @@ function renderDecisions(decisions) {
                 <h3>${decision.title}</h3>
 
                 <p>${decision.description}</p>
+            `)
+        );
+    });
+}
+
+function renderAttentionQueue(items) {
+    const container =
+        document.getElementById("attention-container");
+
+    container.innerHTML = "";
+
+    items.forEach((item) => {
+        const attentionClass =
+            item.type
+                .toLowerCase()
+                .replace(/\s/g, "-");
+
+        container.appendChild(
+            createCard(`
+                <div class="attention-header">
+                    <span class="
+                        attention-badge
+                        ${attentionClass}
+                    ">
+                        ${item.type}
+                    </span>
+                </div>
+
+                <h3>${item.title}</h3>
+
+                <p>
+                    <strong>Owner:</strong>
+                    ${item.owner}
+                </p>
+
+                <p>${item.reason}</p>
             `)
         );
     });

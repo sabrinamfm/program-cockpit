@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Program Delivery Plan</title>
+    <title>Program Cockpit</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +26,24 @@
                 <h2>Executive Summary</h2>
 
                 <p id="executive-summary"></p>
+                
+                <div class="weekly-summary-grid">
+                    <div class="summary-column">
+                        <h3 class="summary-title">
+                            Highlights
+                        </h3>
+
+                        <ul id="highlights-list"></ul>
+                    </div>
+
+                    <div class="summary-column">
+                        <h3 class="summary-title">
+                            Lowlights
+                        </h3>
+
+                        <ul id="lowlights-list"></ul>
+                    </div>
+                </div>
 
                 <div class="summary-grid">
                     <div>
@@ -99,6 +117,12 @@
                 <h2 id="features-title"></h2>
 
                 <div id="features-container"></div>
+            </section>
+
+            <section class="panel">
+                <h2>Attention Queue</h2>
+
+                <div id="attention-container"></div>
             </section>
 
             <section class="panel panel-wide">
