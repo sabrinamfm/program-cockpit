@@ -508,3 +508,45 @@ section {
 .horizontal-content p {
     margin-bottom: 10px;
 }
+
+.panel-full-width {
+    width: 100%;
+}
+
+.bottom-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 24px;
+
+    margin-top: 24px;
+}
+
+.attention-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 20px;
+}
+
+@media (max-width: 1100px) {
+    .attention-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.attention-reason {
+    margin-top: 12px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}

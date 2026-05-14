@@ -256,7 +256,9 @@ function renderAttentionQueue(items) {
                     ${item.owner}
                 </p>
 
-                <p>${item.reason}</p>
+                <p class="attention-reason">
+                    ${item.reason}
+                </p>
             `)
         );
     });
