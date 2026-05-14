@@ -1,32 +1,21 @@
 {
     "deliveryConfidence": 75,
-
     "activeRisks": 3,
-
     "blockedDependencies": 1,
-
     "pendingDecisions": 2,
-
     "lastUpdated": "2026-05-06",
-
     "weeklySummary": {
         "highlights": [
             "Initial customer validation completed.",
             "Governance review scheduled."
         ],
-
         "lowlights": [
             "Specification alignment still incomplete."
         ]
     },
-
     "milestones": [],
-
     "features": [],
-
     "risks": [],
-
     "attentionQueue": [],
-
     "decisions": []
 }

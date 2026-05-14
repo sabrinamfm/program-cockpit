@@ -1,23 +1,116 @@
 async function loadData() {
+    const snapshotsConfigResponse =
+        await fetch(
+            "data/config/snapshots.json"
+        );
+
+    const snapshotsConfig =
+        await snapshotsConfigResponse.json();
+
+    const sortedSnapshots =
+        [...snapshotsConfig.availableSnapshots]
+            .sort();
+
+    const latestSnapshot =
+        sortedSnapshots[
+            sortedSnapshots.length - 1
+        ];
+
+    renderSnapshotSelector(
+        sortedSnapshots,
+        latestSnapshot
+    );
+
+    await loadSnapshot(
+        latestSnapshot,
+        sortedSnapshots
+    );
+}
+
+async function loadSnapshot(
+    snapshotId,
+    availableSnapshots
+) {
     const programResponse = await fetch(
         "data/config/program.json"
     );
 
-    const currentSnapshotResponse = await fetch(
-        "data/snapshots/2026-05-13.json"
+    const currentSnapshotResponse =
+        await fetch(
+            `data/snapshots/${snapshotId}.json`
+        );
+
+    const currentSnapshot =
+        await currentSnapshotResponse.json();
+
+    const snapshotIndex =
+        availableSnapshots.indexOf(snapshotId);
+
+    let previousSnapshot = {
+        deliveryConfidence:
+            currentSnapshot.deliveryConfidence
+    };
+
+    if (snapshotIndex > 0) {
+        const previousSnapshotId =
+            availableSnapshots[
+                snapshotIndex - 1
+            ];
+
+        const previousSnapshotResponse =
+            await fetch(
+                `data/snapshots/${previousSnapshotId}.json`
+            );
+
+        previousSnapshot =
+            await previousSnapshotResponse.json();
+    }
+
+    const program =
+        await programResponse.json();
+
+    renderProgram(
+        program,
+        currentSnapshot,
+        previousSnapshot
     );
+}
 
-    const previousSnapshotResponse = await fetch(
-        "data/snapshots/2026-05-06.json"
+function renderSnapshotSelector(
+    snapshots,
+    latestSnapshot
+) {
+    const selector =
+        document.getElementById(
+            "snapshot-selector"
+        );
+
+    selector.innerHTML = "";
+
+    snapshots.forEach((snapshot) => {
+        const option =
+            document.createElement("option");
+
+        option.value = snapshot;
+
+        option.innerText = snapshot;
+
+        if (snapshot === latestSnapshot) {
+            option.selected = true;
+        }
+
+        selector.appendChild(option);
+    });
+
+    selector.addEventListener(
+        "change",
+        async (event) => {
+            await loadSnapshot(
+                event.target.value,
+                snapshots
+            );
+        }
     );
-
-    const program = await programResponse.json();
-
-    const currentSnapshot = await currentSnapshotResponse.json();
-
-    const previousSnapshot = await previousSnapshotResponse.json();
-
-    renderProgram(program, currentSnapshot, previousSnapshot);
 }
 
 function createCard(content) {
@@ -35,7 +128,7 @@ function renderProgram(program, currentSnapshot, previousSnapshot) {
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderMilestones(currentSnapshot.milestones);
     renderFeatures(currentSnapshot.features);
-    renderRisks(currentSnapshot.risks);
+    renderRisks(currentSnapshot.risks, previousSnapshot.risks || []);
     renderDecisions(currentSnapshot.decisions);
     renderAttentionQueue(currentSnapshot.attentionQueue);
 }
@@ -45,6 +138,7 @@ function renderHeader(program, currentSnapshot, previousSnapshot) {
     document.getElementById("executive-summary").innerText = program.executiveSummary;
     document.getElementById("target-launch").innerText = program.targetLaunch;
     document.getElementById("last-updated").innerText = currentSnapshot.lastUpdated;
+    document.getElementById("snapshot-note").innerText = currentSnapshot.metadata?.note || "";
     document.getElementById("milestones-title").innerText = program.sections.milestones;
     document.getElementById("risks-title").innerText = program.sections.risks;
     document.getElementById("features-title").innerText = program.sections.features;
@@ -199,25 +293,47 @@ function renderFeatures(features) {
     });
 }
 
-function renderRisks(risks) {
-    const container = document.getElementById("risks-container");
+function renderRisks(
+    currentRisks,
+    previousRisks
+) {
+    const container =
+        document.getElementById("risks-container");
 
     container.innerHTML = "";
 
-    risks.forEach((risk) => {
-        const changeClass = risk.change.toLowerCase().replace(/\s/g, "-");
+    const previousRiskTitles =
+        previousRisks.map((risk) => risk.title);
+
+    currentRisks.forEach((risk) => {
+        let changeType = "";
+
+        if (
+            !previousRiskTitles.includes(
+                risk.title
+            )
+        ) {
+            changeType = "New";
+        }
 
         container.appendChild(
             createCard(`
-                <div class="risk-header">
-                    <span class="
-                        risk-change
-                        ${changeClass}
-                    ">
-                        ${risk.change}
-                    </span>
+                ${
+                    changeType
+                        ? `
+                        <div class="risk-header">
 
-                </div>
+                            <span class="
+                                risk-change
+                                new
+                            ">
+                                ${changeType}
+                            </span>
+
+                        </div>
+                    `
+                        : ""
+                }
 
                 <h3>${risk.title}</h3>
 

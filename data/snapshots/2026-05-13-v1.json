@@ -1,4 +1,7 @@
 {
+    "metadata": {
+        "note": "Post governance review update"
+    },
     "deliveryConfidence": 68,
     "activeRisks": 4,
     "blockedDependencies": 2,
@@ -83,23 +86,21 @@
     ],
     "risks": [
         {
-            "title": "Specification still under discussion",
-            "impact": "High",
-            "attention": "Needs Discussion",
-            "change": "Escalated",
+            "title":
+                "Customer dependency ownership unclear",
+
+            "impact":
+                "Medium",
+
+            "attention":
+                "Watch",
+
             "mitigation": {
-                "description": "Parallel validation and early alignment meetings.",
-                "status": "Accepted"
-            }
-        },
-        {
-            "title": "Customer dependency ownership unclear",
-            "impact": "Medium",
-            "attention": "Watch",
-            "change": "New",
-            "mitigation": {
-                "description": "Clarify ownership model during governance review.",
-                "status": "Proposed"
+                "description":
+                    "Clarify ownership model during governance review.",
+
+                "status":
+                    "Proposed"
             }
         }
     ],

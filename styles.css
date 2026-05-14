@@ -612,3 +612,13 @@ section {
     background: rgba(107, 114, 128, 0.10);
     color: #6B7280;
 }
+
+#snapshot-note {
+    margin-top: 6px;
+
+    font-size: 13px;
+
+    color: var(--text-secondary);
+
+    font-style: italic;
+}
