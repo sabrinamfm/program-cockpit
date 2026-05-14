@@ -550,3 +550,65 @@ section {
 
     line-height: 1.5;
 }
+
+.metric-value {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 10px;
+}
+
+.metric-main {
+    font-size: 36px;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+.metric-delta {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.delta-positive {
+    color: var(--success);
+}
+
+.delta-negative {
+    color: var(--risk);
+}
+
+.risk-header {
+    margin-bottom: 14px;
+}
+
+.risk-change {
+    display: inline-flex;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+.new {
+    background: rgba(15, 118, 110, 0.10);
+    color: var(--success);
+}
+
+.escalated {
+    background: rgba(153, 27, 27, 0.10);
+    color: var(--risk);
+}
+
+.resolved {
+    background: rgba(107, 114, 128, 0.10);
+    color: #6B7280;
+}

@@ -3,15 +3,21 @@ async function loadData() {
         "data/config/program.json"
     );
 
-    const snapshotResponse = await fetch(
+    const currentSnapshotResponse = await fetch(
         "data/snapshots/2026-05-13.json"
+    );
+
+    const previousSnapshotResponse = await fetch(
+        "data/snapshots/2026-05-06.json"
     );
 
     const program = await programResponse.json();
 
-    const snapshot = await snapshotResponse.json();
+    const currentSnapshot = await currentSnapshotResponse.json();
 
-    renderProgram(program, snapshot);
+    const previousSnapshot = await previousSnapshotResponse.json();
+
+    renderProgram(program, currentSnapshot, previousSnapshot);
 }
 
 function createCard(content) {
@@ -24,21 +30,21 @@ function createCard(content) {
     return div;
 }
 
-function renderProgram(program, snapshot) {
-    renderHeader(program, snapshot);
-    renderWeeklySummary(snapshot.weeklySummary);
-    renderMilestones(snapshot.milestones);
-    renderFeatures(snapshot.features);
-    renderRisks(snapshot.risks);
-    renderDecisions(snapshot.decisions);
-    renderAttentionQueue(snapshot.attentionQueue);
+function renderProgram(program, currentSnapshot, previousSnapshot) {
+    renderHeader(program, currentSnapshot, previousSnapshot);
+    renderWeeklySummary(currentSnapshot.weeklySummary);
+    renderMilestones(currentSnapshot.milestones);
+    renderFeatures(currentSnapshot.features);
+    renderRisks(currentSnapshot.risks);
+    renderDecisions(currentSnapshot.decisions);
+    renderAttentionQueue(currentSnapshot.attentionQueue);
 }
 
-function renderHeader(program, snapshot) {
+function renderHeader(program, currentSnapshot, previousSnapshot) {
     document.getElementById("program-name").innerText = program.programName;
     document.getElementById("executive-summary").innerText = program.executiveSummary;
     document.getElementById("target-launch").innerText = program.targetLaunch;
-    document.getElementById("last-updated").innerText = snapshot.lastUpdated;
+    document.getElementById("last-updated").innerText = currentSnapshot.lastUpdated;
     document.getElementById("milestones-title").innerText = program.sections.milestones;
     document.getElementById("risks-title").innerText = program.sections.risks;
     document.getElementById("features-title").innerText = program.sections.features;
@@ -51,10 +57,29 @@ function renderHeader(program, snapshot) {
         labels[index].innerText = metric;
     });
 
-    values[0].innerText = `${snapshot.deliveryConfidence}%`;
-    values[1].innerText = snapshot.activeRisks;
-    values[2].innerText = snapshot.blockedDependencies;
-    values[3].innerText = snapshot.pendingDecisions;
+    const confidenceDelta = 
+        currentSnapshot.deliveryConfidence - previousSnapshot.deliveryConfidence;
+
+    const deltaClass =
+        confidenceDelta >= 0
+            ? "delta-positive"
+            : "delta-negative";
+
+    const deltaArrow = confidenceDelta >= 0 ? "↑" : "↓";
+
+    values[0].innerHTML = `
+        <span class="metric-main">
+            ${currentSnapshot.deliveryConfidence}%
+        </span>
+
+        <span class="metric-delta ${deltaClass}">
+            (${deltaArrow}${Math.abs(confidenceDelta)}%)
+        </span>
+    `;
+    
+    values[1].innerText = currentSnapshot.activeRisks;
+    values[2].innerText = currentSnapshot.blockedDependencies;
+    values[3].innerText = currentSnapshot.pendingDecisions;
 }
 
 function renderWeeklySummary(summary) {
@@ -175,14 +200,25 @@ function renderFeatures(features) {
 }
 
 function renderRisks(risks) {
-    const container =
-        document.getElementById("risks-container");
+    const container = document.getElementById("risks-container");
 
     container.innerHTML = "";
 
     risks.forEach((risk) => {
+        const changeClass = risk.change.toLowerCase().replace(/\s/g, "-");
+
         container.appendChild(
             createCard(`
+                <div class="risk-header">
+                    <span class="
+                        risk-change
+                        ${changeClass}
+                    ">
+                        ${risk.change}
+                    </span>
+
+                </div>
+
                 <h3>${risk.title}</h3>
 
                 <p><strong>Impact:</strong>

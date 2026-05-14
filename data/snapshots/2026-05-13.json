@@ -46,6 +46,26 @@
             "status": "At Risk"
         }
     ],
+    "attentionQueue": [
+        {
+            "title": "Specification approval blocked",
+            "type": "Critical",
+            "owner": "Governance Team",
+            "reason": "Customer launch path cannot finalize without approval alignment."
+        },
+        {
+            "title": "Customer dependency ownership unclear",
+            "type": "Needs Discussion",
+            "owner": "Platform Team",
+            "reason": "Multiple teams assume partial ownership of downstream validation."
+        },
+        {
+            "title": "Validation throughput decreasing",
+            "type": "Watch",
+            "owner": "QA Team",
+            "reason": "Average validation turnaround increased from 2 to 5 days."
+        }
+    ],
     "features": [
         {
             "title": "Customer Configuration Flow",
@@ -66,9 +86,20 @@
             "title": "Specification still under discussion",
             "impact": "High",
             "attention": "Needs Discussion",
+            "change": "Escalated",
             "mitigation": {
                 "description": "Parallel validation and early alignment meetings.",
                 "status": "Accepted"
+            }
+        },
+        {
+            "title": "Customer dependency ownership unclear",
+            "impact": "Medium",
+            "attention": "Watch",
+            "change": "New",
+            "mitigation": {
+                "description": "Clarify ownership model during governance review.",
+                "status": "Proposed"
             }
         }
     ],
@@ -80,26 +111,6 @@
         {
             "title": "Parallel Validation Approved",
             "description": "Teams agreed to begin technical validation before full specification completion."
-        }
-    ],
-    "attentionQueue": [
-        {
-            "title": "Specification approval blocked",
-            "type": "Critical",
-            "owner": "Governance Team",
-            "reason": "Customer launch path cannot finalize without approval alignment."
-        },
-        {
-            "title": "Customer dependency ownership unclear",
-            "type": "Needs Discussion",
-            "owner": "Platform Team",
-            "reason": "Multiple teams assume partial ownership of downstream validation."
-        },
-        {
-            "title": "Validation throughput decreasing",
-            "type": "Watch",
-            "owner": "QA Team",
-            "reason": "Average validation turnaround increased from 2 to 5 days."
         }
     ]
 }
