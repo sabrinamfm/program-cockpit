@@ -30,3 +30,19 @@ function renderGovernanceWarnings(warnings) {
         `;
     });
 }
+
+function detectOperationalContradictions(currentSnapshot, previousSnapshot) {
+    const warnings = [];
+    const confidenceIncreased = currentSnapshot.deliveryConfidence > previousSnapshot.deliveryConfidence;
+    const unresolvedRisksIncreased = currentSnapshot.activeRisks > previousSnapshot.activeRisks;
+
+    if (confidenceIncreased && unresolvedRisksIncreased) {
+        warnings.push({
+            severity: "High",
+            category: "Operational Contradiction",
+            message: "Delivery confidence increased while unresolved risks increased"
+        });
+    }
+
+    return warnings;
+}

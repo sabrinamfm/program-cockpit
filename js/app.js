@@ -33,7 +33,13 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     if (confidenceTrendWarning) {
         warnings.push(confidenceTrendWarning);
     }
-    
+
+    const milestoneWarnings = detectMilestoneDrift(currentSnapshot.milestones, previousSnapshot.milestones || []);
+    warnings.push(...milestoneWarnings);
+
+    const contradictionWarnings = detectOperationalContradictions(currentSnapshot, previousSnapshot);
+    warnings.push(...contradictionWarnings);
+
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderMilestones(currentSnapshot.milestones);
     renderFeatures(currentSnapshot.features);

@@ -3,8 +3,8 @@
         "note": "Operational review snapshot"
     },
     "lastUpdated": "2026-05-20",
-    "deliveryConfidence": 61,
-    "activeRisks": 1,
+    "deliveryConfidence": 66,
+    "activeRisks": 3,
     "blockedDependencies": 2,
     "pendingDecisions": 1,
     "weeklySummary": {
@@ -18,7 +18,7 @@
     "milestones": [
         {
             "title": "Beta Validation",
-            "date": "2026-05-28",
+            "date": "2026-06-03",
             "status": "At Risk"
         }
     ],

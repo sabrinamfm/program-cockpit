@@ -2,8 +2,8 @@
     "metadata": {
         "note": "Post governance review update"
     },
-    "deliveryConfidence": 69,
-    "activeRisks": 4,
+    "deliveryConfidence": 61,
+    "activeRisks": 1,
     "blockedDependencies": 2,
     "pendingDecisions": 3,
     "lastUpdated": "2026-05-13",
@@ -19,9 +19,14 @@
     },
     "milestones": [
         {
+            "title": "Beta Validation",
+            "date": "2026-05-28",
+            "status": "At Risk"
+        },
+        {
             "title": "Cross-Org Specification Alignment",
             "date": "2026-05-20",
-            "status": "At Risk"
+            "status": "Off Track"
         },
         {
             "title": "Platform Governance Approval",
