@@ -2,6 +2,15 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
     const programResponse = await fetch("data/config/program.json");
     const currentSnapshotResponse = await fetch(`data/snapshots/${snapshotId}.json`);
     const currentSnapshot = await currentSnapshotResponse.json();
+
+    const historicalSnapshots = [];
+
+    for (const snapshotId of availableSnapshots) {
+        const response = await fetch(`data/snapshots/${snapshotId}.json`);
+
+        historicalSnapshots.push(await response.json());
+    }
+
     const snapshotIndex = availableSnapshots.indexOf(snapshotId);
 
     let previousSnapshot = {
@@ -17,7 +26,7 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
 
     const program = await programResponse.json();
 
-    renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots);
+    renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots);
 }
 
 function renderSnapshotSelector(snapshots, latestSnapshot) {

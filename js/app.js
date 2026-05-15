@@ -20,9 +20,20 @@ async function loadData() {
     await loadSnapshot(latestSnapshot, sortedSnapshots);
 }
 
-function renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots) {
+function renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots) {
     renderHeader(program, currentSnapshot, previousSnapshot);
-    const warnings = validateRisks(currentSnapshot.risks, previousSnapshot.risks || [], currentSnapshot.attentionQueue || [], availableSnapshots);
+    const warnings = validateRisks(
+        currentSnapshot.risks, 
+        previousSnapshot.risks || [], 
+        currentSnapshot.attentionQueue || [], 
+        availableSnapshots
+    );
+    const confidenceTrendWarning = detectConfidenceTrend(historicalSnapshots);
+
+    if (confidenceTrendWarning) {
+        warnings.push(confidenceTrendWarning);
+    }
+    
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderMilestones(currentSnapshot.milestones);
     renderFeatures(currentSnapshot.features);
