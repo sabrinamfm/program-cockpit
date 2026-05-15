@@ -72,7 +72,8 @@ async function loadSnapshot(
     renderProgram(
         program,
         currentSnapshot,
-        previousSnapshot
+        previousSnapshot,
+        availableSnapshots
     );
 }
 
@@ -123,12 +124,16 @@ function createCard(content) {
     return div;
 }
 
-function renderProgram(program, currentSnapshot, previousSnapshot) {
+function renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots) {
     renderHeader(program, currentSnapshot, previousSnapshot);
-    renderWeeklySummary(currentSnapshot.weeklySummary);
+
+    renderWeeklySummary(
+        currentSnapshot.weeklySummary
+    );
+
     renderMilestones(currentSnapshot.milestones);
     renderFeatures(currentSnapshot.features);
-    renderRisks(currentSnapshot.risks, previousSnapshot.risks || []);
+    renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots, availableSnapshots);
     renderDecisions(currentSnapshot.decisions);
     renderAttentionQueue(currentSnapshot.attentionQueue);
 }
@@ -176,24 +181,38 @@ function renderHeader(program, currentSnapshot, previousSnapshot) {
     values[3].innerText = currentSnapshot.pendingDecisions;
 }
 
-function renderWeeklySummary(summary) {
-    const highlights = document.getElementById("highlights-list");
-    const lowlights = document.getElementById("lowlights-list");
+function renderWeeklySummary(
+    summary
+) {
+    const highlights =
+        document.getElementById(
+            "highlights-list"
+        );
+
+    const lowlights =
+        document.getElementById(
+            "lowlights-list"
+        );
 
     highlights.innerHTML = "";
+
     lowlights.innerHTML = "";
 
-    summary.highlights.forEach((item) => {
-        highlights.innerHTML += `
-            <li>${item}</li>
-        `;
-    });
+    summary.highlights.forEach(
+        (item) => {
+            highlights.innerHTML += `
+                <li>${item}</li>
+            `;
+        }
+    );
 
-    summary.lowlights.forEach((item) => {
-        lowlights.innerHTML += `
-            <li>${item}</li>
-        `;
-    });
+    summary.lowlights.forEach(
+        (item) => {
+            lowlights.innerHTML += `
+                <li>${item}</li>
+            `;
+        }
+    );
 }
 
 function renderMilestones(milestones) {
@@ -293,10 +312,7 @@ function renderFeatures(features) {
     });
 }
 
-function renderRisks(
-    currentRisks,
-    previousRisks
-) {
+function renderRisks(currentRisks, previousRisks, availableSnapshots) {
     const container =
         document.getElementById("risks-container");
 
@@ -307,6 +323,7 @@ function renderRisks(
 
     currentRisks.forEach((risk) => {
         let changeType = "";
+        const riskAge = calculateRiskAge(risk, availableSnapshots);
 
         if (
             !previousRiskTitles.includes(
@@ -343,6 +360,17 @@ function renderRisks(
                 <p><strong>Attention:</strong>
                     ${risk.attention}</p>
 
+                ${
+                    riskAge
+                        ? `
+                            <p>
+                                <strong>Age:</strong>
+                                ${riskAge} snapshot(s)
+                            </p>
+                        `
+                        : ""
+                }
+
                 <div class="dependencies-section">
                     <span class="dependency-label">
                         Mitigation
@@ -359,6 +387,29 @@ function renderRisks(
             `)
         );
     });
+}
+
+function calculateRiskAge(
+    risk,
+    availableSnapshots
+) {
+    if (!risk.introduced) {
+        return null;
+    }
+
+    const introducedIndex =
+        availableSnapshots.indexOf(
+            risk.introduced
+        );
+
+    if (introducedIndex === -1) {
+        return null;
+    }
+
+    return (
+        availableSnapshots.length -
+        introducedIndex
+    );
 }
 
 function renderDecisions(decisions) {

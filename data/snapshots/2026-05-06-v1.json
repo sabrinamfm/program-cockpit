@@ -15,7 +15,32 @@
     },
     "milestones": [],
     "features": [],
-    "risks": [],
+    "risks": [
+        {
+            "title":
+                "Customer dependency ownership unclear",
+
+            "state":
+                "Unresolved",
+
+            "introduced":
+                "2026-05-06-v1",
+
+            "impact":
+                "Medium",
+
+            "attention":
+                "Watch",
+
+            "mitigation": {
+                "description":
+                    "Clarify ownership model during governance review.",
+
+                "status":
+                    "Proposed"
+            }
+        }
+    ],
     "attentionQueue": [],
     "decisions": []
 }

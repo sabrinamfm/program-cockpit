@@ -85,24 +85,6 @@
         }
     ],
     "risks": [
-        {
-            "title":
-                "Customer dependency ownership unclear",
-
-            "impact":
-                "Medium",
-
-            "attention":
-                "Watch",
-
-            "mitigation": {
-                "description":
-                    "Clarify ownership model during governance review.",
-
-                "status":
-                    "Proposed"
-            }
-        }
     ],
     "decisions": [
         {

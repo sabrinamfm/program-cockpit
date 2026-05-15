@@ -3,7 +3,6 @@
         "onTrack": "On Track",
         "atRisk": "At Risk"
     },
-
     "attentionLevels": [
         "Critical",
         "Needs Discussion",
@@ -11,7 +10,6 @@
         "Stable",
         "Resolved"
     ],
-
     "mitigationStates": [
         "Proposed",
         "Under Review",
@@ -21,11 +19,17 @@
         "Rejected",
         "Blocked"
     ],
-
     "riskLevels": [
         "Low",
         "Medium",
         "Elevated",
         "High"
+    ],
+    "riskStates": [
+        "Unresolved",
+        "Mitigated",
+        "Accepted",
+        "Monitoring",
+        "Closed"
     ]
 }
