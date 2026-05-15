@@ -1,0 +1,41 @@
+{
+    "metadata": {
+        "note": "Operational review snapshot"
+    },
+    "lastUpdated": "2026-05-20",
+    "deliveryConfidence": 61,
+    "activeRisks": 1,
+    "blockedDependencies": 2,
+    "pendingDecisions": 1,
+    "weeklySummary": {
+        "highlights": [
+            "Integration testing continued."
+        ],
+        "lowlights": [
+            "Customer alignment remains unresolved."
+        ]
+    },
+    "milestones": [
+        {
+            "title": "Beta Validation",
+            "date": "2026-05-28",
+            "status": "At Risk"
+        }
+    ],
+    "attentionQueue": [],
+    "features": [],
+    "risks": [
+        {
+            "title": "Customer dependency ownership unclear",
+            "introduced": "2026-05-06-v1",
+            "state": "Unresolved",
+            "impact": "Medium",
+            "attention": "Watch",
+            "mitigation": {
+                "description": "Clarify ownership model during governance review.",
+                "status": "In Progress"
+            }
+        }
+    ],
+    "decisions": []
+}
