@@ -1,12 +1,12 @@
 {
     "metadata": {
-        "note": "Operational review snapshot"
+        "snapshotId": "2026-05-20-v1",
+        "createdBy": "TPM",
+        "note": "Post governance review update"
     },
     "lastUpdated": "2026-05-20",
     "deliveryConfidence": 66,
-    "activeRisks": 3,
     "blockedDependencies": 2,
-    "pendingDecisions": 1,
     "weeklySummary": {
         "highlights": [
             "Integration testing continued."
@@ -17,25 +17,160 @@
     },
     "milestones": [
         {
+            "id": "MS-001",
             "title": "Beta Validation",
             "date": "2026-06-03",
-            "status": "At Risk"
+            "status": "At Risk",
+            "owner": "QA Team",
+            "confidence": "Medium",
+            "relatedRisks": [
+                "RISK-001"
+            ]
+        },
+        {
+            "id": "MS-002",
+            "title": "Customer Launch Go/No-Go Decision",
+            "date": "2026-07-25",
+            "status": "On Track",
+            "owner": "Executive Team",
+            "confidence": "Low",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-003",
+            "title": "Cross-Org Specification Alignment",
+            "date": "2026-05-20",
+            "status": "Off Track",
+            "owner": "Governance Team",
+            "confidence": "Low",
+            "relatedRisks": [
+                "RISK-002"
+            ]
+        },
+        {
+            "id": "MS-004",
+            "title": "Platform Governance Approval",
+            "date": "2026-06-03",
+            "status": "Unknown",
+            "owner": "Governance Team",
+            "confidence": "Medium",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-005",
+            "title": "Security & Compliance Validation",
+            "date": "2026-06-14",
+            "status": "On Track",
+            "owner": "Security Team",
+            "confidence": "High",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-006",
+            "title": "Customer Configuration Integration Testing",
+            "date": "2026-06-28",
+            "status": "On Track",
+            "owner": "QA Team",
+            "confidence": "Medium",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-007",
+            "title": "Operational Readiness & Support Enablement",
+            "date": "2026-07-12",
+            "status": "At Risk",
+            "owner": "Operations Team",
+            "confidence": "Medium",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-008",
+            "title": "Customer Launch Go/No-Go Decision",
+            "date": "2026-07-25",
+            "status": "At Risk",
+            "owner": "Executive Team",
+            "confidence": "Low",
+            "relatedRisks": []
         }
     ],
-    "attentionQueue": [],
-    "features": [],
+    "attentionQueue": [
+        {
+            "entityType": "Risk",
+            "entityId": "RISK-001",
+            "priority": "Critical",
+            "reason": "Customer launch path blocked pending ownership clarification."
+        }
+    ],
+    "features": [
+        {
+            "title": "Customer Configuration Flow",
+            "estimate": "5 weeks",
+            "owner": "Platform Team",
+            "status": "In Progress",
+            "confidence": "Medium",
+            "risk": "Elevated",
+            "dependencies": [
+                "Platform Approval",
+                "Security Review",
+                "Customer Validation"
+            ]
+        }
+    ],
     "risks": [
         {
+            "id": "RISK-001",
             "title": "Customer dependency ownership unclear",
             "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-13-v1",
             "state": "Unresolved",
-            "impact": "Medium",
+            "severity": "Medium",
+            "impact": "Delivery",
+            "owner": "Platform Team",
             "attention": "Watch",
+            "description": "Multiple teams assume partial ownership of downstream validation.",
             "mitigation": {
-                "description": "Clarify ownership model during governance review.",
-                "status": "In Progress"
+                "status": "In Progress",
+                "description": "Clarify ownership during governance review."
             }
         }
     ],
-    "decisions": []
+    "decisions": [
+        {
+            "id": "DEC-001",
+            "title": "Specification Path Still Undefined",
+            "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "status": "Pending",
+            "severity": "High",
+            "owner": "Governance Team",
+            "relatedRisks": [
+                "RISK-001"
+            ],
+            "description": "Awaiting alignment between governance process and accelerated customer delivery expectations."
+        },
+        {
+            "id": "DEC-002",
+            "title": "Specification Path Still Undefined",
+            "introduced": "2026-05-13-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "status": "Pending",
+            "severity": "High",
+            "owner": "Governance Team",
+            "relatedRisks": [
+                "RISK-002"
+            ],
+            "description": "Awaiting alignment between governance process and accelerated customer delivery expectations."
+        },
+        {
+            "id": "DEC-003",
+            "title": "Parallel Validation Approved",
+            "introduced": "2026-05-13-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "status": "Approved",
+            "severity": "Medium",
+            "owner": "Governance Team",
+            "relatedRisks": [],
+            "description": "Teams agreed to begin technical validation before full specification completion."
+        }
+    ]
 }

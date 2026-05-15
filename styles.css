@@ -7,9 +7,10 @@
     --text-primary: #111827;
     --text-secondary: #6B7280;
 
-    --success: #0F766E;
-    --warning: #B45309;
-    --risk: #991B1B;
+    --on-track: #0F766E;
+    --risk: #B45309;
+    --off-track: #991B1B;
+    --unknown: #6B7280;
 
     --shadow: rgba(15, 23, 42, 0.06);
 }
@@ -117,13 +118,23 @@ section {
 }
 
 .at-risk {
-    background: rgba(153, 27, 27, 0.08);
-    color: var(--risk);
+    background: var(--risk);
+    color: white;
 }
 
 .on-track {
-    background: rgba(15, 118, 110, 0.08);
-    color: var(--success);
+    background: var(--on-track);
+    color: white;
+}
+
+.off-track {
+    background-color: var(--off-track);
+    color: white;
+}
+
+.unknown {
+    background-color: var(--unknown);
+    color: white;
 }
 
 .card {
@@ -324,7 +335,7 @@ section {
 
 .risk-low {
     background: rgba(15, 118, 110, 0.08);
-    color: var(--success);
+    color: var(--on-track);
 }
 
 .dependencies-section {
@@ -494,11 +505,19 @@ section {
 }
 
 .horizontal-marker.on-track {
-    background: var(--success);
+    background: var(--on-track);
 }
 
 .horizontal-marker.at-risk {
     background: var(--risk);
+}
+
+.horizontal-marker.off-track {
+    background: var(--off-track);
+}
+
+.horizontal-marker.unknown {
+    background: var(--unknown);
 }
 
 .horizontal-content h3 {
@@ -572,11 +591,11 @@ section {
 }
 
 .delta-positive {
-    color: var(--success);
+    color: var(--on-track);
 }
 
 .delta-negative {
-    color: var(--risk);
+    color: var(--off-track);
 }
 
 .risk-header {
@@ -600,7 +619,7 @@ section {
 
 .new {
     background: rgba(15, 118, 110, 0.10);
-    color: var(--success);
+    color: var(--on-track);
 }
 
 .escalated {
@@ -622,6 +641,7 @@ section {
 
     font-style: italic;
 }
+
 .governance-warning {
     padding: 16px 18px;
 
@@ -635,15 +655,13 @@ section {
 .governance-warning.high {
     background: rgba(153, 27, 27, 0.05);
 
-    border-color:
-        rgba(153, 27, 27, 0.18);
+    border-color: var(--off-track)
 }
 
 .governance-warning.medium {
     background: rgba(180, 83, 9, 0.05);
 
-    border-color:
-        rgba(180, 83, 9, 0.18);
+    border-color: var(--risk);
 }
 
 .governance-warning-header {
@@ -664,7 +682,7 @@ section {
 
     text-transform: uppercase;
 
-    color: #991B1B;
+    color: var(--off-track);
 }
 
 .governance-category {

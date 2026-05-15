@@ -8,7 +8,24 @@ function renderMilestones(milestones) {
     milestones.forEach((milestone) => {
         const item = document.createElement("div");
 
-        const statusClass = milestone.status === "On Track" ? "on-track" : "at-risk";
+        let statusClass = "unknown";
+
+        switch (milestone.status) {
+            case "On Track":
+                statusClass = "on-track";
+                break;
+
+            case "At Risk":
+                statusClass = "at-risk";
+                break;
+
+            case "Off Track":
+                statusClass = "off-track";
+                break;
+
+            default:
+                statusClass = "unknown";
+        }
 
         item.className = "horizontal-timeline-item";
 

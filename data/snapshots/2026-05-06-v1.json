@@ -1,8 +1,6 @@
 {
     "deliveryConfidence": 74,
-    "activeRisks": 3,
     "blockedDependencies": 1,
-    "pendingDecisions": 2,
     "lastUpdated": "2026-05-06",
     "weeklySummary": {
         "highlights": [
@@ -13,31 +11,109 @@
             "Specification alignment still incomplete."
         ]
     },
-    "milestones": [],
-    "features": [],
+    "milestones": [
+        {
+            "id": "MS-001",
+            "title": "Beta Validation",
+            "date": "2026-06-03",
+            "status": "At Risk",
+            "owner": "QA Team",
+            "confidence": "Medium",
+            "relatedRisks": [
+                "RISK-001"
+            ]
+        },
+        {
+            "id": "MS-002",
+            "title": "Customer Launch Go/No-Go Decision",
+            "date": "2026-07-25",
+            "status": "At Risk",
+            "owner": "Executive Team",
+            "confidence": "Low",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-003",
+            "title": "Cross-Org Specification Alignment",
+            "date": "2026-05-20",
+            "status": "Off Track",
+            "owner": "Governance Team",
+            "confidence": "Low",
+            "relatedRisks": [
+                "RISK-002"
+            ]
+        },
+        {
+            "id": "MS-004",
+            "title": "Platform Governance Approval",
+            "date": "2026-06-03",
+            "status": "At Risk",
+            "owner": "Governance Team",
+            "confidence": "Medium",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-005",
+            "title": "Security & Compliance Validation",
+            "date": "2026-06-14",
+            "status": "On Track",
+            "owner": "Security Team",
+            "confidence": "High",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-006",
+            "title": "Customer Configuration Integration Testing",
+            "date": "2026-06-28",
+            "status": "On Track",
+            "owner": "QA Team",
+            "confidence": "Medium",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-007",
+            "title": "Operational Readiness & Support Enablement",
+            "date": "2026-07-12",
+            "status": "At Risk",
+            "owner": "Operations Team",
+            "confidence": "Medium",
+            "relatedRisks": []
+        },
+        {
+            "id": "MS-008",
+            "title": "Customer Launch Go/No-Go Decision",
+            "date": "2026-07-25",
+            "status": "At Risk",
+            "owner": "Executive Team",
+            "confidence": "Low",
+            "relatedRisks": []
+        }
+    ],
+    "features": [
+        {
+            "title": "Customer Configuration Flow",
+            "estimate": "5 weeks",
+            "owner": "Platform Team",
+            "status": "In Progress",
+            "confidence": "Medium",
+            "risk": "Elevated",
+            "dependencies": [
+                "Platform Approval",
+                "Security Review",
+                "Customer Validation"
+            ]
+        }
+    ],
     "risks": [
         {
-            "title":
-                "Customer dependency ownership unclear",
-
-            "state":
-                "Unresolved",
-
-            "introduced":
-                "2026-05-06-v1",
-
-            "impact":
-                "Medium",
-
-            "attention":
-                "Watch",
-
+            "title": "Customer dependency ownership unclear",
+            "state": "Unresolved",
+            "introduced": "2026-05-06-v1",
+            "impact": "Medium",
+            "attention": "Watch",
             "mitigation": {
-                "description":
-                    "Clarify ownership model during governance review.",
-
-                "status":
-                    "Proposed"
+                "description": "Clarify ownership model during governance review.",
+                "status": "Proposed"
             }
         }
     ],

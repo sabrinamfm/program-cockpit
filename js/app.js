@@ -40,12 +40,18 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     const contradictionWarnings = detectOperationalContradictions(currentSnapshot, previousSnapshot);
     warnings.push(...contradictionWarnings);
 
+    warnings.push(...validateRisksSchema(currentSnapshot.risks));
+    warnings.push(...validateDecisionsSchema(currentSnapshot.decisions));
+    warnings.push(...validateMilestonesSchema(currentSnapshot.milestones));
+    warnings.push(...validateAttentionsSchema(currentSnapshot.attentionQueue));
+    
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderMilestones(currentSnapshot.milestones);
     renderFeatures(currentSnapshot.features);
     renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots);
     renderDecisions(currentSnapshot.decisions);
-    renderAttentionQueue(currentSnapshot.attentionQueue);
+    const resolvedAttentionQueue = resolveAttentionEntities(currentSnapshot);
+    renderAttentionQueue(resolvedAttentionQueue);
     renderGovernanceWarnings(warnings);
 }
 

@@ -4,27 +4,39 @@ function renderAttentionQueue(items) {
     container.innerHTML = "";
 
     items.forEach((item) => {
-        const attentionClass = item.type.toLowerCase().replace(/\s/g, "-");
+        const attentionClass = item.priority.toLowerCase().replace(/\s/g, "-");
 
-        container.appendChild(
-            createCard(`
-                <div class="attention-header">
-                    <span class="
-                        attention-badge
-                        ${attentionClass}
-                    ">
-                        ${item.type}
-                    </span>
-                </div>
-                <h3>${item.title}</h3>
-                <p>
-                    <strong>Owner:</strong>
-                    ${item.owner}
-                </p>
-                <p class="attention-reason">
-                    ${item.reason}
-                </p>
-            `)
-        );
+        const card = createCard(`
+            <div class="attention-header">
+                <span class="
+                    attention-badge
+                    ${attentionClass}
+                ">
+                    ${item.priority}
+                </span>
+            </div>
+            <h3>
+                ${item.entity.title}
+            </h3>
+            <p>
+                <strong>Type:</strong>
+                ${item.entityType}
+            </p>
+            ${
+                item.entity.owner
+                    ? `
+                        <p>
+                            <strong>Owner:</strong>
+                            ${item.entity.owner}
+                        </p>
+                    `
+                    : ""
+            }
+
+            <p>
+                ${item.reason}
+            </p>
+        `);
+        container.appendChild(card);
     });
 }

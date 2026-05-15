@@ -29,7 +29,7 @@ function renderHeader(program, currentSnapshot, previousSnapshot) {
         </span>
     `;
     
-    values[1].innerText = currentSnapshot.activeRisks;
+    values[1].innerText = calculateActiveRisks(currentSnapshot.risks);
     values[2].innerText = currentSnapshot.blockedDependencies;
-    values[3].innerText = currentSnapshot.pendingDecisions;
+    values[3].innerText = calculatePendingDecisions(currentSnapshot.decisions);
 }

@@ -56,3 +56,83 @@ function detectMilestoneDrift(currentMilestones, previousMilestones) {
 
     return warnings;
 }
+
+function calculateActiveRisks(risks) {
+    return risks.filter((risk) => risk.state !== "Closed").length;
+}
+
+function calculatePendingDecisions(decisions) {
+    return decisions.length;
+}
+
+function resolveAttentionEntities(
+    snapshot
+) {
+    return snapshot.attentionQueue
+        .map((item) => {
+            let referencedEntity =
+                null;
+
+            switch (
+                item.entityType
+            ) {
+                case "Risk":
+                    referencedEntity =
+                        snapshot.risks.find(
+                            (risk) =>
+                                risk.id ===
+                                item.entityId
+                        );
+                    break;
+
+                case "Milestone":
+                    referencedEntity =
+                        snapshot.milestones.find(
+                            (milestone) =>
+                                milestone.id ===
+                                item.entityId
+                        );
+                    break;
+
+                case "Decision":
+                    referencedEntity =
+                        snapshot.decisions.find(
+                            (decision) =>
+                                decision.id ===
+                                item.entityId
+                        );
+                    break;
+
+                case "Dependency":
+                    referencedEntity =
+                        snapshot.dependencies?.find(
+                            (dependency) =>
+                                dependency.id ===
+                                item.entityId
+                        );
+                    break;
+            }
+
+            if (!referencedEntity) {
+                return null;
+            }
+
+            return {
+                entityType:
+                    item.entityType,
+
+                entityId:
+                    item.entityId,
+
+                priority:
+                    item.priority,
+
+                reason:
+                    item.reason,
+
+                entity:
+                    referencedEntity
+            };
+        })
+        .filter(Boolean);
+}
