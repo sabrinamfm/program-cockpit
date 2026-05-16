@@ -27,53 +27,48 @@
                 <span id="snapshot-note"></span>
             </div>
 
-            <div class="summary-card">
-                <h2>Executive Summary</h2>
+            <div class="summary-layout">
+                <div class="summary-main">
+                    <div class="summary-card">
+                        <h2>Executive Summary</h2>
+                        <p id="executive-summary"></p>
 
-                <p id="executive-summary"></p>
+                        <div class="summary-column">
+                            <h3 class="summary-title">
+                                Highlights
+                            </h3>
+                            <ul id="highlights-list"></ul>
 
-                <div id="okr-container">
-                    <div class="related-okrs">
-                        <div class="okr-reference-list"></div>
+                            <h3 class="summary-title">
+                                Lowlights
+                            </h3>
+                            <ul id="lowlights-list"></ul>
+                        </div>
+                    
+                        <div class="summary-grid">
+                            <div>
+                                <span class="label">Status</span>
+                                <span id="status-class"></span>
+                            </div>
+                            <div>
+                                <span class="label">Target Launch</span>
+                                <span id="target-launch"></span>
+                            </div>
+                            <div>
+                                <span class="label">Last Updated</span>
+                                <span id="last-updated"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="weekly-summary-grid">
-                    <div class="summary-column">
-                        <h3 class="summary-title">
-                            Highlights
-                        </h3>
-
-                        <ul id="highlights-list"></ul>
+                <aside class="summary-sidebar">
+                    <div id="okr-container">
+                        <div class="related-okrs">
+                            <div class="okr-reference-list"></div>
+                        </div>
                     </div>
-
-                    <div class="summary-column">
-                        <h3 class="summary-title">
-                            Lowlights
-                        </h3>
-
-                        <ul id="lowlights-list"></ul>
-                    </div>
-                </div>
-
-                <div class="summary-grid">
-                    <div>
-                        <span class="label">Status</span>
-                        <span id="status-class"></span>
-                    </div>
-
-                    <div>
-                        <span class="label">Target Launch</span>
-                        <span id="target-launch"></span>
-                    </div>
-
-                    <div>
-                        <span class="label">Last Updated</span>
-                        <span id="last-updated"></span>
-                    </div>
-                </div>
+                </aside>
             </div>
-
             <div class="health-strip">
                 <div class="health-metric">
                     <span class="metric-label"></span>

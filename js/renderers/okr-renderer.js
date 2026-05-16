@@ -39,18 +39,20 @@ function renderOKRs(
 
                     return `
                         <div class="okr-reference">
-                            <strong>
+                            <div class="okr-id">
                                 ${okr.id}
-                            </strong>
-                            <span>
+                            </div>
+                            <div class="okr-objective">
                                 ${okr.objective}
-                            </span>
-                            <span class="
-                                okr-status-badge
-                                okr-${statusClass}
-                            ">
-                                ${okr.status}
-                            </span>
+                            </div>
+                            <div class="okr-status-wrapper">
+                                <span class="
+                                    okr-status-badge
+                                    okr-${statusClass}
+                                ">
+                                    ${okr.status}
+                                </span>
+                            </div>
                         </div>
                     `;
                 })

@@ -422,16 +422,6 @@ section {
     color: var(--on-track-color);
 }
 
-.weekly-summary-grid {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 28px;
-
-    margin-top: 28px;
-}
-
 .summary-column {
     background: var(--background);
 
@@ -765,20 +755,24 @@ section {
 
 .okr-reference {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 0.95rem;
-    color: #4B5563;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 0;
+    border-bottom:
+        1px solid
+        var(--border-color);
 }
 
 .okr-status-badge {
     display: inline-flex;
+    align-items: center;
     padding: 4px 10px;
     border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.72rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+    width: fit-content;
 }
 
 .okr-off-track {
@@ -794,4 +788,43 @@ section {
 .okr-on-track {
     background-color: var(--on-track-background);
     color: var(--on-track-color);
+}
+
+.summary-layout {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 2.6fr)
+        minmax(220px, 0.7fr);
+    align-items: start;
+}
+
+.okr-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.okr-id {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--heading-color);
+    font-size: 0.92rem;
+}
+
+.okr-objective {
+    color: var(--text-secondary);
+    line-height: 1.45;
+    font-size: 0.9rem;
+}
+
+.okr-status-wrapper {
+    margin-top: 4px;
+}
+
+.summary-sidebar {
+    font-size: 0.92rem;
+    padding-left: 16px;
+}
+
 }
