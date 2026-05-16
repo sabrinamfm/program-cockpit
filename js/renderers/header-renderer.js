@@ -36,6 +36,6 @@ function renderHeader(program, currentSnapshot, previousSnapshot) {
     `;
     
     values[1].innerText = calculateActiveRisks(currentSnapshot.risks);
-    values[2].innerText = currentSnapshot.blockedDependencies;
+    values[2].innerText = calculateBlockedDependencies(currentSnapshot.dependencies);
     values[3].innerText = calculatePendingDecisions(currentSnapshot.decisions);
 }

@@ -31,3 +31,7 @@ function validateMilestonesSchema(milestones) {
 function validateRisksSchema(risks) {
     return risks.flatMap((risk) => validateEntity(risk, riskSchema, "Risk"));
 }
+
+function validateDependenciesSchema(dependencies) {
+    return dependencies.flatMap((dependency) => validateEntity(dependency, dependencySchema, "Dependency"));
+}

@@ -32,7 +32,6 @@
     ],
     "lastUpdated": "2026-05-20",
     "declaredDeliveryConfidence": 66,
-    "blockedDependencies": 2,
     "weeklySummary": {
         "highlights": [
             "Integration testing continued."
@@ -197,6 +196,92 @@
             "owner": "Governance Team",
             "relatedRisks": [],
             "description": "Teams agreed to begin technical validation before full specification completion."
+        }
+    ],
+    "dependencies": [
+        {
+            "id": "DEP-001",
+            "title": "Platform governance approval",
+            "owner": "Governance Team",
+            "status": "Blocked",
+            "severity": "High",
+            "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "description": "Specification approval required before downstream customer validation can finalize.",
+            "relationships": {
+                "risks": [
+                    "RISK-001"
+                ],
+                "milestones": [
+                    "MS-003"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ]
+            }
+        },
+        {
+            "id": "DEP-002",
+            "title": "Platform governance approval",
+            "owner": "Governance Team",
+            "status": "Resolved",
+            "severity": "High",
+            "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "description": "Specification approval required before downstream customer validation can finalize.",
+            "relationships": {
+                "risks": [
+                    "RISK-001"
+                ],
+                "milestones": [
+                    "MS-003"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ]
+            }
+        },
+        {
+            "id": "DEP-003",
+            "title": "Platform governance approval",
+            "owner": "Governance Team",
+            "status": "At Risk",
+            "severity": "High",
+            "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "description": "Specification approval required before downstream customer validation can finalize.",
+            "relationships": {
+                "risks": [
+                    "RISK-001"
+                ],
+                "milestones": [
+                    "MS-003"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ]
+            }
+        },
+        {
+            "id": "DEP-004",
+            "title": "Platform governance approval",
+            "owner": "Governance Team",
+            "status": "Active",
+            "severity": "High",
+            "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "description": "Specification approval required before downstream customer validation can finalize.",
+            "relationships": {
+                "risks": [
+                    "RISK-001"
+                ],
+                "milestones": [
+                    "MS-003"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ]
+            }
         }
     ]
 }

@@ -44,12 +44,15 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     warnings.push(...validateDecisionsSchema(currentSnapshot.decisions));
     warnings.push(...validateMilestonesSchema(currentSnapshot.milestones));
     warnings.push(...validateAttentionsSchema(currentSnapshot.attentionQueue));
+    warnings.push(...validateDependenciesSchema(currentSnapshot.dependencies));
+    warnings.push(...validateDependencyHealth(currentSnapshot.dependencies));
     
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderOKRs(currentSnapshot.relatedOKRs);
     renderMilestones(currentSnapshot.milestones);
     renderFeatures(currentSnapshot.features);
     renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots);
+    renderDependencies(currentSnapshot.dependencies);
     renderDecisions(currentSnapshot.decisions);
     const resolvedAttentionQueue = resolveAttentionEntities(currentSnapshot);
     renderAttentionQueue(resolvedAttentionQueue);

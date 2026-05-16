@@ -65,17 +65,13 @@ function calculatePendingDecisions(decisions) {
     return decisions.length;
 }
 
-function resolveAttentionEntities(
-    snapshot
-) {
+function resolveAttentionEntities(snapshot) {
     return snapshot.attentionQueue
         .map((item) => {
             let referencedEntity =
                 null;
 
-            switch (
-                item.entityType
-            ) {
+            switch (item.entityType) {
                 case "Risk":
                     referencedEntity =
                         snapshot.risks.find(
@@ -133,6 +129,28 @@ function resolveAttentionEntities(
                 entity:
                     referencedEntity
             };
-        })
-        .filter(Boolean);
+        }
+    ).filter(Boolean);
+}
+
+function calculateBlockedDependencies(dependencies) {
+    return dependencies.filter((dependency) => dependency.status === "Blocked").length;
+}
+
+function validateDependencyHealth(dependencies) {
+    const warnings = [];
+
+    dependencies.forEach(
+        (dependency) => {
+            if (dependency.status === "Blocked") {
+                warnings.push({
+                    severity: "Medium",
+                    category: "Dependency",
+                    message: `Dependency blocked: ${dependency.title}`
+                });
+            }
+        }
+    );
+
+    return warnings;
 }

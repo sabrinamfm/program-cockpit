@@ -827,4 +827,31 @@ section {
     padding-left: 16px;
 }
 
+.dependency-status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    width: fit-content;
+}
+
+.dependency-blocked {
+    background-color: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.dependency-at-risk {
+    background-color: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.dependency-resolved, .dependency-active {
+    background-color: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
 }
