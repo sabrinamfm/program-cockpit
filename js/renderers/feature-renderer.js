@@ -4,7 +4,8 @@ function renderFeatures(features) {
     container.innerHTML = "";
 
     features.forEach((feature) => {
-        const riskClass = feature.risk === "Elevated" ? "risk-high" : "risk-low";
+        const riskClass = feature.risk.toLowerCase().replace(/\s+/g,"-");
+        const confidenceClass = feature.confidence.toLowerCase().replace(/\s+/g,"-");
 
         const dependenciesHtml =
             feature.dependencies
@@ -21,7 +22,10 @@ function renderFeatures(features) {
             createCard(`
                 <div class="feature-header">
                     <h3>${feature.title}</h3>
-                    <span class="risk-pill ${riskClass}">
+                    <span class="risk-pill confidence-${confidenceClass}">
+                        ${feature.confidence} Confidence
+                    </span>
+                    <span class="risk-pill risk-${riskClass}">
                         ${feature.risk} Risk
                     </span>
                 </div>

@@ -1,9 +1,8 @@
 {
-    "status": {
+    "programStatuses": {
         "onTrack": "On Track",
         "atRisk": "At Risk",
-        "offTrack": "Off Track",
-        "unknown": "Unknown"
+        "offTrack": "Off Track"
     },
     "attentionLevels": [
         "Critical",
@@ -11,6 +10,23 @@
         "Watch",
         "Stable",
         "Resolved"
+    ],
+    "riskLevels": [
+        "Low",
+        "Medium",
+        "High"
+    ],
+    "confidenceLevels": [
+        "Low",
+        "Medium",
+        "High"
+    ],
+    "riskStates": [
+        "Unresolved",
+        "Mitigated",
+        "Accepted",
+        "Monitoring",
+        "Closed"
     ],
     "mitigationStates": [
         "Proposed",
@@ -21,17 +37,16 @@
         "Rejected",
         "Blocked"
     ],
-    "riskLevels": [
-        "Low",
-        "Medium",
-        "Elevated",
-        "High"
+    "dependencyStatuses": [
+        "Active",
+        "At Risk",
+        "Blocked",
+        "Resolved"
     ],
-    "riskStates": [
-        "Unresolved",
-        "Mitigated",
-        "Accepted",
-        "Monitoring",
-        "Closed"
+    "milestoneStatuses": [
+        "On Track",
+        "At Risk",
+        "Off Track",
+        "Unknown"
     ]
 }

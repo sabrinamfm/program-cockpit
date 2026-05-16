@@ -22,7 +22,7 @@
     --on-track-background: rgba(15, 118, 110, 0.12);
     --on-track-color: #0F766E;
 
-    --unksnown-background: rgba(107, 114, 128, 0.12);
+    --unknown-background: rgba(107, 114, 128, 0.12);
     --unknown-color: #6B7280;
 
 * {
@@ -351,6 +351,92 @@ section {
     color: var(--on-track-color);
 }
 
+.risk-unresolved {
+    background: var(--unknown-background);
+    color: var(--unknown-color);
+}
+
+.risk-mitigated {
+    background: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.risk-accepted {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.risk-monitoring {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.risk-closed {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.confidence-low {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.confidence-medium {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.confidence-high {
+    background: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.mitigation-proposed {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.mitigation-under-review {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.mitigation-accepted {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.mitigation-in-progress {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.mitigation-validated {
+    background: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.mitigation-rejected {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.mitigation-blocked {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.mitigation-pill {
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.mitigation-status-wrapper {
+    margin-top: 4px;
+}
+
 .dependencies-section {
     margin-top: 18px;
 }
@@ -378,18 +464,10 @@ section {
 }
 
 .dependency-pill {
-    background: #F3F4F6;
-
-    border: 1px solid #E5E7EB;
-
     border-radius: 999px;
-
     padding: 8px 12px;
-
     font-size: 13px;
     font-weight: 500;
-
-    color: #374151;
 }
 
 .attention-header {
@@ -539,16 +617,6 @@ section {
     width: 100%;
 }
 
-.bottom-grid {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 24px;
-
-    margin-top: 24px;
-}
-
 .attention-grid {
     display: grid;
 
@@ -606,6 +674,9 @@ section {
 }
 
 .risk-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 14px;
 }
 
@@ -827,6 +898,13 @@ section {
     padding-left: 16px;
 }
 
+.dependency-status-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
 .dependency-status-badge {
     display: inline-flex;
     align-items: center;
@@ -852,6 +930,17 @@ section {
 .dependency-resolved, .dependency-active {
     background-color: var(--on-track-background);
     color: var(--on-track-color);
+}
+
+.relationship-section {
+    margin-top: 16px;
+}
+
+.relationship-list {
+    margin-top: 8px;
+    padding-left: 18px;
+    color: var(--text-secondary);
+    line-height: 1.5;
 }
 
 }

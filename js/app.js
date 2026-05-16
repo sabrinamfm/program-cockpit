@@ -51,7 +51,7 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     renderOKRs(currentSnapshot.relatedOKRs);
     renderMilestones(currentSnapshot.milestones);
     renderFeatures(currentSnapshot.features);
-    renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots);
+    renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots, currentSnapshot);
     renderDependencies(currentSnapshot.dependencies);
     renderDecisions(currentSnapshot.decisions);
     const resolvedAttentionQueue = resolveAttentionEntities(currentSnapshot);

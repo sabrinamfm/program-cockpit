@@ -5,20 +5,6 @@
         "note": "Attention items review"
     },
     "executiveSummary": "Customer launch dependent on specification approval and downstream configuration readiness.",
-    "targetLaunch": "2026-09-30",
-    "programStatus": "Off Track",
-    "relatedOKRs": [
-        {
-            "id": "OKR-001",
-            "entityType": "OKR",
-            "objective": "Enable customer launch readiness",
-            "keyResult": "Complete downstream configuration integration before Q3 launch.",
-            "status": "At Risk",
-            "link": "https://..."
-        }
-    ],
-    "lastUpdated": "2026-05-13",
-    "declaredDeliveryConfidence": 61,
     "weeklySummary": {
         "highlights": [
             "Parallel validation path approved by platform teams.",
@@ -29,6 +15,20 @@
             "Validation throughput decreased due to review bottlenecks."
         ]
     },
+    "programStatus": "Off Track",
+    "targetLaunch": "2026-09-30",
+    "lastUpdated": "2026-05-13",
+    "relatedOKRs": [
+        {
+            "id": "OKR-001",
+            "entityType": "OKR",
+            "objective": "Enable customer launch readiness",
+            "keyResult": "Complete downstream configuration integration before Q3 launch.",
+            "status": "At Risk",
+            "link": "https://..."
+        }
+    ],
+    "declaredDeliveryConfidence": 61,
     "milestones": [
         {
             "id": "MS-001",
@@ -37,9 +37,15 @@
             "status": "At Risk",
             "owner": "QA Team",
             "confidence": "Medium",
-            "relatedRisks": [
-                "RISK-001"
-            ]
+            "relationships": {
+                "risks": [
+                    "RISK-001"
+                ],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            }
         },
         {
             "id": "MS-002",
@@ -48,7 +54,13 @@
             "status": "At Risk",
             "owner": "Executive Team",
             "confidence": "Low",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            }
         },
         {
             "id": "MS-003",
@@ -57,9 +69,11 @@
             "status": "Off Track",
             "owner": "Governance Team",
             "confidence": "Low",
-            "relatedRisks": [
-                "RISK-002"
-            ]
+            "relationships": {
+                "risks": [
+                    "RISK-002"
+                ]
+            }
         },
         {
             "id": "MS-004",
@@ -68,7 +82,13 @@
             "status": "At Risk",
             "owner": "Governance Team",
             "confidence": "Medium",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            }
         },
         {
             "id": "MS-005",
@@ -77,7 +97,13 @@
             "status": "On Track",
             "owner": "Security Team",
             "confidence": "High",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            }
         },
         {
             "id": "MS-006",
@@ -86,7 +112,13 @@
             "status": "On Track",
             "owner": "QA Team",
             "confidence": "Medium",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            }
         },
         {
             "id": "MS-007",
@@ -95,7 +127,13 @@
             "status": "At Risk",
             "owner": "Operations Team",
             "confidence": "Medium",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            }
         },
         {
             "id": "MS-008",
@@ -104,7 +142,13 @@
             "status": "At Risk",
             "owner": "Executive Team",
             "confidence": "Low",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            }
         }
     ],
     "attentionQueue": [
@@ -144,9 +188,9 @@
     ],
     "risks": [
         {
-            "id": "RISK-002",
-            "title": "Specification governance path still unresolved",
-            "introduced": "2026-05-13-v1",
+            "id": "RISK-001",
+            "title": "Customer dependency ownership unclear",
+            "introduced": "2026-05-06-v1",
             "lastUpdated": "2026-05-13-v1",
             "state": "Unresolved",
             "severity": "Medium",
@@ -169,9 +213,15 @@
             "status": "Pending",
             "severity": "High",
             "owner": "Governance Team",
-            "relatedRisks": [
-                "RISK-001"
-            ],
+            "relationships": {
+                "risks": [
+                    "RISK-001"
+                ],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            },
             "description": "Awaiting alignment between governance process and accelerated customer delivery expectations."
         },
         {
@@ -182,9 +232,15 @@
             "status": "Pending",
             "severity": "High",
             "owner": "Governance Team",
-            "relatedRisks": [
-                "RISK-002"
-            ],
+            "relationships": {
+                "risks": [
+                    "RISK-002"
+                ],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            },
             "description": "Awaiting alignment between governance process and accelerated customer delivery expectations."
         },
         {
@@ -195,7 +251,13 @@
             "status": "Approved",
             "severity": "Medium",
             "owner": "Governance Team",
-            "relatedRisks": [],
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": []
+            },
             "description": "Teams agreed to begin technical validation before full specification completion."
         }
     ],
@@ -213,9 +275,11 @@
                 "risks": [
                     "RISK-001"
                 ],
+                "dependencies": [],
                 "milestones": [
                     "MS-003"
                 ],
+                "decisions": [],
                 "okrs": [
                     "OKR-001"
                 ]

@@ -16,6 +16,9 @@ function renderDependencies(dependencies) {
             const card =
                 createCard(`
                     <div class="dependency-status-wrapper">
+                        <h3>
+                            ${dependency.title}
+                        </h3>
                         <span class="
                             dependency-status-badge
                             dependency-${statusClass}
@@ -23,10 +26,6 @@ function renderDependencies(dependencies) {
                             ${dependency.status}
                         </span>
                     </div>
-
-                    <h3>
-                        ${dependency.title}
-                    </h3>
 
                     <p>
                         <strong>Owner:</strong>
