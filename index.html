@@ -18,25 +18,25 @@
 
 <body>
     <div class="container">
-
         <header>
             <h1 id="program-name"></h1>
 
             <div class="snapshot-selector-container">
-
-                <label for="snapshot-selector">
-                    Operational Snapshot
-                </label>
-
+                <label for="snapshot-selector">Operational Snapshot</label>
                 <select id="snapshot-selector"></select>
                 <span id="snapshot-note"></span>
-
             </div>
 
             <div class="summary-card">
                 <h2>Executive Summary</h2>
 
                 <p id="executive-summary"></p>
+
+                <div id="okr-container">
+                    <div class="related-okrs">
+                        <div class="okr-reference-list"></div>
+                    </div>
+                </div>
 
                 <div class="weekly-summary-grid">
                     <div class="summary-column">
@@ -59,25 +59,16 @@
                 <div class="summary-grid">
                     <div>
                         <span class="label">Status</span>
-
-                        <span class="status at-risk">
-                            At Risk
-                        </span>
+                        <span id="status-class"></span>
                     </div>
 
                     <div>
-                        <span class="label">
-                            Target Launch
-                        </span>
-
+                        <span class="label">Target Launch</span>
                         <span id="target-launch"></span>
                     </div>
 
                     <div>
-                        <span class="label">
-                            Last Updated
-                        </span>
-
+                        <span class="label">Last Updated</span>
                         <span id="last-updated"></span>
                     </div>
                 </div>
@@ -152,7 +143,7 @@
             </section>
         </main>
     </div>
-    
+
     <script src="js/config.js"></script>
 
     <script src="js/schema/risk-schema.js"></script>
@@ -174,6 +165,7 @@
     <script src="js/renderers/decision-renderer.js"></script>
     <script src="js/renderers/attention-renderer.js"></script>
     <script src="js/renderers/governance-renderer.js"></script>
+    <script src="js/renderers/okr-renderer.js"></script>
 
     <script src="js/app.js"></script>
 </body>

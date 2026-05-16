@@ -10,10 +10,20 @@
     --on-track: #0F766E;
     --risk: #B45309;
     --off-track: #991B1B;
-    --unknown: #6B7280;
 
     --shadow: rgba(15, 23, 42, 0.06);
-}
+
+    --off-track-background: rgba(153, 27, 27, 0.12);
+    --off-track-color: #991B1B;
+
+    --at-risk-background: rgba(180, 83, 9, 0.12);
+    --at-risk-color: #B45309;
+
+    --on-track-background: rgba(15, 118, 110, 0.12);
+    --on-track-color: #0F766E;
+
+    --unksnown-background: rgba(107, 114, 128, 0.12);
+    --unknown-color: #6B7280;
 
 * {
     box-sizing: border-box;
@@ -118,23 +128,23 @@ section {
 }
 
 .at-risk {
-    background: var(--risk);
-    color: white;
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
 }
 
 .on-track {
-    background: var(--on-track);
-    color: white;
+    background: var(--on-track-background);
+    color: var(--on-track-color);
 }
 
 .off-track {
-    background-color: var(--off-track);
-    color: white;
+    background-color: var(--off-track-background);
+    color: var(--off-track-color);
 }
 
 .unknown {
-    background-color: var(--unknown);
-    color: white;
+    background-color: rgba(107, 114, 128, 0.12);
+    color: var(--unknown-color);
 }
 
 .card {
@@ -321,21 +331,24 @@ section {
 
 .risk-pill {
     padding: 6px 10px;
-
     border-radius: 999px;
-
     font-size: 12px;
     font-weight: 700;
 }
 
 .risk-high {
-    background: rgba(153, 27, 27, 0.08);
-    color: var(--risk);
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.risk-medium {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
 }
 
 .risk-low {
-    background: rgba(15, 118, 110, 0.08);
-    color: var(--on-track);
+    background: var(--on-track-background);
+    color: var(--on-track-color);
 }
 
 .dependencies-section {
@@ -395,18 +408,18 @@ section {
 }
 
 .critical {
-    background: rgba(153, 27, 27, 0.12);
-    color: #991B1B;
+    background: var(--off-track-background);
+    color: var(--off-track-color);
 }
 
 .needs-discussion {
-    background: rgba(180, 83, 9, 0.12);
-    color: #B45309;
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
 }
 
 .watch {
-    background: rgba(15, 118, 110, 0.12);
-    color: #0F766E;
+    background: var(--on-track-background);
+    color: var(--on-track-color);
 }
 
 .weekly-summary-grid {
@@ -420,7 +433,7 @@ section {
 }
 
 .summary-column {
-    background: #F9FAFB;
+    background: var(--background);
 
     border: 1px solid var(--border);
 
@@ -444,6 +457,10 @@ section {
     color: var(--text-secondary);
 
     margin-bottom: 10px;
+}
+
+.snapshot-selector-container {
+    margin-bottom: 28px;
 }
 
 #milestones-container {
@@ -505,19 +522,19 @@ section {
 }
 
 .horizontal-marker.on-track {
-    background: var(--on-track);
+    background: var(--on-track-color);
 }
 
 .horizontal-marker.at-risk {
-    background: var(--risk);
+    background: var(--at-risk-color);
 }
 
 .horizontal-marker.off-track {
-    background: var(--off-track);
+    background: var(--off-track-color);
 }
 
 .horizontal-marker.unknown {
-    background: var(--unknown);
+    background: var(--unknown-color);
 }
 
 .horizontal-content h3 {
@@ -695,4 +712,86 @@ section {
     font-size: 14px;
 
     line-height: 1.5;
+}
+
+.program-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    width: fit-content;
+}
+
+.program-status.on-track {
+    background-color: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.program-status.at-risk {
+    background-color: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.program-status.off-track {
+    background-color: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.program-status.unknown {
+    background-color: var(--unknown-background);
+    color: var(--unknown-color);
+}
+
+.related-okrs {
+    margin-top: 24px;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #111827;
+}
+
+.okr-reference-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.okr-reference {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: #4B5563;
+}
+
+.okr-status-badge {
+    display: inline-flex;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.okr-off-track {
+    background-color: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.okr-at-risk {
+    background-color: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.okr-on-track {
+    background-color: var(--on-track-background);
+    color: var(--on-track-color);
 }

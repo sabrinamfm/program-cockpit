@@ -4,8 +4,34 @@
         "createdBy": "TPM",
         "note": "Post governance review update"
     },
+    "executiveSummary": "Customer launch dependent on specification approval and downstream configuration readiness.",
+    "targetLaunch": "2026-09-30",
+    "programStatus": "On Track",
+    "relatedOKRs": [
+        {
+            "id": "OKR-001",
+            "objective": "Enable customer launch readiness",
+            "keyResult": "Complete downstream configuration integration before Q3 launch.",
+            "status": "At Risk",
+            "link": "https://example.com/okr-001"
+        },
+        {
+            "id": "OKR-002",
+            "objective": "Reduce governance approval lead time",
+            "keyResult": "Reduce specification approval cycle from 10 to 4 days.",
+            "status": "On Track",
+            "link": "https://example.com/okr-002"
+        },
+        {
+            "id": "OKR-003",
+            "objective": "Improve validation throughput",
+            "keyResult": "Restore average validation turnaround below 3 days.",
+            "status": "At Risk",
+            "link": "https://example.com/okr-003"
+        }
+    ],
     "lastUpdated": "2026-05-20",
-    "deliveryConfidence": 66,
+    "declaredDeliveryConfidence": 66,
     "blockedDependencies": 2,
     "weeklySummary": {
         "highlights": [

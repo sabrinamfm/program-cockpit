@@ -1,7 +1,9 @@
 {
     "status": {
         "onTrack": "On Track",
-        "atRisk": "At Risk"
+        "atRisk": "At Risk",
+        "offTrack": "Off Track",
+        "unknown": "Unknown"
     },
     "attentionLevels": [
         "Critical",

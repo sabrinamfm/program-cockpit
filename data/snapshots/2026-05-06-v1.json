@@ -1,6 +1,19 @@
 {
-    "deliveryConfidence": 74,
+    "declaredDeliveryConfidence": 80,
     "blockedDependencies": 1,
+    "executiveSummary": "Customer launch dependent on specification approval and downstream configuration readiness.",
+    "targetLaunch": "2026-09-30",
+    "programStatus": "At Risk",
+    "relatedOKRs": [
+        {
+            "id": "OKR-001",
+            "entityType": "OKR",
+            "objective": "Enable customer launch readiness",
+            "keyResult": "Complete downstream configuration integration before Q3 launch.",
+            "status": "At Risk",
+            "link": "https://..."
+        }
+    ],
     "lastUpdated": "2026-05-06",
     "weeklySummary": {
         "highlights": [

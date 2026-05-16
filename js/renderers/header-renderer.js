@@ -1,7 +1,13 @@
 function renderHeader(program, currentSnapshot, previousSnapshot) {
     document.getElementById("program-name").innerText = program.programName;
-    document.getElementById("executive-summary").innerText = program.executiveSummary;
-    document.getElementById("target-launch").innerText = program.targetLaunch;
+    document.getElementById("executive-summary").innerText = currentSnapshot.executiveSummary;
+    
+    const statusElement = document.getElementById("status-class");
+    const statusClass = currentSnapshot.programStatus.toLowerCase().replace(/\s+/g, "-");
+    statusElement.innerText = currentSnapshot.programStatus;
+    statusElement.className = `program-status ${statusClass}`;
+
+    document.getElementById("target-launch").innerText = currentSnapshot.targetLaunch;
     document.getElementById("last-updated").innerText = currentSnapshot.lastUpdated;
     document.getElementById("snapshot-note").innerText = currentSnapshot.metadata?.note || "";
     document.getElementById("milestones-title").innerText = program.sections.milestones;
@@ -16,16 +22,16 @@ function renderHeader(program, currentSnapshot, previousSnapshot) {
         labels[index].innerText = metric;
     });
 
-    const confidenceDelta = currentSnapshot.deliveryConfidence - previousSnapshot.deliveryConfidence;
-    const deltaClass = confidenceDelta >= 0 ? "delta-positive" : "delta-negative";
-    const deltaArrow = confidenceDelta >= 0 ? "↑" : "↓";
+    const declaredDeliveryConfidence = currentSnapshot.declaredDeliveryConfidence - previousSnapshot.declaredDeliveryConfidence;
+    const deltaClass = declaredDeliveryConfidence >= 0 ? "delta-positive" : "delta-negative";
+    const deltaArrow = declaredDeliveryConfidence >= 0 ? "↑" : "↓";
 
     values[0].innerHTML = `
         <span class="metric-main">
-            ${currentSnapshot.deliveryConfidence}%
+            ${currentSnapshot.declaredDeliveryConfidence}%
         </span>
         <span class="metric-delta ${deltaClass}">
-            (${deltaArrow}${Math.abs(confidenceDelta)}%)
+            (${deltaArrow}${Math.abs(declaredDeliveryConfidence)}%)
         </span>
     `;
     

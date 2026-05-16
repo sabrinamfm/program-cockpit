@@ -4,8 +4,21 @@
         "createdBy": "TPM",
         "note": "Attention items review"
     },
+    "executiveSummary": "Customer launch dependent on specification approval and downstream configuration readiness.",
+    "targetLaunch": "2026-09-30",
+    "programStatus": "Off Track",
+    "relatedOKRs": [
+        {
+            "id": "OKR-001",
+            "entityType": "OKR",
+            "objective": "Enable customer launch readiness",
+            "keyResult": "Complete downstream configuration integration before Q3 launch.",
+            "status": "At Risk",
+            "link": "https://..."
+        }
+    ],
     "lastUpdated": "2026-05-13",
-    "deliveryConfidence": 61,
+    "declaredDeliveryConfidence": 61,
     "blockedDependencies": 2,
     "weeklySummary": {
         "highlights": [

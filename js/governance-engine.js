@@ -7,13 +7,13 @@ function detectConfidenceTrend(snapshots) {
 
     const isDecreasing =
         lastThree[0]
-            .deliveryConfidence >
+            .declaredDeliveryConfidence >
         lastThree[1]
-            .deliveryConfidence &&
+            .declaredDeliveryConfidence &&
         lastThree[1]
-            .deliveryConfidence >
+            .declaredDeliveryConfidence >
         lastThree[2]
-            .deliveryConfidence;
+            .declaredDeliveryConfidence;
 
     if (!isDecreasing) {
         return null;

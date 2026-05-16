@@ -14,7 +14,7 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
     const snapshotIndex = availableSnapshots.indexOf(snapshotId);
 
     let previousSnapshot = {
-        deliveryConfidence: currentSnapshot.deliveryConfidence
+        declaredDeliveryConfidence: currentSnapshot.declaredDeliveryConfidence
     };
 
     if (snapshotIndex > 0) {
