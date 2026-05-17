@@ -170,6 +170,7 @@ function validateAttentionQueueReferences(attentionQueue, snapshot) {
     );
 
     return warnings;
+}
 
 function collectGovernanceWarnings(currentSnapshot, previousSnapshot) {
     return [
