@@ -170,4 +170,45 @@ function validateAttentionQueueReferences(attentionQueue, snapshot) {
     );
 
     return warnings;
+
+function collectGovernanceWarnings(currentSnapshot, previousSnapshot) {
+    return [
+        ...validateRisksSchema(
+            currentSnapshot.risks
+        ),
+
+        ...validateDependenciesSchema(
+            currentSnapshot.dependencies
+        ),
+
+        ...validateFeaturesSchema(
+            currentSnapshot.features
+        ),
+
+        ...validateMilestonesSchema(
+            currentSnapshot.milestones
+        ),
+
+        ...validateDecisionsSchema(
+            currentSnapshot.decisions
+        ),
+
+        ...validateAttentionsSchema(
+            currentSnapshot.attentionQueue
+        ),
+
+        ...validateAttentionQueueReferences(
+            currentSnapshot.attentionQueue,
+            currentSnapshot
+        ),
+
+        ...validateDependencyHealth(
+            currentSnapshot.dependencies
+        ),
+
+        ...detectOperationalContradictions(
+            currentSnapshot,
+            previousSnapshot
+        )
+    ];
 }

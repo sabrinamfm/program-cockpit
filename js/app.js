@@ -22,33 +22,7 @@ async function loadData() {
 
 function renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots) {
     renderHeader(program, currentSnapshot, previousSnapshot);
-    const warnings = validateRisks(
-        currentSnapshot.risks, 
-        previousSnapshot.risks || [], 
-        currentSnapshot.attentionQueue || [], 
-        availableSnapshots
-    );
-    const confidenceTrendWarning = detectConfidenceTrend(historicalSnapshots);
-
-    if (confidenceTrendWarning) {
-        warnings.push(confidenceTrendWarning);
-    }
-
-    const milestoneWarnings = detectMilestoneDrift(currentSnapshot.milestones, previousSnapshot.milestones || []);
-    warnings.push(...milestoneWarnings);
-
-    const contradictionWarnings = detectOperationalContradictions(currentSnapshot, previousSnapshot);
-    warnings.push(...contradictionWarnings);
-    
-    warnings.push(...validateRisksSchema(currentSnapshot.risks));
-    warnings.push(...validateDecisionsSchema(currentSnapshot.decisions));
-    warnings.push(...validateMilestonesSchema(currentSnapshot.milestones));
-    warnings.push(...validateAttentionsSchema(currentSnapshot.attentionQueue));
-    warnings.push(...validateDependenciesSchema(currentSnapshot.dependencies));
-    warnings.push(...validateDependencyHealth(currentSnapshot.dependencies));
-    warnings.push(...validateAttentionQueueReferences(currentSnapshot.attentionQueue, currentSnapshot));
-    warnings.push(...validateFeaturesSchema(currentSnapshot.features));
-    
+    const warnings = collectGovernanceWarnings(currentSnapshot, previousSnapshot);
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderOKRs(currentSnapshot.relatedOKRs);
     renderMilestones(currentSnapshot.milestones);
@@ -56,8 +30,7 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots, currentSnapshot);
     renderDependencies(currentSnapshot.dependencies);
     renderDecisions(currentSnapshot.decisions);
-    const resolvedAttentionQueue = resolveAttentionEntities(currentSnapshot);
-    renderAttentionQueue(resolvedAttentionQueue);
+    renderAttentionQueue(resolveAttentionEntities(currentSnapshot));
     renderGovernanceWarnings(warnings);
 }
 
