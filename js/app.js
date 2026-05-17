@@ -47,7 +47,8 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots, currentSnapshot);
     renderDependencies(currentSnapshot.dependencies);
     renderDecisions(currentSnapshot.decisions);
-    renderAttentionQueue(resolveAttentionEntities(currentSnapshot));
+    renderAttentionQueue(resolveAttentionEntities(currentSnapshot), "summary");
+    renderAttentionQueue(resolveAttentionEntities(currentSnapshot), "detailed");
     renderGovernanceWarnings(warnings);
 }
 

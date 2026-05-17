@@ -182,7 +182,6 @@ function resolveAttentionEntities(snapshot) {
 
             return a._originalIndex - b._originalIndex;
         })
-        .slice(0, 3)
         .map(({ _attentionPriority, _attentionAgeKey, _originalIndex, ...rest }) => rest);
 }
 
