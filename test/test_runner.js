@@ -51,6 +51,29 @@ function testDetectMilestoneDrift() {
     assert(warnings.length === 1, 'should detect milestone drift');
 }
 
+function testDetectOperationalContradictionsHandlesMissingPreviousRisks() {
+    const warnings = gov.detectOperationalContradictions(
+        { declaredDeliveryConfidence: 80, risks: [{ id: 'r1', state: 'Unresolved' }] },
+        { declaredDeliveryConfidence: 70 }
+    );
+
+    assert(Array.isArray(warnings), 'should return warnings array');
+    assert(warnings.length === 1, 'should detect contradiction without crashing');
+}
+
+function testValidateAllowedValue() {
+    const warnings = val.validateAllowedValue(
+        { id: 'r1', attention: 'Watch' },
+        'attention',
+        ['Monitor', 'Active', 'Escalated'],
+        'Risk'
+    );
+
+    assert(Array.isArray(warnings));
+    assert(warnings.length === 1, 'should report invalid enum values');
+    assert(warnings[0].message.includes('invalid attention: Watch'));
+}
+
 function testResolveAttentionEntitiesOrdering() {
     global.uiConfig = { queueLevels: ['Informational', 'Review', 'Urgent'] };
 
@@ -93,6 +116,12 @@ function runAll() {
 
         testDetectMilestoneDrift();
         console.log('testDetectMilestoneDrift passed');
+
+        testDetectOperationalContradictionsHandlesMissingPreviousRisks();
+        console.log('testDetectOperationalContradictionsHandlesMissingPreviousRisks passed');
+
+        testValidateAllowedValue();
+        console.log('testValidateAllowedValue passed');
 
         testResolveAttentionEntitiesOrdering();
         console.log('testResolveAttentionEntitiesOrdering passed');

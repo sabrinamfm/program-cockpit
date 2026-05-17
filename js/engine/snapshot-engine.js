@@ -30,9 +30,16 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
         }
 
         const snapshotIndex = availableSnapshots.indexOf(snapshotId);
+        const historicalSnapshotsThroughCurrent = historicalSnapshots.slice(0, snapshotIndex + 1);
 
         let previousSnapshot = {
-            declaredDeliveryConfidence: currentSnapshot.declaredDeliveryConfidence
+            declaredDeliveryConfidence: currentSnapshot.declaredDeliveryConfidence,
+            risks: [],
+            milestones: [],
+            dependencies: [],
+            decisions: [],
+            features: [],
+            attentionQueue: []
         };
 
         if (snapshotIndex > 0) {
@@ -49,7 +56,7 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
         const program = await programResponse.json();
 
         clearLoading();
-        renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots);
+        renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshotsThroughCurrent);
     } catch (err) {
         console.error(err);
         clearLoading();

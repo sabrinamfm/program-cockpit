@@ -12,41 +12,26 @@ function renderGovernanceWarnings(warnings) {
     }
 
     warnings.forEach((warning) => {
+        const severity = warning.severity || "Unknown";
+        const severityClass = severity.toLowerCase().replace(/[^a-z0-9-]/g, "-");
+
         container.innerHTML += `
-            <div class="governance-warning ${warning.severity.toLowerCase()}">
+            <div class="governance-warning ${severityClass}">
                 <div class="governance-warning-header">
                     <span class="governance-severity">
-                        ${warning.severity}
+                        ${escapeHtml(severity)}
                     </span>
 
                     <span class="governance-category">
                         <strong>
-                            ${warning.category}
+                            ${escapeHtml(warning.category || "Governance")}
                         </strong>
                     </span>
                 </div>
                 <div class="governance-message">
-                    ${warning.message}
+                    ${escapeHtml(warning.message || "No details available.")}
                 </div>
             </div>
         `;
     });
-}
-
-function detectOperationalContradictions(currentSnapshot, previousSnapshot) {
-    const warnings = [];
-    const confidenceIncreased = currentSnapshot.declaredDeliveryConfidence > previousSnapshot.declaredDeliveryConfidence;
-    const currentActiveRisks = calculateActiveRisks(currentSnapshot.risks);
-    const previousActiveRisks = calculateActiveRisks(previousSnapshot.risks);
-    const unresolvedRisksIncreased = currentActiveRisks > previousActiveRisks;
-
-    if (confidenceIncreased && unresolvedRisksIncreased) {
-        warnings.push({
-            severity: "High",
-            category: "Operational Contradiction",
-            message: "Delivery confidence increased while unresolved risks increased"
-        });
-    }
-
-    return warnings;
 }

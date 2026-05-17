@@ -76,8 +76,9 @@ function renderRisks(currentRisks = [], previousRisks = [], availableSnapshots =
             </td>
             <td>
                 <button 
+                    type="button"
                     class="mitigation-button risk-mitigation-${mitigationClass}"
-                    onclick="openMitigationModal('${escapeHtml(safeRisk.id || "")}')"
+                    data-risk-id="${escapeHtml(safeRisk.id || "")}"
                 >
                     ${escapeHtml(mitigationStatus)}
                 </button>
@@ -86,6 +87,11 @@ function renderRisks(currentRisks = [], previousRisks = [], availableSnapshots =
                 ${relationshipsHtml}
             </td>
         `;
+
+        const mitigationButton = row.querySelector(".mitigation-button");
+        if (mitigationButton) {
+            mitigationButton.addEventListener("click", () => openMitigationModal(safeRisk.id || ""));
+        }
 
         tbody.appendChild(row);
     });

@@ -83,13 +83,13 @@ function openMitigationModal(riskId) {
 
 	title.innerText = `${risk.id} — ${risk.title}`;
 	body.innerHTML = `
-		<p><strong>Owner:</strong> ${risk.owner}</p>
-		<p><strong>Severity:</strong> ${risk.severity}</p>
-		<p><strong>State:</strong> ${risk.state}</p>
-		<p><strong>Attention:</strong> ${risk.attention}</p>
-		<p><strong>Description:</strong> ${risk.description || "No description available."}</p>
-		<p><strong>Mitigation status:</strong> ${risk.mitigation.status}</p>
-		<p><strong>Mitigation details:</strong> ${risk.mitigation.description || "No mitigation details available."}</p>
+		<p><strong>Owner:</strong> ${escapeHtml(risk.owner || "—")}</p>
+		<p><strong>Severity:</strong> ${escapeHtml(risk.severity || "—")}</p>
+		<p><strong>State:</strong> ${escapeHtml(risk.state || "—")}</p>
+		<p><strong>Attention:</strong> ${escapeHtml(risk.attention || "—")}</p>
+		<p><strong>Description:</strong> ${escapeHtml(risk.description || "No description available.")}</p>
+		<p><strong>Mitigation status:</strong> ${escapeHtml(risk.mitigation?.status || "—")}</p>
+		<p><strong>Mitigation details:</strong> ${escapeHtml(risk.mitigation?.description || "No mitigation details available.")}</p>
 	`;
 
 	modal.classList.add("visible");

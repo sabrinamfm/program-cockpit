@@ -29,9 +29,9 @@ function detectConfidenceTrend(snapshots) {
 function detectMilestoneDrift(currentMilestones, previousMilestones) {
     const warnings = [];
 
-    currentMilestones.forEach(
+    (currentMilestones || []).forEach(
         (currentMilestone) => {
-            const previousMilestone = previousMilestones.find((milestone) => milestone.title === currentMilestone.title);
+            const previousMilestone = (previousMilestones || []).find((milestone) => milestone.title === currentMilestone.title);
 
             if (!previousMilestone) {
                 return;
@@ -58,11 +58,11 @@ function detectMilestoneDrift(currentMilestones, previousMilestones) {
 }
 
 function calculateActiveRisks(risks) {
-    return risks.filter((risk) => risk.state !== "Closed").length;
+    return (risks || []).filter((risk) => risk.state !== "Closed").length;
 }
 
 function calculatePendingDecisions(decisions) {
-    return decisions.length;
+    return (decisions || []).length;
 }
 
 function parseSnapshotIdToTimestamp(snapshotId) {
@@ -179,13 +179,13 @@ function resolveAttentionEntities(snapshot) {
 }
 
 function calculateBlockedDependencies(dependencies) {
-    return dependencies.filter((dependency) => dependency.status === "Blocked").length;
+    return (dependencies || []).filter((dependency) => dependency.status === "Blocked").length;
 }
 
 function validateDependencyHealth(dependencies) {
     const warnings = [];
 
-    dependencies.forEach(
+    (dependencies || []).forEach(
         (dependency) => {
             if (dependency.status === "Blocked") {
                 warnings.push({
@@ -203,7 +203,7 @@ function validateDependencyHealth(dependencies) {
 function validateAttentionQueueReferences(attentionQueue, snapshot) {
     const warnings = [];
 
-    attentionQueue.forEach(
+    (attentionQueue || []).forEach(
         (item) => {
             const entity =
                 findEntityById(
@@ -225,6 +225,24 @@ function validateAttentionQueueReferences(attentionQueue, snapshot) {
     return warnings;
 }
 
+function detectOperationalContradictions(currentSnapshot = {}, previousSnapshot = {}) {
+    const warnings = [];
+    const confidenceIncreased = currentSnapshot.declaredDeliveryConfidence > previousSnapshot.declaredDeliveryConfidence;
+    const currentActiveRisks = calculateActiveRisks(currentSnapshot.risks);
+    const previousActiveRisks = calculateActiveRisks(previousSnapshot.risks);
+    const unresolvedRisksIncreased = currentActiveRisks > previousActiveRisks;
+
+    if (confidenceIncreased && unresolvedRisksIncreased) {
+        warnings.push({
+            severity: "High",
+            category: "Operational Contradiction",
+            message: "Delivery confidence increased while unresolved risks increased"
+        });
+    }
+
+    return warnings;
+}
+
 // Expose pure helpers for unit tests
 if (typeof module !== "undefined" && module.exports) {
     module.exports = {
@@ -232,41 +250,55 @@ if (typeof module !== "undefined" && module.exports) {
         detectMilestoneDrift,
         calculateActiveRisks,
         calculateBlockedDependencies,
-        resolveAttentionEntities
+        resolveAttentionEntities,
+        detectOperationalContradictions
     };
 }
 
-function collectGovernanceWarnings(currentSnapshot, previousSnapshot, availableSnapshots = []) {
+function collectGovernanceWarnings(currentSnapshot, previousSnapshot, availableSnapshots = [], historicalSnapshots = []) {
+    const confidenceTrendWarning = detectConfidenceTrend(historicalSnapshots || []);
+
     return [
+        ...(confidenceTrendWarning ? [confidenceTrendWarning] : []),
+
+        ...detectMilestoneDrift(
+            currentSnapshot.milestones || [],
+            previousSnapshot.milestones || []
+        ),
+
+        ...validateProgramSnapshot(
+            currentSnapshot
+        ),
+
         ...validateRisksSchema(
-            currentSnapshot.risks
+            currentSnapshot.risks || []
         ),
 
         ...validateRisks(
-            currentSnapshot.risks,
+            currentSnapshot.risks || [],
             previousSnapshot.risks || [],
             currentSnapshot.attentionQueue || [],
             availableSnapshots
         ),
 
         ...validateDependenciesSchema(
-            currentSnapshot.dependencies
+            currentSnapshot.dependencies || []
         ),
 
         ...validateFeaturesSchema(
-            currentSnapshot.features
+            currentSnapshot.features || []
         ),
 
         ...validateMilestonesSchema(
-            currentSnapshot.milestones
+            currentSnapshot.milestones || []
         ),
 
         ...validateDecisionsSchema(
-            currentSnapshot.decisions
+            currentSnapshot.decisions || []
         ),
 
         ...validateAttentionsSchema(
-            currentSnapshot.attentionQueue
+            currentSnapshot.attentionQueue || []
         ),
 
         ...validateAttentionQueueReferences(

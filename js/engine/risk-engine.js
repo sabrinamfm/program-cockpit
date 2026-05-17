@@ -14,21 +14,11 @@ function calculateRiskAge(risk, availableSnapshots) {
 
 function validateRisks(currentRisks, previousRisks, attentionQueue, availableSnapshots) {
     const warnings = [];
-    const allowedRiskStates = ((typeof uiConfig !== "undefined" && uiConfig.riskStates) ? uiConfig.riskStates : []) || [];
+    const currentRiskList = currentRisks || [];
 
-    currentRisks.forEach((risk) => {
-        if (risk.state && !allowedRiskStates.includes(risk.state)) {
-            warnings.push({
-                severity: "High",
-                category: "Risk State",
-                message: `Invalid risk state: ${risk.state}`
-            });
-        }
-    });
+    const currentTitles = currentRiskList.map((risk) => risk.title);
 
-    const currentTitles = currentRisks.map((risk) => risk.title);
-
-    previousRisks.forEach((risk) => {
+    (previousRisks || []).forEach((risk) => {
         if (!currentTitles.includes(risk.title)) {
             warnings.push({
                 severity: "High",
@@ -38,9 +28,9 @@ function validateRisks(currentRisks, previousRisks, attentionQueue, availableSna
         }
     });
 
-    const attentionTitles = attentionQueue.map((item) => item.title);
+    const attentionTitles = (attentionQueue || []).map((item) => item.title);
 
-    currentRisks.forEach((risk) => {
+    currentRiskList.forEach((risk) => {
         const riskAge = calculateRiskAge(risk, availableSnapshots);
         const requiresAttention = riskAge >= 3 && risk.state === "Unresolved";
         const alreadyTracked = attentionTitles.includes(risk.title);
