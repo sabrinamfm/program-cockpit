@@ -5,13 +5,8 @@ function renderDependencies(dependencies) {
 
     dependencies.forEach(
         (dependency) => {
-            const statusClass =
-                dependency.status
-                    .toLowerCase()
-                    .replace(
-                        /\s+/g,
-                        "-"
-                    );
+            const statusClass = dependency.status.toLowerCase().replace(/\s+/g, "-");
+            const severityClass = dependency.severity.toLowerCase().replace(/\s+/g, "-");
 
             const card =
                 createCard(`
@@ -19,13 +14,14 @@ function renderDependencies(dependencies) {
                         <h3>
                             ${dependency.title}
                         </h3>
-                        <span class="
-                            dependency-status-badge
-                            dependency-${statusClass}
-                        ">
+                        <span class="badge dependency-${statusClass}">
                             ${dependency.status}
                         </span>
                     </div>
+
+                    <p>
+                        ${dependency.description}
+                    </p>
 
                     <p>
                         <strong>Owner:</strong>
@@ -33,7 +29,10 @@ function renderDependencies(dependencies) {
                     </p>
 
                     <p>
-                        ${dependency.description}
+                        <strong>Severity:</strong>
+                        <span class="badge severity-${severityClass}">
+                            ${dependency.severity}
+                        </span>
                     </p>
                 `);
 

@@ -34,13 +34,15 @@ function renderGovernanceWarnings(warnings) {
 function detectOperationalContradictions(currentSnapshot, previousSnapshot) {
     const warnings = [];
     const confidenceIncreased = currentSnapshot.declaredDeliveryConfidence > previousSnapshot.declaredDeliveryConfidence;
-    const unresolvedRisksIncreased = currentSnapshot.activeRisks > previousSnapshot.activeRisks;
+    const currentActiveRisks = calculateActiveRisks(currentSnapshot.risks);
+    const previousActiveRisks = calculateActiveRisks(previousSnapshot.risks);
+    const unresolvedRisksIncreased = currentActiveRisks > previousActiveRisks;
 
     if (confidenceIncreased && unresolvedRisksIncreased) {
         warnings.push({
             severity: "High",
             category: "Operational Contradiction",
-            message: "Declared delivery confidence increased while unresolved risks increased"
+            message: "Delivery confidence increased while unresolved risks increased"
         });
     }
 

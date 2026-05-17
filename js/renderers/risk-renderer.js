@@ -28,21 +28,17 @@ function renderRisks(currentRisks, previousRisks, availableSnapshots, currentSna
         const row = document.createElement("tr");
         const relatedEntities = resolveRelationships(risk.relationships, currentSnapshot);
         const relationshipsHtml =
-            relatedEntities.length > 0
-                ? `
-                    <ul class="relationship-list">
-                        ${relatedEntities
-                            .map(
-                                (entity) => `
-                                    <li>
-                                        ${entity.title}
-                                    </li>
-                                `
-                            )
-                            .join("")}
-                    </ul>
-                `
-                : "—";
+                relatedEntities.length > 0
+                    ? relatedEntities
+                        .map((entity) => 
+                            `
+                                <span class="relationship-pill">
+                                    ${entity.id} + ${entity.title}
+                                </span>
+                            `
+                        )
+                        .join("")
+                    : "—";
 
         const stateClass = risk.state.toLowerCase().replace(/\s+/g, "-");
         const attentionClass = risk.attention.toLowerCase().replace(/\s+/g, "-");
@@ -64,7 +60,7 @@ function renderRisks(currentRisks, previousRisks, availableSnapshots, currentSna
             </td>
 
             <td>
-                <span class="badge risk-severity-${severityClass}">
+                <span class="badge severity-${severityClass}">
                     ${risk.severity}
                 </span>
             </td>

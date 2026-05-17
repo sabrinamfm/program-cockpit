@@ -39,7 +39,7 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
 
     const contradictionWarnings = detectOperationalContradictions(currentSnapshot, previousSnapshot);
     warnings.push(...contradictionWarnings);
-
+    
     warnings.push(...validateRisksSchema(currentSnapshot.risks));
     warnings.push(...validateDecisionsSchema(currentSnapshot.decisions));
     warnings.push(...validateMilestonesSchema(currentSnapshot.milestones));

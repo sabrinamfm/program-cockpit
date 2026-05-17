@@ -1,6 +1,7 @@
 const featureSchema = {
     required: [
         "id",
+        "title",
         "owner",
         "estimate",
         "status",

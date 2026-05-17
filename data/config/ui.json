@@ -46,6 +46,11 @@
         "Blocked",
         "Resolved"
     ],
+    "dependencySeverity": [
+        "Low",
+        "Medium",
+        "High"
+    ],
     "milestoneStatuses": [
         "On Track",
         "At Risk",
@@ -72,5 +77,20 @@
         "In Progress",
         "Completed",
         "Blocked"
+    ],
+    "relationshipTypes": [
+        "risks",
+        "dependencies",
+        "milestones",
+        "decisions",
+        "okrs",
+        "features"
+    ],
+    "decisionStatuses": [
+        "Proposed",
+        "Under Review",
+        "Accepted",
+        "Implemented",
+        "Rejected"
     ]
 }

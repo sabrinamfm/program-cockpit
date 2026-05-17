@@ -2,7 +2,7 @@
     --background: #F9FAFB;
     --surface: #FFFFFF;
 
-    --border: #E5E7EB;
+    --border-color: #E5E7EB;
 
     --text-primary: #111827;
     --text-secondary: #6B7280;
@@ -11,18 +11,24 @@
 
     --off-track-background: rgba(153, 27, 27, 0.12);
     --off-track-color: #991B1B;
-
     --at-risk-background: rgba(180, 83, 9, 0.12);
     --at-risk-color: #B45309;
-
     --on-track-background: rgba(15, 118, 110, 0.12);
     --on-track-color: #0F766E;
 
+    --new-background: rgba(44, 141, 133, 0.12);
+    --new-color: #1d9389;
     --unknown-background: rgba(107, 114, 128, 0.12);
     --unknown-color: #6B7280;
-
     --completed-background: rgba(27, 78, 141, 0.12);
     --completed-color: #4b4ea6;
+
+    --high-background: var(--off-track-background);
+    --high-color: var(--off-track-color);
+    --medium-background: rgba(202, 138, 4, 0.12);
+    --medium-color: #CA8A04;
+    --low-background: var(--on-track-background);
+    --low-color: var(--on-track-color);
 
 * {
     box-sizing: border-box;
@@ -33,10 +39,8 @@
 body {
     background: var(--background);
     color: var(--text-primary);
-
     font-family: "Inter", sans-serif;
     line-height: 1.6;
-
     padding: 48px;
 }
 
@@ -53,14 +57,12 @@ h1 {
     font-size: 52px;
     font-weight: 700;
     letter-spacing: -2px;
-
     margin-bottom: 28px;
 }
 
 h2 {
     font-size: 24px;
     font-weight: 600;
-
     margin-bottom: 20px;
 }
 
@@ -140,9 +142,7 @@ section {
 
 .card:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 24px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 }
 
 .card p {
@@ -172,7 +172,6 @@ section {
     .cockpit-grid {
         grid-template-columns: 1fr;
     }
-
     .panel-wide {
         grid-column: span 1;
     }
@@ -210,11 +209,8 @@ section {
 .horizontal-marker {
     width: 24px;
     height: 24px;
-
     border-radius: 999px;
-
     border: 4px solid white;
-
     margin-bottom: 16px;
 }
 
@@ -236,45 +232,32 @@ section {
 
 .health-strip {
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 18px;
-
     margin-top: 28px;
 }
 
 .health-metric {
     background: white;
-
-    border: 1px solid var(--border);
-
+    border: 1px solid var(--border-color);
     border-radius: 18px;
-
     padding: 22px;
-
-    box-shadow:
-        0 4px 14px var(--shadow);
+    box-shadow: 0 4px 14px var(--shadow);
 }
 
 .metric-label {
     display: block;
-
     font-size: 11px;
     font-weight: 700;
-
     text-transform: uppercase;
     letter-spacing: 1px;
-
     color: var(--text-secondary);
-
     margin-bottom: 12px;
 }
 
 .metric-value {
     font-size: 36px;
     font-weight: 700;
-
     letter-spacing: -1px;
 }
 
@@ -292,25 +275,20 @@ section {
 
 .feature-header {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
-
     margin-bottom: 14px;
 }
 
 .risk-table {
     width: 100%;
-
     border-collapse: collapse;
 }
 
 .risk-table th {
     text-align: left;
     padding: 14px;
-    border-bottom:
-        1px solid
-        var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -320,9 +298,7 @@ section {
 .risk-table td {
     padding: 18px 14px;
     vertical-align: top;
-    border-bottom:
-        1px solid
-        var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .risk-impact {
@@ -363,24 +339,24 @@ section {
     color: var(--off-track-color);
 }
 
-.risk-severity-high {
-    background: var(--off-track-background);
-    color: var(--off-track-color);
+.severity-high {
+    background: var(--high-background);
+    color: var(--high-color);
 }
 
-.risk-severity-medium {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
+.severity-medium {
+    background: var(--medium-background);
+    color: var(--medium-color);
 }
 
-.risk-severity-low {
-    background: var(--on-track-background);
-    color: var(--on-track-color);
+.severity-low {
+    background: var(--low-background);
+    color: var(--low-color);
 }
 
 .risk-state-unresolved {
-    background: var(--unknown-background);
-    color: var(--unknown-color);
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
 }
 
 .risk-state-mitigated {
@@ -389,8 +365,8 @@ section {
 }
 
 .risk-state-accepted {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
+    background: var(--on-track-background);
+    color: var(--on-track-color);
 }
 
 .risk-state-monitoring {
@@ -399,8 +375,8 @@ section {
 }
 
 .risk-state-closed {
-    background: var(--off-track-background);
-    color: var(--off-track-color);
+    background: var(--completed-background);
+    color: var(--completed-color);
 }
 
 .risk-mitigation-proposed {
@@ -414,8 +390,8 @@ section {
 }
 
 .risk-mitigation-accepted {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
+    background: var(--on-track-background);
+    color: var(--on-track-color);
 }
 
 .risk-mitigation-in-progress {
@@ -434,6 +410,31 @@ section {
 }
 
 .risk-mitigation-blocked {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.decision-status-proposed {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.decision-status-under-review {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.decision-status-accepted {
+    background: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.decision-status-implemented {
+    background: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.decision-status-rejected {
     background: var(--off-track-background);
     color: var(--off-track-color);
 }
@@ -476,8 +477,8 @@ section {
 }
 
 .risk-attention-monitor {
-    background: var(--off-track-background);
-    color: var(--off-track-color);
+    background: var(--unknown-background);
+    color: var(--unknown-color);
 }
 
 .risk-attention-active {
@@ -486,36 +487,36 @@ section {
 }
 
 .risk-attention-escalated {
-    background: var(--on-track-background);
-    color: var(--on-track-color);
-}
-
-.summary-column {
-    background: var(--background);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
-}
-
-.confidence-low {
     background: var(--off-track-background);
     color: var(--off-track-color);
 }
 
+.summary-column {
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 14px;
+}
+
+.confidence-low {
+    background: var(--low-background);
+    color: var(--low-color);
+}
+
 .confidence-medium {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
+    background: var(--medium-background);
+    color: var(--medium-color);
 }
 
 .confidence-high {
-    background: var(--on-track-background);
-    color: var(--on-track-color);
+    background: var(--high-background);
+    color: var(--high-color);
 }
 
 .summary-title {
     font-size: 15px;
     font-weight: 700;
-
     margin-bottom: 14px;
 }
 
@@ -525,7 +526,6 @@ section {
 
 .summary-column li {
     color: var(--text-secondary);
-
     margin-bottom: 10px;
 }
 
@@ -623,24 +623,19 @@ section {
 
 .attention-reason {
     margin-top: 12px;
-
     font-size: 14px;
-
     line-height: 1.5;
 }
 
 .metric-value {
     display: flex;
-
     align-items: baseline;
-
     gap: 10px;
 }
 
 .metric-main {
     font-size: 36px;
     font-weight: 700;
-
     letter-spacing: -1px;
 }
 
@@ -666,16 +661,11 @@ section {
 
 .risk-change {
     display: inline-flex;
-
     padding: 5px 10px;
-
     border-radius: 999px;
-
     font-size: 11px;
     font-weight: 700;
-
     text-transform: uppercase;
-
     letter-spacing: 0.5px;
 }
 
@@ -685,13 +675,13 @@ section {
 }
 
 .escalated {
-    background: rgba(153, 27, 27, 0.10);
-    color: var(--risk);
+    background: var(--off-track-background);
+    color: var(--off-track-color);
 }
 
 .resolved {
-    background: rgba(107, 114, 128, 0.10);
-    color: #6B7280;
+    background: var(--resolved-background);
+    color: var(--resolved-color);
 }
 
 #snapshot-note {

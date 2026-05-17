@@ -6,6 +6,7 @@ const riskSchema = {
         "introduced",
         "lastUpdated",
         "owner",
+        "attention",
         "state",
         "severity",
         "mitigation"
