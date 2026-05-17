@@ -329,112 +329,143 @@ section {
     margin-bottom: 14px;
 }
 
-.risk-pill {
+.risk-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.risk-table th {
+    text-align: left;
+    padding: 14px;
+    border-bottom:
+        1px solid
+        var(--border-color);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+}
+
+.risk-table td {
+    padding: 18px 14px;
+    vertical-align: top;
+    border-bottom:
+        1px solid
+        var(--border-color);
+}
+
+.risk-impact {
+    margin-top: 8px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    font-size: 0.92rem;
+}
+
+.mitigation-button {
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.badge {
     padding: 6px 10px;
     border-radius: 999px;
     font-size: 12px;
     font-weight: 700;
 }
 
-.risk-high {
-    background: var(--off-track-background);
-    color: var(--off-track-color);
-}
-
-.risk-medium {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
-}
-
-.risk-low {
+.attention-queue-informational {
     background: var(--on-track-background);
     color: var(--on-track-color);
 }
 
-.risk-unresolved {
+.attention-queue-review {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.attention-queue-urgent {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.risk-severity-high {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.risk-severity-medium {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.risk-severity-low {
+    background: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.risk-state-unresolved {
     background: var(--unknown-background);
     color: var(--unknown-color);
 }
 
-.risk-mitigated {
+.risk-state-mitigated {
     background: var(--on-track-background);
     color: var(--on-track-color);
 }
 
-.risk-accepted {
+.risk-state-accepted {
     background: var(--at-risk-background);
     color: var(--at-risk-color);
 }
 
-.risk-monitoring {
+.risk-state-monitoring {
     background: var(--at-risk-background);
     color: var(--at-risk-color);
 }
 
-.risk-closed {
+.risk-state-closed {
     background: var(--off-track-background);
     color: var(--off-track-color);
 }
 
-.confidence-low {
-    background: var(--off-track-background);
-    color: var(--off-track-color);
-}
-
-.confidence-medium {
+.risk-mitigation-proposed {
     background: var(--at-risk-background);
     color: var(--at-risk-color);
 }
 
-.confidence-high {
+.risk-mitigation-under-review {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.risk-mitigation-accepted {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.risk-mitigation-in-progress {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.risk-mitigation-validated {
     background: var(--on-track-background);
     color: var(--on-track-color);
 }
 
-.mitigation-proposed {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
-}
-
-.mitigation-under-review {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
-}
-
-.mitigation-accepted {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
-}
-
-.mitigation-in-progress {
-    background: var(--at-risk-background);
-    color: var(--at-risk-color);
-}
-
-.mitigation-validated {
-    background: var(--on-track-background);
-    color: var(--on-track-color);
-}
-
-.mitigation-rejected {
+.risk-mitigation-rejected {
     background: var(--off-track-background);
     color: var(--off-track-color);
 }
 
-.mitigation-blocked {
+.risk-mitigation-blocked {
     background: var(--off-track-background);
     color: var(--off-track-color);
-}
-
-.mitigation-pill {
-    border-radius: 999px;
-    padding: 8px 12px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.mitigation-status-wrapper {
-    margin-top: 4px;
 }
 
 .dependencies-section {
@@ -463,7 +494,7 @@ section {
     gap: 10px;
 }
 
-.dependency-pill {
+.dependency-badge {
     border-radius: 999px;
     padding: 8px 12px;
     font-size: 13px;
@@ -474,40 +505,41 @@ section {
     margin-bottom: 14px;
 }
 
-.attention-badge {
-    display: inline-flex;
-
-    padding: 6px 12px;
-
-    border-radius: 999px;
-
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.critical {
+.risk-attention-monitor {
     background: var(--off-track-background);
     color: var(--off-track-color);
 }
 
-.needs-discussion {
+.risk-attention-active {
     background: var(--at-risk-background);
     color: var(--at-risk-color);
 }
 
-.watch {
+.risk-attention-escalated {
     background: var(--on-track-background);
     color: var(--on-track-color);
 }
 
 .summary-column {
     background: var(--background);
-
     border: 1px solid var(--border);
-
     border-radius: 14px;
-
     padding: 18px;
+}
+
+.confidence-low {
+    background: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.confidence-medium {
+    background: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.confidence-high {
+    background: var(--on-track-background);
+    color: var(--on-track-color);
 }
 
 .summary-title {
@@ -537,40 +569,28 @@ section {
 
 .horizontal-timeline {
     display: flex;
-
     align-items: flex-start;
-
     gap: 24px;
-
     width: 100%;
-
     overflow-x: auto;
     overflow-y: hidden;
-
     padding-bottom: 12px;
-
     margin-top: 20px;
 }
 
 .horizontal-timeline-item {
     position: relative;
-
     min-width: 240px;
-
     flex-shrink: 0;
 }
 
 .horizontal-timeline-item::after {
     content: "";
-
     position: absolute;
-
     top: 11px;
     left: calc(100% - 12px);
-
     width: 24px;
     height: 2px;
-
     background: #D1D5DB;
 }
 
@@ -581,11 +601,8 @@ section {
 .horizontal-marker {
     width: 24px;
     height: 24px;
-
     border-radius: 999px;
-
     border: 4px solid white;
-
     margin-bottom: 16px;
 }
 
@@ -619,11 +636,8 @@ section {
 
 .attention-grid {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 18px;
-
     margin-top: 20px;
 }
 

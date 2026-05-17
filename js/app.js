@@ -46,6 +46,8 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     warnings.push(...validateAttentionsSchema(currentSnapshot.attentionQueue));
     warnings.push(...validateDependenciesSchema(currentSnapshot.dependencies));
     warnings.push(...validateDependencyHealth(currentSnapshot.dependencies));
+    warnings.push(
+    ...validateAttentionQueueReferences(currentSnapshot.attentionQueue, currentSnapshot));
     
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderOKRs(currentSnapshot.relatedOKRs);

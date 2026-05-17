@@ -1,91 +1,102 @@
 function renderRisks(currentRisks, previousRisks, availableSnapshots, currentSnapshot) {
     const container = document.getElementById("risks-container");
+    const previousRiskTitles = previousRisks.map((risk) => risk.title);
 
     container.innerHTML = "";
 
-    const previousRiskTitles = previousRisks.map((risk) => risk.title);
+    const table = document.createElement("table");
+    table.className = "risk-table";
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Risk</th>
+                <th>Owner</th>
+                <th>Severity</th>
+                <th>State</th>
+                <th>Attention</th>
+                <th>Mitigation</th>
+                <th>Relationships</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
+
+    const tbody = table.querySelector("tbody");
 
     currentRisks.forEach((risk) => {
-        let changeType = "";
-        const riskAge = calculateRiskAge(risk, availableSnapshots);
+        const row = document.createElement("tr");
         const relatedEntities = resolveRelationships(risk.relationships, currentSnapshot);
-        const statusClass = risk.state.toLowerCase().replace(/\s+/g,"-");
-        const mitigationClass = risk.mitigation.status.toLowerCase().replace(/\s+/g,"-");
-        
-        if (!previousRiskTitles.includes(risk.title)) {
-            changeType = "New";
-        }
+        const relationshipsHtml =
+            relatedEntities.length > 0
+                ? `
+                    <ul class="relationship-list">
+                        ${relatedEntities
+                            .map(
+                                (entity) => `
+                                    <li>
+                                        ${entity.title}
+                                    </li>
+                                `
+                            )
+                            .join("")}
+                    </ul>
+                `
+                : "—";
 
-        const relationshipHtml = relatedEntities.length > 0
-        ? `
-            <div class="
-                relationship-section
-            ">
+        const stateClass = risk.state.toLowerCase().replace(/\s+/g, "-");
+        const attentionClass = risk.attention.toLowerCase().replace(/\s+/g, "-");
+        const mitigationClass = risk.mitigation.status.toLowerCase().replace(/\s+/g, "-");
+        const severityClass = risk.severity.toLowerCase().replace(/\s+/g, "-");
+
+        row.innerHTML = `
+            <td>
                 <strong>
-                    Impacts
+                    ${risk.id}
                 </strong>
+            </td>
+            <td>
+                ${risk.title}
+            </td>
 
-                <ul class="
-                    relationship-list
-                ">
-                    ${relatedEntities
-                        .map(
-                            (entity) => `
-                                <li>
-                                    ${entity.id}: ${entity.title}
-                                </li>
-                            `
-                        )
-                        .join("")}
-                </ul>
-            </div>
-        `
-        : "";
+            <td>
+                ${risk.owner}
+            </td>
 
-        container.appendChild(
-            createCard(`
-                ${
-                    changeType
-                        ? 
-                        `
-                        <div class="risk-header">
-                            <h3>${risk.title}</h3>
-                            <span class="risk-change risk-${statusClass}">
-                                ${changeType}
-                            </span>
-                            <span class="risk-change risk-${statusClass}">
-                                ${statusClass}
-                            </span>
-                        </div>
-                        `
-                        :
-                        `
-                        <div class="risk-header">
-                            <h3>${risk.title}</h3>
-                            <span class="risk-change risk-${statusClass}">
-                                ${statusClass}
-                            </span>
-                        </div>
-                        `
-                }
+            <td>
+                <span class="badge risk-severity-${severityClass}">
+                    ${risk.severity}
+                </span>
+            </td>
 
-                ${relationshipHtml}
+            <td>
+                <span class="badge risk-state-${stateClass}">
+                    ${risk.state}
+                </span>
+            </td>
 
-                <div class="dependencies-section">
-                    <strong>
-                        Mitigation
-                    </strong>
-                    <p>
-                        ${risk.mitigation.description}
-                    </p>
+            <td>
+                <span class="badge risk-attention-${attentionClass}">
+                    ${risk.attention}
+                </span>
+            </td>
 
-                    <div class="mitigation-status-wrapper">
-                        <span class="mitigation-pill mitigation-${mitigationClass}">
-                            ${risk.mitigation.status}
-                        </span>
-                    </div>
-                </div>
-            `)
-        );
+            <td>
+                <button 
+                    class="mitigation-button risk-mitigation-${mitigationClass}"
+                    onclick="openMitigationModal('${risk.id}')"
+                >
+                    ${risk.mitigation.status}
+                </button>
+            </td>
+
+            <td>
+                ${relationshipsHtml}
+            </td>
+        `;
+
+        tbody.appendChild(row);
     });
+
+    container.appendChild(table);
 }

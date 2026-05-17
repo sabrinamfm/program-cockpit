@@ -40,6 +40,29 @@
             "Customer alignment remains unresolved."
         ]
     },
+    "attentionQueue": [
+        {
+            "entityType": "Risk",
+            "entityId": "RISK-001",
+            "queueLevel": "Informational",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
+        },
+        {
+            "entityType": "Risk",
+            "entityId": "RISK-002",
+            "queueLevel": "Review",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
+        },
+        {
+            "entityType": "Risk",
+            "entityId": "RISK-001",
+            "queueLevel": "Urgent",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
+        }
+    ],
     "milestones": [
         {
             "id": "MS-001",
@@ -118,14 +141,6 @@
             "relatedRisks": []
         }
     ],
-    "attentionQueue": [
-        {
-            "entityType": "Risk",
-            "entityId": "RISK-001",
-            "priority": "Critical",
-            "reason": "Customer launch path blocked pending ownership clarification."
-        }
-    ],
     "features": [
         {
             "title": "Customer Configuration Flow",
@@ -176,7 +191,7 @@
             "state": "Unresolved",
             "severity": "Medium",
             "owner": "Platform Team",
-            "attention": "Watch",
+            "attention": "Active",
             "description": "Multiple teams assume partial ownership of downstream validation.",
             "mitigation": {
                 "status": "In Progress",
@@ -186,15 +201,15 @@
         {
             "id": "RISK-002",
             "title": "Specification approval blocked",
+            "description": "Multiple teams assume partial ownership of downstream validation.",
             "introduced": "2026-05-06-v1",
             "lastUpdated": "2026-05-13-v1",
-            "state": "Mitigated",
-            "severity": "Medium",
             "owner": "Platform Team",
-            "attention": "Watch",
-            "description": "Multiple teams assume partial ownership of downstream validation.",
+            "state": "Monitoring",
+            "severity": "Medium",
+            "attention": "Monitor",
             "mitigation": {
-                "status": "In Progress",
+                "status": "Accepted",
                 "description": "Clarify ownership during governance review."
             },
             "relationships": {

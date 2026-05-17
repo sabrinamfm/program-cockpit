@@ -4,15 +4,12 @@ function renderAttentionQueue(items) {
     container.innerHTML = "";
 
     items.forEach((item) => {
-        const attentionClass = item.priority.toLowerCase().replace(/\s/g, "-");
+        const queueLevelClass = item.queueLevel.toLowerCase().replace(/\s/g, "-");
 
         const card = createCard(`
             <div class="attention-header">
-                <span class="
-                    attention-badge
-                    ${attentionClass}
-                ">
-                    ${item.priority}
+                <span class="badge attention-queue-${queueLevelClass}">
+                    ${item.queueLevel}
                 </span>
             </div>
             <h3>

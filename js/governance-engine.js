@@ -114,20 +114,12 @@ function resolveAttentionEntities(snapshot) {
             }
 
             return {
-                entityType:
-                    item.entityType,
-
-                entityId:
-                    item.entityId,
-
-                priority:
-                    item.priority,
-
-                reason:
-                    item.reason,
-
-                entity:
-                    referencedEntity
+                entityType: item.entityType,
+                entityId: item.entityId,
+                queueLevel: item.queueLevel,
+                reason: item.reason,
+                owner: item.owner,
+                entity: referencedEntity
             };
         }
     ).filter(Boolean);
@@ -147,6 +139,31 @@ function validateDependencyHealth(dependencies) {
                     severity: "Medium",
                     category: "Dependency",
                     message: `Dependency blocked: ${dependency.title}`
+                });
+            }
+        }
+    );
+
+    return warnings;
+}
+
+function validateAttentionQueueReferences(attentionQueue, snapshot) {
+    const warnings = [];
+
+    attentionQueue.forEach(
+        (item) => {
+            const entity =
+                findEntityById(
+                    `${item.entityType.toLowerCase()}s`,
+                    item.entityId,
+                    snapshot
+                );
+
+            if (!entity) {
+                warnings.push({
+                    severity: "High",
+                    category: "Topology",
+                    message:`Attention Queue references missing entity: ${item.entityId}`
                 });
             }
         }

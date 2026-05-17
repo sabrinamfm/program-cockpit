@@ -2,7 +2,7 @@ const attentionSchema = {
     required: [
         "entityType",
         "entityId",
-        "priority",
+        "queueLevel",
         "reason"
     ]
 };

@@ -1,25 +1,18 @@
 {
-    "programStatuses": {
-        "onTrack": "On Track",
-        "atRisk": "At Risk",
-        "offTrack": "Off Track"
-    },
-    "attentionLevels": [
-        "Critical",
-        "Needs Discussion",
-        "Watch",
-        "Stable",
-        "Resolved"
+    "programStatuses": [
+        "On Track",
+        "At Risk",
+        "Off Track"
     ],
-    "riskLevels": [
-        "Low",
-        "Medium",
-        "High"
+    "okrStatuses": [
+        "On Track",
+        "At Risk",
+        "Off Track"
     ],
-    "confidenceLevels": [
-        "Low",
-        "Medium",
-        "High"
+    "queueLevels": [
+        "Informational",
+        "Review",
+        "Urgent"
     ],
     "riskStates": [
         "Unresolved",
@@ -28,7 +21,17 @@
         "Monitoring",
         "Closed"
     ],
-    "mitigationStates": [
+    "riskSeverityLevels": [
+        "Low",
+        "Medium",
+        "High"
+    ],
+    "riskAttentionLevels": [
+        "Monitor",
+        "Active",
+        "Escalated"
+    ],
+    "riskMitigationStates": [
         "Proposed",
         "Under Review",
         "Accepted",
@@ -48,5 +51,10 @@
         "At Risk",
         "Off Track",
         "Unknown"
+    ],
+    "confidenceLevels": [
+        "Low",
+        "Medium",
+        "High"
     ]
 }

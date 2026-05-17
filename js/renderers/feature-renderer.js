@@ -11,7 +11,7 @@ function renderFeatures(features) {
             feature.dependencies
                 .map((dependency) => {
                     return `
-                        <div class="dependency-pill">
+                        <div class="dependency-badge">
                             ${dependency}
                         </div>
                     `;
@@ -22,10 +22,10 @@ function renderFeatures(features) {
             createCard(`
                 <div class="feature-header">
                     <h3>${feature.title}</h3>
-                    <span class="risk-pill confidence-${confidenceClass}">
+                    <span class="badge confidence-${confidenceClass}">
                         ${feature.confidence} Confidence
                     </span>
-                    <span class="risk-pill risk-${riskClass}">
+                    <span class="badge risk-severity-${riskClass}">
                         ${feature.risk} Risk
                     </span>
                 </div>
