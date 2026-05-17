@@ -20,7 +20,9 @@ function renderGovernanceWarnings(warnings) {
                     </span>
 
                     <span class="governance-category">
-                        ${warning.category}
+                        <strong>
+                            ${warning.category}
+                        </strong>
                     </span>
                 </div>
                 <div class="governance-message">

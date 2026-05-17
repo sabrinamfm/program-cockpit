@@ -53,8 +53,5 @@ function validateRisks(currentRisks, previousRisks, attentionQueue, availableSna
             });
         }
     });
-
-    renderGovernanceWarnings(warnings);
-
     return warnings;
 }

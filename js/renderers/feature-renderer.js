@@ -36,12 +36,12 @@ function renderFeatures(features, currentSnapshot) {
                 dependencies.length > 0
                     ? dependencies
                         .map((dependency) => 
-                            `
-                                <span class="relationship-pill">
-                                    ${dependency.id} + ${dependency.title}
-                                </span>
-                            `
-                        )
+                                `
+                                    <span class="relationship-pill">
+                                        ${dependency.id} — ${dependency.title}
+                                    </span>
+                                `
+                            )
                         .join("")
                     : "—";
 

@@ -2,6 +2,8 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
     clearError();
 
     try {
+        showLoading(`Loading snapshot ${snapshotId}...`);
+
         const programResponse = await fetch("data/config/program.json");
         if (!programResponse.ok) throw new Error(`Failed to load program config: ${programResponse.status}`);
 
@@ -46,10 +48,11 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
 
         const program = await programResponse.json();
 
-        clearError();
+        clearLoading();
         renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots);
     } catch (err) {
         console.error(err);
+        clearLoading();
         showError(`Error loading snapshot ${snapshotId}: ${err.message}`);
     }
 }

@@ -18,24 +18,26 @@ function renderHeader(program, currentSnapshot, previousSnapshot) {
     const labels = document.querySelectorAll(".metric-label");
     const values = document.querySelectorAll(".metric-value");
 
-    program.healthMetrics.forEach((metric, index) => {
-        labels[index].innerText = metric;
+    (program.healthMetrics || []).forEach((metric, index) => {
+        if (labels[index]) labels[index].innerText = metric;
     });
 
     const declaredDeliveryConfidence = currentSnapshot.declaredDeliveryConfidence - previousSnapshot.declaredDeliveryConfidence;
     const deltaClass = declaredDeliveryConfidence >= 0 ? "delta-positive" : "delta-negative";
     const deltaArrow = declaredDeliveryConfidence >= 0 ? "↑" : "↓";
 
-    values[0].innerHTML = `
-        <span class="metric-main">
-            ${currentSnapshot.declaredDeliveryConfidence}%
-        </span>
-        <span class="metric-delta ${deltaClass}">
-            (${deltaArrow}${Math.abs(declaredDeliveryConfidence)}%)
-        </span>
-    `;
-    
-    values[1].innerText = calculateActiveRisks(currentSnapshot.risks);
-    values[2].innerText = calculateBlockedDependencies(currentSnapshot.dependencies);
-    values[3].innerText = calculatePendingDecisions(currentSnapshot.decisions);
+    if (values[0]) {
+        values[0].innerHTML = `
+            <span class="metric-main">
+                ${currentSnapshot.declaredDeliveryConfidence}%
+            </span>
+            <span class="metric-delta ${deltaClass}">
+                (${deltaArrow}${Math.abs(declaredDeliveryConfidence)}%)
+            </span>
+        `;
+    }
+
+    if (values[1]) values[1].innerText = calculateActiveRisks(currentSnapshot.risks);
+    if (values[2]) values[2].innerText = calculateBlockedDependencies(currentSnapshot.dependencies);
+    if (values[3]) values[3].innerText = calculatePendingDecisions(currentSnapshot.decisions);
 }

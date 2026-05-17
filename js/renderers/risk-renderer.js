@@ -33,7 +33,7 @@ function renderRisks(currentRisks, previousRisks, availableSnapshots, currentSna
                         .map((entity) => 
                             `
                                 <span class="relationship-pill">
-                                    ${entity.id} + ${entity.title}
+                                    ${entity.id} — ${entity.title}
                                 </span>
                             `
                         )

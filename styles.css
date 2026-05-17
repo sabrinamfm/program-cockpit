@@ -716,9 +716,8 @@ section {
 }
 
 .governance-warning.medium {
-    background: rgba(180, 83, 9, 0.05);
-
-    border-color: var(--at-risk-color);
+    background: var(--medium-background);
+    border-color: var(--medium-color);
 }
 
 .governance-warning-header {
@@ -792,8 +791,8 @@ section {
 }
 
 .feature-confidence-medium {
-    background-color: var(--at-risk-background);
-    color: var(--at-risk-color);
+    background-color: var(--medium-background);
+    color: var(--medium-color);
 }
 
 .feature-confidence-low {
@@ -827,8 +826,8 @@ section {
 }
 
 .feature-risk-medium {
-    background-color: var(--at-risk-background);
-    color: var(--at-risk-color);
+    background-color: var(--medium-background);
+    color: var(--medium-color);
 }
 
 .feature-risk-high {

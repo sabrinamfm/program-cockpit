@@ -9,6 +9,8 @@ async function loadData() {
     clearError();
 
     try {
+        showLoading("Loading configuration...");
+
         const snapshotsConfigResponse = await fetch("data/config/snapshots.json");
         if (!snapshotsConfigResponse.ok) throw new Error(`Failed to load snapshots config: ${snapshotsConfigResponse.status}`);
         const snapshotsConfig = await snapshotsConfigResponse.json();
@@ -24,8 +26,11 @@ async function loadData() {
         renderSnapshotSelector(sortedSnapshots, latestSnapshot);
 
         await loadSnapshot(latestSnapshot, sortedSnapshots);
+
+        clearLoading();
     } catch (err) {
         console.error(err);
+        clearLoading();
         showError(`Error loading data: ${err.message}`);
     }
 }
