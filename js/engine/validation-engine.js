@@ -76,7 +76,7 @@ function validateFeaturesSchema(features) {
 function validateRelationshipsStructure(entity, entityType) {
     const warnings = [];
     const relationships = entity.relationships;
-    const validRelationshipTypes = uiConfig.relationshipTypes || [];
+    const validRelationshipTypes = ((typeof uiConfig !== "undefined" && uiConfig.relationshipTypes) ? uiConfig.relationshipTypes : []) || [];
 
     if (!relationships || typeof relationships !== "object") {
         warnings.push({

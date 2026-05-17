@@ -39,14 +39,33 @@ function runTests() {
             dependencies: [{ id: 'd1', title: 'Dep One' }],
             milestones: [{ id: 'm1', title: 'Milestone One' }],
             decisions: [{ id: 'dec1', title: 'Decision One' }],
-            relatedOKRs: [{ id: 'okr1', objective: 'OKR One' }]
+            relatedOKRs: [{ id: 'okr1', objective: 'OKR One' }],
+            features: [{ id: 'f1', title: 'Feature One' }]
         };
 
         const risk = findEntityById('risks', 'r1', snapshot);
         const okr = findEntityById('okrs', 'okr1', snapshot);
+        const feature = findEntityById('features', 'f1', snapshot);
 
         if (!risk || risk.title !== 'Risk One') throw new Error('Risk not found');
         if (!okr || okr.objective !== 'OKR One') throw new Error('OKR not found');
+        if (!feature || feature.title !== 'Feature One') throw new Error('Feature not found');
+
+        if (!risk || risk.title !== 'Risk One') throw new Error('Risk not found');
+        if (!okr || okr.objective !== 'OKR One') throw new Error('OKR not found');
+    });
+
+    test('resolveRelationships should resolve feature relationships', () => {
+        const relationships = { features: ['f1'] };
+        const snapshot = { features: [{ id: 'f1', title: 'Feature One' }] };
+        const resolved = resolveRelationships(relationships, snapshot);
+
+        if (!Array.isArray(resolved) || resolved.length !== 1) {
+            throw new Error('Expected one resolved relationship for feature');
+        }
+        if (resolved[0].id !== 'f1' || resolved[0].title !== 'Feature One') {
+            throw new Error('Resolved feature did not match expected values');
+        }
     });
 
     test('validateRelationshipsStructure should warn for invalid relationship types', () => {

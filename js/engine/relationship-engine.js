@@ -22,7 +22,8 @@ function findEntityById(entityType, id, snapshot) {
         dependencies: snapshot.dependencies,
         milestones: snapshot.milestones,
         decisions: snapshot.decisions,
-        okrs: snapshot.relatedOKRs
+        okrs: snapshot.relatedOKRs,
+        features: snapshot.features
     };
 
     const collection = collectionMap[entityType];
