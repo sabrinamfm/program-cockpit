@@ -78,6 +78,21 @@ function runTests() {
         }
     });
 
+    test('validateRisks should warn when unresolved risk exceeds age without attention', () => {
+        uiConfig.riskStates = ['Unresolved', 'Mitigated', 'Accepted', 'Monitoring', 'Closed'];
+        const currentRisks = [
+            { id: 'r1', title: 'Risk One', state: 'Unresolved', introduced: 's1', attention: 'Monitor', mitigation: { status: 'Proposed' } }
+        ];
+        const previousRisks = [
+            { id: 'r1', title: 'Risk One', state: 'Unresolved', introduced: 's1', attention: 'Monitor', mitigation: { status: 'Proposed' } }
+        ];
+        const warnings = validateRisks(currentRisks, previousRisks, [], ['s1', 's2', 's3', 's4']);
+
+        if (!Array.isArray(warnings) || warnings.every((w) => w.category !== 'Governance Attention')) {
+            throw new Error('Expected Governance Attention warning for unresolved risk age');
+        }
+    });
+
     test('calculateRiskAge should compute age from available snapshots', () => {
         const availableSnapshots = ['s1', 's2', 's3', 's4'];
         const risk = { introduced: 's2' };

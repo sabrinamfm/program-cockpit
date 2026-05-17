@@ -183,10 +183,17 @@ if (typeof module !== "undefined" && module.exports) {
     };
 }
 
-function collectGovernanceWarnings(currentSnapshot, previousSnapshot) {
+function collectGovernanceWarnings(currentSnapshot, previousSnapshot, availableSnapshots = []) {
     return [
         ...validateRisksSchema(
             currentSnapshot.risks
+        ),
+
+        ...validateRisks(
+            currentSnapshot.risks,
+            previousSnapshot.risks || [],
+            currentSnapshot.attentionQueue || [],
+            availableSnapshots
         ),
 
         ...validateDependenciesSchema(

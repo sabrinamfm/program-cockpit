@@ -38,7 +38,7 @@ async function loadData() {
 function renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots) {
     clearError();
     renderHeader(program, currentSnapshot, previousSnapshot);
-    const warnings = collectGovernanceWarnings(currentSnapshot, previousSnapshot);
+    const warnings = collectGovernanceWarnings(currentSnapshot, previousSnapshot, availableSnapshots);
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderOKRs(currentSnapshot.relatedOKRs);
     renderMilestones(currentSnapshot.milestones);

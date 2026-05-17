@@ -14,7 +14,7 @@ function calculateRiskAge(risk, availableSnapshots) {
 
 function validateRisks(currentRisks, previousRisks, attentionQueue, availableSnapshots) {
     const warnings = [];
-    const allowedRiskStates = uiConfig.riskStates || [];
+    const allowedRiskStates = ((typeof uiConfig !== "undefined" && uiConfig.riskStates) ? uiConfig.riskStates : []) || [];
 
     currentRisks.forEach((risk) => {
         if (risk.state && !allowedRiskStates.includes(risk.state)) {
