@@ -1,32 +1,57 @@
 async function loadSnapshot(snapshotId, availableSnapshots) {
-    const programResponse = await fetch("data/config/program.json");
-    const currentSnapshotResponse = await fetch(`data/snapshots/${snapshotId}.json`);
-    const currentSnapshot = await currentSnapshotResponse.json();
+    clearError();
 
-    const historicalSnapshots = [];
+    try {
+        const programResponse = await fetch("data/config/program.json");
+        if (!programResponse.ok) throw new Error(`Failed to load program config: ${programResponse.status}`);
 
-    for (const snapshotId of availableSnapshots) {
-        const response = await fetch(`data/snapshots/${snapshotId}.json`);
+        const currentSnapshotResponse = await fetch(`data/snapshots/${snapshotId}.json`);
+        if (!currentSnapshotResponse.ok) throw new Error(`Failed to load snapshot ${snapshotId}: ${currentSnapshotResponse.status}`);
 
-        historicalSnapshots.push(await response.json());
+        const currentSnapshot = await currentSnapshotResponse.json();
+
+        const historicalSnapshots = [];
+
+        for (const sId of availableSnapshots) {
+            try {
+                const response = await fetch(`data/snapshots/${sId}.json`);
+
+                if (!response.ok) {
+                    console.warn(`Failed to load historical snapshot ${sId}: ${response.status}`);
+                    continue;
+                }
+
+                historicalSnapshots.push(await response.json());
+            } catch (e) {
+                console.warn(`Error loading historical snapshot ${sId}: ${e.message}`);
+            }
+        }
+
+        const snapshotIndex = availableSnapshots.indexOf(snapshotId);
+
+        let previousSnapshot = {
+            declaredDeliveryConfidence: currentSnapshot.declaredDeliveryConfidence
+        };
+
+        if (snapshotIndex > 0) {
+            const previousSnapshotId = availableSnapshots[snapshotIndex - 1];
+            const previousSnapshotResponse = await fetch(`data/snapshots/${previousSnapshotId}.json`);
+
+            if (!previousSnapshotResponse.ok) {
+                console.warn(`Failed to load previous snapshot ${previousSnapshotId}: ${previousSnapshotResponse.status}`);
+            } else {
+                previousSnapshot = await previousSnapshotResponse.json();
+            }
+        }
+
+        const program = await programResponse.json();
+
+        clearError();
+        renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots);
+    } catch (err) {
+        console.error(err);
+        showError(`Error loading snapshot ${snapshotId}: ${err.message}`);
     }
-
-    const snapshotIndex = availableSnapshots.indexOf(snapshotId);
-
-    let previousSnapshot = {
-        declaredDeliveryConfidence: currentSnapshot.declaredDeliveryConfidence
-    };
-
-    if (snapshotIndex > 0) {
-        const previousSnapshotId = availableSnapshots[snapshotIndex - 1];
-        const previousSnapshotResponse = await fetch(`data/snapshots/${previousSnapshotId}.json`);
-
-        previousSnapshot = await previousSnapshotResponse.json();
-    }
-
-    const program = await programResponse.json();
-
-    renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots);
 }
 
 function renderSnapshotSelector(snapshots, latestSnapshot) {

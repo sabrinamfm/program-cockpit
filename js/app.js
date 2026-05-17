@@ -6,21 +6,32 @@
 */
 
 async function loadData() {
-    const snapshotsConfigResponse = await fetch("data/config/snapshots.json");
-    const snapshotsConfig = await snapshotsConfigResponse.json();
-    const uiConfigResponse = await fetch("data/config/ui.json");
+    clearError();
 
-    uiConfig = await uiConfigResponse.json();
+    try {
+        const snapshotsConfigResponse = await fetch("data/config/snapshots.json");
+        if (!snapshotsConfigResponse.ok) throw new Error(`Failed to load snapshots config: ${snapshotsConfigResponse.status}`);
+        const snapshotsConfig = await snapshotsConfigResponse.json();
 
-    const sortedSnapshots = [...snapshotsConfig.availableSnapshots].sort();
-    const latestSnapshot = sortedSnapshots[sortedSnapshots.length - 1];
+        const uiConfigResponse = await fetch("data/config/ui.json");
+        if (!uiConfigResponse.ok) throw new Error(`Failed to load ui config: ${uiConfigResponse.status}`);
 
-    renderSnapshotSelector(sortedSnapshots, latestSnapshot);
+        uiConfig = await uiConfigResponse.json();
 
-    await loadSnapshot(latestSnapshot, sortedSnapshots);
+        const sortedSnapshots = [...snapshotsConfig.availableSnapshots].sort();
+        const latestSnapshot = sortedSnapshots[sortedSnapshots.length - 1];
+
+        renderSnapshotSelector(sortedSnapshots, latestSnapshot);
+
+        await loadSnapshot(latestSnapshot, sortedSnapshots);
+    } catch (err) {
+        console.error(err);
+        showError(`Error loading data: ${err.message}`);
+    }
 }
 
 function renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshots) {
+    clearError();
     renderHeader(program, currentSnapshot, previousSnapshot);
     const warnings = collectGovernanceWarnings(currentSnapshot, previousSnapshot);
     renderWeeklySummary(currentSnapshot.weeklySummary);
