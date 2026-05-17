@@ -51,6 +51,32 @@ function testDetectMilestoneDrift() {
     assert(warnings.length === 1, 'should detect milestone drift');
 }
 
+function testResolveAttentionEntitiesOrdering() {
+    global.uiConfig = { queueLevels: ['Informational', 'Review', 'Urgent'] };
+
+    const snapshot = {
+        attentionQueue: [
+            { entityType: 'Risk', entityId: 'R1', queueLevel: 'Informational', reason: 'info' },
+            { entityType: 'Risk', entityId: 'R2', queueLevel: 'Urgent', reason: 'urgent' },
+            { entityType: 'Risk', entityId: 'R3', queueLevel: 'Review', reason: 'review' },
+            { entityType: 'Risk', entityId: 'R4', queueLevel: 'Urgent', reason: 'urgent old' }
+        ],
+        risks: [
+            { id: 'R1', title: 'Info Risk', introduced: '2026-05-20-v1' },
+            { id: 'R2', title: 'Urgent Risk', introduced: '2026-05-13-v1' },
+            { id: 'R3', title: 'Review Risk', introduced: '2026-05-20-v1' },
+            { id: 'R4', title: 'Old Urgent Risk', introduced: '2026-05-06-v1' }
+        ]
+    };
+
+    const ordered = gov.resolveAttentionEntities(snapshot);
+    assert(Array.isArray(ordered), 'should return an array');
+    assert(ordered.length === 3, 'should return only the top three attention items');
+    assert(ordered[0].entityId === 'R4', 'oldest urgent item should be first');
+    assert(ordered[1].entityId === 'R2', 'newer urgent item should be second');
+    assert(ordered[2].entityId === 'R3', 'review item should follow urgent items');
+}
+
 function runAll() {
     try {
         testResolveRelationships();
@@ -67,6 +93,9 @@ function runAll() {
 
         testDetectMilestoneDrift();
         console.log('testDetectMilestoneDrift passed');
+
+        testResolveAttentionEntitiesOrdering();
+        console.log('testResolveAttentionEntitiesOrdering passed');
 
         console.log('\nAll tests passed');
         process.exit(0);

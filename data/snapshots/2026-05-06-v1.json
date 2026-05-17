@@ -129,7 +129,16 @@
             }
         }
     ],
-    "attentionQueue": [],
+    "attentionQueue": [
+        {
+            "id": "ATTN-001",
+            "entityType": "Risk",
+            "entityId": "RISK-001",
+            "queueLevel": "Informational",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
+        }
+    ],
     "decisions": [],
     "dependencies": [
         {

@@ -65,47 +65,84 @@ function calculatePendingDecisions(decisions) {
     return decisions.length;
 }
 
+function parseSnapshotIdToTimestamp(snapshotId) {
+    if (typeof snapshotId !== "string") {
+        return null;
+    }
+
+    const match = snapshotId.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (!match) {
+        return null;
+    }
+
+    const date = new Date(match[1]);
+    return Number.isNaN(date.getTime()) ? null : date.getTime();
+}
+
+function getAttentionQueuePriority(queueLevel) {
+    const configuredLevels = ((typeof uiConfig !== "undefined" && Array.isArray(uiConfig.queueLevels)) ? uiConfig.queueLevels : []);
+    const orderedLevels = configuredLevels.length > 0 ? [...configuredLevels].reverse() : ["Urgent", "Review", "Informational"];
+    const index = orderedLevels.indexOf(queueLevel);
+    return index !== -1 ? index : orderedLevels.length;
+}
+
+function getAttentionAgeSortKey(item, entity) {
+    if (typeof item.age === "number") {
+        return -item.age;
+    }
+
+    if (item.createdAt) {
+        const createdTs = Date.parse(item.createdAt);
+        if (!Number.isNaN(createdTs)) {
+            return createdTs;
+        }
+    }
+
+    if (entity && typeof entity.introduced === "string") {
+        const introducedTs = parseSnapshotIdToTimestamp(entity.introduced);
+        if (introducedTs !== null) {
+            return introducedTs;
+        }
+    }
+
+    if (entity && entity.lastUpdated) {
+        const updatedTs = Date.parse(entity.lastUpdated);
+        if (!Number.isNaN(updatedTs)) {
+            return updatedTs;
+        }
+    }
+
+    return Number.MAX_SAFE_INTEGER;
+}
+
 function resolveAttentionEntities(snapshot) {
-    return snapshot.attentionQueue
-        .map((item) => {
-            let referencedEntity =
-                null;
+    return (snapshot.attentionQueue || [])
+        .map((item, index) => {
+            let referencedEntity = null;
 
             switch (item.entityType) {
                 case "Risk":
-                    referencedEntity =
-                        snapshot.risks.find(
-                            (risk) =>
-                                risk.id ===
-                                item.entityId
-                        );
+                    referencedEntity = snapshot.risks.find(
+                        (risk) => risk.id === item.entityId
+                    );
                     break;
 
                 case "Milestone":
-                    referencedEntity =
-                        snapshot.milestones.find(
-                            (milestone) =>
-                                milestone.id ===
-                                item.entityId
-                        );
+                    referencedEntity = snapshot.milestones.find(
+                        (milestone) => milestone.id === item.entityId
+                    );
                     break;
 
                 case "Decision":
-                    referencedEntity =
-                        snapshot.decisions.find(
-                            (decision) =>
-                                decision.id ===
-                                item.entityId
-                        );
+                    referencedEntity = snapshot.decisions.find(
+                        (decision) => decision.id === item.entityId
+                    );
                     break;
 
                 case "Dependency":
-                    referencedEntity =
-                        snapshot.dependencies?.find(
-                            (dependency) =>
-                                dependency.id ===
-                                item.entityId
-                        );
+                    referencedEntity = snapshot.dependencies?.find(
+                        (dependency) => dependency.id === item.entityId
+                    );
                     break;
             }
 
@@ -119,10 +156,26 @@ function resolveAttentionEntities(snapshot) {
                 queueLevel: item.queueLevel,
                 reason: item.reason,
                 owner: item.owner,
-                entity: referencedEntity
+                entity: referencedEntity,
+                _attentionPriority: getAttentionQueuePriority(item.queueLevel),
+                _attentionAgeKey: getAttentionAgeSortKey(item, referencedEntity),
+                _originalIndex: index
             };
-        }
-    ).filter(Boolean);
+        })
+        .filter(Boolean)
+        .sort((a, b) => {
+            if (a._attentionPriority !== b._attentionPriority) {
+                return a._attentionPriority - b._attentionPriority;
+            }
+
+            if (a._attentionAgeKey !== b._attentionAgeKey) {
+                return a._attentionAgeKey - b._attentionAgeKey;
+            }
+
+            return a._originalIndex - b._originalIndex;
+        })
+        .slice(0, 3)
+        .map(({ _attentionPriority, _attentionAgeKey, _originalIndex, ...rest }) => rest);
 }
 
 function calculateBlockedDependencies(dependencies) {

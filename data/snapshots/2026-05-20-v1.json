@@ -64,6 +64,14 @@
             "queueLevel": "Urgent",
             "reason": "Customer launch path blocked pending ownership clarification.",
             "owner": "Governance Team"
+        },
+        {
+            "id": "ATTN-004",
+            "entityType": "Dependency",
+            "entityId": "DEP-001",
+            "queueLevel": "Urgent",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
         }
     ],
     "milestones": [

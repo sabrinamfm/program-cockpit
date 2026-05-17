@@ -153,22 +153,28 @@
     ],
     "attentionQueue": [
         {
+            "id": "ATTN-001",
             "entityType": "Risk",
             "entityId": "RISK-001",
-            "priority": "Critical",
-            "reason": "Customer launch path blocked pending ownership clarification."
+            "queueLevel": "Informational",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
         },
         {
-            "entityType": "Milestone",
-            "entityId": "MS-003",
-            "priority": "Critical",
-            "reason": "Customer launch path cannot finalize without approval alignment."
+            "id": "ATTN-002",
+            "entityType": "Risk",
+            "entityId": "RISK-002",
+            "queueLevel": "Review",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
         },
         {
+            "id": "ATTN-003",
             "entityType": "Dependency",
             "entityId": "DEP-001",
-            "priority": "Needs Discussion",
-            "reason": "Multiple teams assume partial ownership of downstream validation."
+            "queueLevel": "Urgent",
+            "reason": "Customer launch path blocked pending ownership clarification.",
+            "owner": "Governance Team"
         }
     ],
     "features": [
