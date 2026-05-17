@@ -3,6 +3,7 @@
     --surface: #FFFFFF;
 
     --border-color: #E5E7EB;
+    --border: var(--border-color);
 
     --text-primary: #111827;
     --text-secondary: #6B7280;
@@ -18,6 +19,10 @@
 
     --new-background: rgba(44, 141, 133, 0.12);
     --new-color: #1d9389;
+    --surface-secondary: #F3F4F6;
+    --on-track: var(--on-track-color);
+    --resolved-background: var(--completed-background);
+    --resolved-color: var(--completed-color);
     --unknown-background: rgba(107, 114, 128, 0.12);
     --unknown-color: #6B7280;
     --completed-background: rgba(27, 78, 141, 0.12);
@@ -671,7 +676,7 @@ section {
 
 .new {
     background: rgba(15, 118, 110, 0.10);
-    color: var(--on-track);
+    color: var(--on-track-color);
 }
 
 .escalated {

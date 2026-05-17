@@ -14,12 +14,13 @@ function renderDecisions(decisions) {
                         <h3>
                             ${decision.title}
                         </h3>
-                        <span class="badge dependency-${statusClass}">
+                        <span class="badge decision-status-${statusClass}">
                             ${decision.status}
                         </span>
                     </div>
 
                     <p>
+                        <strong>Description:</strong>
                         ${decision.description}
                     </p>
 

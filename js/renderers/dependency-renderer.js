@@ -20,6 +20,7 @@ function renderDependencies(dependencies) {
                     </div>
 
                     <p>
+                        <strong>Description:</strong>
                         ${dependency.description}
                     </p>
 
