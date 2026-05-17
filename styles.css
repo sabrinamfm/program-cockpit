@@ -187,7 +187,9 @@ section {
     display: flex;
     align-items: flex-start;
     gap: 24px;
+    width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
     padding-bottom: 12px;
     margin-top: 20px;
 }
@@ -226,6 +228,14 @@ section {
 
 .horizontal-marker.at-risk {
     background: var(--at-risk-color);
+}
+
+.horizontal-marker.off-track {
+    background: var(--off-track-color);
+}
+
+.horizontal-marker.unknown {
+    background: var(--unknown-color);
 }
 
 .horizontal-content h3 {
@@ -543,69 +553,6 @@ section {
     overflow: hidden;
 }
 
-.horizontal-timeline {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 12px;
-    margin-top: 20px;
-}
-
-.horizontal-timeline-item {
-    position: relative;
-    min-width: 240px;
-    flex-shrink: 0;
-}
-
-.horizontal-timeline-item::after {
-    content: "";
-    position: absolute;
-    top: 11px;
-    left: calc(100% - 12px);
-    width: 24px;
-    height: 2px;
-    background: #D1D5DB;
-}
-
-.horizontal-timeline-item:last-child::after {
-    display: none;
-}
-
-.horizontal-marker {
-    width: 24px;
-    height: 24px;
-    border-radius: 999px;
-    border: 4px solid white;
-    margin-bottom: 16px;
-}
-
-.horizontal-marker.on-track {
-    background: var(--on-track-color);
-}
-
-.horizontal-marker.at-risk {
-    background: var(--at-risk-color);
-}
-
-.horizontal-marker.off-track {
-    background: var(--off-track-color);
-}
-
-.horizontal-marker.unknown {
-    background: var(--unknown-color);
-}
-
-.horizontal-content h3 {
-    margin-bottom: 8px;
-}
-
-.horizontal-content p {
-    margin-bottom: 10px;
-}
-
 .panel-full-width {
     width: 100%;
 }
@@ -677,7 +624,7 @@ section {
 
 .new {
     background: rgba(15, 118, 110, 0.10);
-    color: var(--on-track);
+    color: var(--on-track-color);
 }
 
 .escalated {

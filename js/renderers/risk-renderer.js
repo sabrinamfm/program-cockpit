@@ -1,6 +1,5 @@
 function renderRisks(currentRisks = [], previousRisks = [], availableSnapshots = [], currentSnapshot = {}) {
     const container = document.getElementById("risks-container");
-    const previousRiskTitles = (previousRisks || []).map((risk) => risk.title);
 
     window.currentRisksById = {};
     container.innerHTML = "";
