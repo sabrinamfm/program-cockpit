@@ -299,6 +299,7 @@ section {
 .risk-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: auto;
 }
 
 .risk-table th {
@@ -317,6 +318,48 @@ section {
     border-bottom: 1px solid var(--border-color);
 }
 
+.risk-table th:first-child,
+.risk-table td:first-child,
+.feature-table th:first-child,
+.feature-table td:first-child {
+    width: 1%;
+}
+
+.risk-table th:nth-child(4),
+.risk-table td:nth-child(4),
+.risk-table th:nth-child(5),
+.risk-table td:nth-child(5),
+.risk-table th:nth-child(6),
+.risk-table td:nth-child(6),
+.risk-table th:nth-child(7),
+.risk-table td:nth-child(7),
+.feature-table th:nth-child(5),
+.feature-table td:nth-child(5),
+.feature-table th:nth-child(6),
+.feature-table td:nth-child(6),
+.feature-table th:nth-child(7),
+.feature-table td:nth-child(7) {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.entity-id-cell,
+.relationship-id {
+    white-space: nowrap;
+}
+
+.relationship-cell {
+    min-width: 210px;
+}
+
+.risk-table .relationship-cell {
+    width: 24%;
+}
+
+.feature-table .relationship-cell {
+    width: 22%;
+}
+
 .risk-impact {
     margin-top: 8px;
     color: var(--text-secondary);
@@ -331,13 +374,17 @@ section {
     font-size: 0.78rem;
     font-weight: 700;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .badge {
+    display: inline-flex;
+    align-items: center;
     padding: 6px 10px;
     border-radius: 999px;
     font-size: 12px;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .attention-queue-informational {
@@ -922,6 +969,7 @@ section {
 .feature-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: auto;
 }
 
 .feature-table th {
@@ -944,14 +992,38 @@ section {
         var(--border-color);
 }
 
-.relationship-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 8px;
-    border-radius: 999px;
-    background-color: var(--surface-secondary);
+.relationship-list-stack {
+    display: grid;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.relationship-list-stack li {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 6px;
+    align-items: start;
+    min-width: 0;
+    color: var(--text-secondary);
     font-size: 0.72rem;
-    margin-right: 6px;
+    line-height: 1.35;
+}
+
+.relationship-id {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.relationship-id::after {
+    content: " —";
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.relationship-title {
+    min-width: 0;
 }
 
 .modal {

@@ -30,15 +30,20 @@ function renderRisks(currentRisks = [], previousRisks = [], availableSnapshots =
         const relatedEntities = resolveRelationships(safeRisk.relationships || {}, currentSnapshot || {});
         const relationshipsHtml =
                 relatedEntities.length > 0
-                    ? relatedEntities
+                    ? `
+                        <ul class="relationship-list-stack">
+                            ${relatedEntities
                         .map((entity) => 
                             `
-                                <span class="relationship-pill">
-                                    ${escapeHtml(entity.id)} — ${escapeHtml(entity.title)}
-                                </span>
+                                <li>
+                                    <span class="relationship-id">${escapeHtml(entity.id)}</span>
+                                    <span class="relationship-title">${escapeHtml(entity.title)}</span>
+                                </li>
                             `
                         )
-                        .join("")
+                        .join("")}
+                        </ul>
+                    `
                     : "—";
 
         window.currentRisksById[safeRisk.id] = safeRisk;
@@ -53,7 +58,7 @@ function renderRisks(currentRisks = [], previousRisks = [], availableSnapshots =
         const severityClass = severity.toLowerCase().replace(/\s+/g, "-");
 
         row.innerHTML = `
-            <td>
+            <td class="entity-id-cell">
                 <strong>${escapeHtml(safeRisk.id || "N/A")}</strong>
             </td>
             <td>${escapeHtml(safeRisk.title || "Untitled risk")}</td>
@@ -82,7 +87,7 @@ function renderRisks(currentRisks = [], previousRisks = [], availableSnapshots =
                     ${escapeHtml(mitigationStatus)}
                 </button>
             </td>
-            <td>
+            <td class="relationship-cell">
                 ${relationshipsHtml}
             </td>
         `;

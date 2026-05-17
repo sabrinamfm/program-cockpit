@@ -35,15 +35,20 @@ function renderFeatures(features = [], currentSnapshot = {}) {
 
             const dependenciesHtml =
                 dependencies.length > 0
-                    ? dependencies
+                    ? `
+                        <ul class="relationship-list-stack">
+                            ${dependencies
                         .map((dependency) => 
                                 `
-                                    <span class="relationship-pill">
-                                        ${escapeHtml(dependency.id)} — ${escapeHtml(dependency.title)}
-                                    </span>
+                                    <li>
+                                        <span class="relationship-id">${escapeHtml(dependency.id)}</span>
+                                        <span class="relationship-title">${escapeHtml(dependency.title)}</span>
+                                    </li>
                                 `
                             )
-                        .join("")
+                        .join("")}
+                        </ul>
+                    `
                     : "—";
 
             const status = safeFeature.status || "Unknown";
@@ -54,7 +59,7 @@ function renderFeatures(features = [], currentSnapshot = {}) {
             const riskClass = risk.toLowerCase().replace(/\s+/g, "-");
 
             row.innerHTML = `
-                <td>
+                <td class="entity-id-cell">
                     <strong>${escapeHtml(safeFeature.id || "N/A")}</strong>
                 </td>
 
@@ -88,7 +93,7 @@ function renderFeatures(features = [], currentSnapshot = {}) {
                     </span>
                 </td>
 
-                <td>
+                <td class="relationship-cell">
                     ${dependenciesHtml}
                 </td>
             `;
