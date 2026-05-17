@@ -125,3 +125,11 @@ function validateRelationshipsStructure(entity, entityType) {
 
     return warnings;
 }
+
+// Expose for Node unit tests
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+        validateEntity,
+        validateRelationshipsStructure
+    };
+}

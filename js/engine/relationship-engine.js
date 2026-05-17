@@ -33,3 +33,11 @@ function findEntityById(entityType, id, snapshot) {
 
     return collection.find((entity) => entity.id === id);
 }
+
+// Expose for Node unit tests
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+        resolveRelationships,
+        findEntityById
+    };
+}

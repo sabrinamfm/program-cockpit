@@ -55,3 +55,11 @@ function validateRisks(currentRisks, previousRisks, attentionQueue, availableSna
     });
     return warnings;
 }
+
+// Expose for Node unit tests
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+        calculateRiskAge,
+        validateRisks
+    };
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Cockpit Browser Tests</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            padding: 24px;
+        }
+        h1 {
+            margin-bottom: 16px;
+        }
+        .result {
+            margin-bottom: 12px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+        }
+        .result.pass {
+            background: #d1fae5;
+            border-color: #10b981;
+        }
+        .result.fail {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+        .summary {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 14px;
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Browser Unit Tests</h1>
+    <div id="test-results"></div>
+    <div id="summary" class="summary"></div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/engine/relationship-engine.js"></script>
+    <script src="../js/engine/validation-engine.js"></script>
+    <script src="../js/engine/governance-engine.js"></script>
+    <script src="../js/engine/risk-engine.js"></script>
+    <script src="browser_tests.js"></script>
+</body>
+</html>

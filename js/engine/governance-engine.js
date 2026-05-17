@@ -172,6 +172,17 @@ function validateAttentionQueueReferences(attentionQueue, snapshot) {
     return warnings;
 }
 
+// Expose pure helpers for unit tests
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+        detectConfidenceTrend,
+        detectMilestoneDrift,
+        calculateActiveRisks,
+        calculateBlockedDependencies,
+        resolveAttentionEntities
+    };
+}
+
 function collectGovernanceWarnings(currentSnapshot, previousSnapshot) {
     return [
         ...validateRisksSchema(
