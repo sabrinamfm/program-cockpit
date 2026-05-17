@@ -143,43 +143,59 @@
     ],
     "features": [
         {
+            "id": "FEAT-001",
             "title": "Customer Configuration Flow",
             "estimate": "5 weeks",
             "owner": "Platform Team",
-            "status": "In Progress",
+            "status": "Completed",
             "confidence": "Low",
             "risk": "High",
-            "dependencies": [
-                "Platform Approval",
-                "Security Review",
-                "Customer Validation"
-            ]
+            "relationships": {
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "risks": [
+                    "RISK-001"
+                ]
+            }
         },
         {
+            "id": "FEAT-002",
             "title": "Customer Configuration Flow",
             "estimate": "5 weeks",
             "owner": "Platform Team",
             "status": "In Progress",
             "confidence": "High",
-            "risk": "Medium",
-            "dependencies": [
-                "Platform Approval",
-                "Security Review",
-                "Customer Validation"
-            ]
-        }, 
+            "risk": "Low",
+            "relationships": {
+                "dependencies": [
+                    "DEP-002"
+                ],
+                "risks": [
+                    "RISK-002"
+                ]
+            }
+        },
         {
+            "id": "FEAT-003",
             "title": "Customer Configuration Flow",
             "estimate": "5 weeks",
             "owner": "Platform Team",
-            "status": "In Progress",
+            "status": "Blocked",
             "confidence": "Medium",
-            "risk": "Low",
-            "dependencies": [
-                "Platform Approval",
-                "Security Review",
-                "Customer Validation"
-            ]
+            "risk": "Medium",
+            "relationships": {}
+        }
+        ,
+        {
+            "id": "FEAT-004",
+            "title": "Customer Configuration Flow",
+            "estimate": "5 weeks",
+            "owner": "Platform Team",
+            "status": "Planned",
+            "confidence": "Medium",
+            "risk": "Medium",
+            "relationships": {}
         }
     ],
     "risks": [

@@ -46,13 +46,13 @@ function renderProgram(program, currentSnapshot, previousSnapshot, availableSnap
     warnings.push(...validateAttentionsSchema(currentSnapshot.attentionQueue));
     warnings.push(...validateDependenciesSchema(currentSnapshot.dependencies));
     warnings.push(...validateDependencyHealth(currentSnapshot.dependencies));
-    warnings.push(
-    ...validateAttentionQueueReferences(currentSnapshot.attentionQueue, currentSnapshot));
+    warnings.push(...validateAttentionQueueReferences(currentSnapshot.attentionQueue, currentSnapshot));
+    warnings.push(...validateFeaturesSchema(currentSnapshot.features));
     
     renderWeeklySummary(currentSnapshot.weeklySummary);
     renderOKRs(currentSnapshot.relatedOKRs);
     renderMilestones(currentSnapshot.milestones);
-    renderFeatures(currentSnapshot.features);
+    renderFeatures(currentSnapshot.features, currentSnapshot);
     renderRisks(currentSnapshot.risks, previousSnapshot.risks || [], availableSnapshots, currentSnapshot);
     renderDependencies(currentSnapshot.dependencies);
     renderDecisions(currentSnapshot.decisions);

@@ -35,3 +35,7 @@ function validateRisksSchema(risks) {
 function validateDependenciesSchema(dependencies) {
     return dependencies.flatMap((dependency) => validateEntity(dependency, dependencySchema, "Dependency"));
 }
+
+function validateFeaturesSchema(features) {
+    return features.flatMap((feature) => validateEntity(feature, featureSchema, "Feature"));
+}

@@ -7,10 +7,6 @@
     --text-primary: #111827;
     --text-secondary: #6B7280;
 
-    --on-track: #0F766E;
-    --risk: #B45309;
-    --off-track: #991B1B;
-
     --shadow: rgba(15, 23, 42, 0.06);
 
     --off-track-background: rgba(153, 27, 27, 0.12);
@@ -24,6 +20,9 @@
 
     --unknown-background: rgba(107, 114, 128, 0.12);
     --unknown-color: #6B7280;
+
+    --completed-background: rgba(27, 78, 141, 0.12);
+    --completed-color: #4b4ea6;
 
 * {
     box-sizing: border-box;
@@ -68,7 +67,6 @@ h2 {
 h3 {
     font-size: 18px;
     font-weight: 600;
-
     margin-bottom: 12px;
 }
 
@@ -80,49 +78,35 @@ section {
     margin-bottom: 48px;
 }
 
-.summary-card,
-.card {
+.summary-card, .card {
     background: var(--surface);
-
     border: 1px solid var(--border);
-
     border-radius: 18px;
-
     padding: 28px;
-
-    box-shadow:
-        0 4px 14px var(--shadow);
+    box-shadow: 0 4px 14px var(--shadow);
 }
 
 .summary-grid {
     display: flex;
     gap: 48px;
-
     margin-top: 28px;
 }
 
 .label {
     display: block;
-
     color: var(--text-secondary);
-
     font-size: 11px;
     font-weight: 700;
-
     text-transform: uppercase;
     letter-spacing: 1.2px;
-
     margin-bottom: 8px;
 }
 
 .status {
     display: inline-flex;
     align-items: center;
-
     padding: 6px 12px;
-
     border-radius: 999px;
-
     font-size: 13px;
     font-weight: 600;
 }
@@ -149,7 +133,6 @@ section {
 
 .card {
     margin-bottom: 18px;
-
     transition:
         transform 0.12s ease,
         box-shadow 0.12s ease;
@@ -168,9 +151,7 @@ section {
 
 .cockpit-grid {
     display: grid;
-
     grid-template-columns: 2fr 1fr;
-
     gap: 24px;
 }
 
@@ -199,37 +180,26 @@ section {
 
 .horizontal-timeline {
     display: flex;
-
     align-items: flex-start;
-
     gap: 24px;
-
     overflow-x: auto;
-
     padding-bottom: 12px;
-
     margin-top: 20px;
 }
 
 .horizontal-timeline-item {
     position: relative;
-
     min-width: 240px;
-
     flex-shrink: 0;
 }
 
 .horizontal-timeline-item::after {
     content: "";
-
     position: absolute;
-
     top: 11px;
     left: calc(100% - 12px);
-
     width: 24px;
     height: 2px;
-
     background: #D1D5DB;
 }
 
@@ -249,11 +219,11 @@ section {
 }
 
 .horizontal-marker.on-track {
-    background: var(--success);
+    background: var(--on-track-color);
 }
 
 .horizontal-marker.at-risk {
-    background: var(--risk);
+    background: var(--at-risk-color);
 }
 
 .horizontal-content h3 {
@@ -680,11 +650,11 @@ section {
 }
 
 .delta-positive {
-    color: var(--on-track);
+    color: var(--on-track-color);
 }
 
 .delta-negative {
-    color: var(--off-track);
+    color: var(--off-track-color);
 }
 
 .risk-header {
@@ -747,13 +717,13 @@ section {
 .governance-warning.high {
     background: rgba(153, 27, 27, 0.05);
 
-    border-color: var(--off-track)
+    border-color: var(--off-track-color)
 }
 
 .governance-warning.medium {
     background: rgba(180, 83, 9, 0.05);
 
-    border-color: var(--risk);
+    border-color: var(--at-risk-color);
 }
 
 .governance-warning-header {
@@ -774,7 +744,7 @@ section {
 
     text-transform: uppercase;
 
-    color: var(--off-track);
+    color: var(--off-track-color);
 }
 
 .governance-category {
@@ -819,6 +789,56 @@ section {
 .program-status.unknown {
     background-color: var(--unknown-background);
     color: var(--unknown-color);
+}
+
+.feature-confidence-high {
+    background-color: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.feature-confidence-medium {
+    background-color: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.feature-confidence-low {
+    background-color: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.feature-status-planned {
+    background-color: var(--unknown-background);
+    color: var(--unknown-color);
+}
+
+.feature-status-in-progress {
+    background-color: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.feature-status-completed {
+    background-color: var(--completed-background);
+    color: var(--completed-color);
+}
+
+.feature-status-blocked {
+    background-color: var(--off-track-background);
+    color: var(--off-track-color);
+}
+
+.feature-risk-low {
+    background-color: var(--on-track-background);
+    color: var(--on-track-color);
+}
+
+.feature-risk-medium {
+    background-color: var(--at-risk-background);
+    color: var(--at-risk-color);
+}
+
+.feature-risk-high {
+    background-color: var(--off-track-background);
+    color: var(--off-track-color);
 }
 
 .related-okrs {
@@ -955,6 +975,41 @@ section {
     padding-left: 18px;
     color: var(--text-secondary);
     line-height: 1.5;
+}
+
+.feature-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.feature-table th {
+    text-align: left;
+    padding: 14px;
+    border-bottom:
+        1px solid
+        var(--border-color);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+}
+
+.feature-table td {
+    padding: 16px 14px;
+    vertical-align: top;
+    border-bottom:
+        1px solid
+        var(--border-color);
+}
+
+.relationship-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background-color: var(--surface-secondary);
+    font-size: 0.72rem;
+    margin-right: 6px;
 }
 
 }

@@ -56,5 +56,21 @@
         "Low",
         "Medium",
         "High"
+    ],
+    "featureRisks": [
+        "Low",
+        "Medium",
+        "High"
+    ],
+    "featureConfidence": [
+        "Low",
+        "Medium",
+        "High"
+    ],
+    "featureStatuses": [
+        "Planned",
+        "In Progress",
+        "Completed",
+        "Blocked"
     ]
 }
