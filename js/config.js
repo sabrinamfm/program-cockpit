@@ -61,3 +61,40 @@ function clearLoading() {
 		el.remove();
 	}
 }
+
+function openMitigationModal(riskId) {
+	const risk = window.currentRisksById?.[riskId];
+	const modal = document.getElementById("mitigation-modal");
+	const title = modal.querySelector(".modal-title");
+	const body = modal.querySelector(".modal-body");
+
+	if (!risk) {
+		showError(`Unable to show mitigation details for ${riskId}`);
+		return;
+	}
+
+	title.innerText = `${risk.id} — ${risk.title}`;
+	body.innerHTML = `
+		<p><strong>Owner:</strong> ${risk.owner}</p>
+		<p><strong>Severity:</strong> ${risk.severity}</p>
+		<p><strong>State:</strong> ${risk.state}</p>
+		<p><strong>Attention:</strong> ${risk.attention}</p>
+		<p><strong>Description:</strong> ${risk.description || "No description available."}</p>
+		<p><strong>Mitigation status:</strong> ${risk.mitigation.status}</p>
+		<p><strong>Mitigation details:</strong> ${risk.mitigation.description || "No mitigation details available."}</p>
+	`;
+
+	modal.classList.add("visible");
+	modal.classList.remove("hidden");
+	modal.setAttribute("aria-hidden", "false");
+}
+
+function closeMitigationModal() {
+	const modal = document.getElementById("mitigation-modal");
+
+	if (modal) {
+		modal.classList.remove("visible");
+		modal.classList.add("hidden");
+		modal.setAttribute("aria-hidden", "true");
+	}
+}

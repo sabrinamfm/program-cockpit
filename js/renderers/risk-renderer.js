@@ -2,6 +2,7 @@ function renderRisks(currentRisks, previousRisks, availableSnapshots, currentSna
     const container = document.getElementById("risks-container");
     const previousRiskTitles = previousRisks.map((risk) => risk.title);
 
+    window.currentRisksById = {};
     container.innerHTML = "";
 
     const table = document.createElement("table");
@@ -40,6 +41,7 @@ function renderRisks(currentRisks, previousRisks, availableSnapshots, currentSna
                         .join("")
                     : "—";
 
+        window.currentRisksById[risk.id] = risk;
         const stateClass = risk.state.toLowerCase().replace(/\s+/g, "-");
         const attentionClass = risk.attention.toLowerCase().replace(/\s+/g, "-");
         const mitigationClass = risk.mitigation.status.toLowerCase().replace(/\s+/g, "-");
