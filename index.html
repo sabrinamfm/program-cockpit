@@ -27,107 +27,133 @@
                 <span id="snapshot-note"></span>
             </div>
 
-            <div class="summary-layout">
-                <div class="summary-main">
-                    <div class="summary-card">
-                        <h2>Executive Summary</h2>
-                        <p id="executive-summary"></p>
+            <div class="tab-navigation">
 
-                        <div class="summary-column">
-                            <h3 class="summary-title">
-                                Highlights
-                            </h3>
-                            <ul id="highlights-list"></ul>
+                <button class="tab-button active" data-tab="overview">
+                    Overview
+                </button>
 
-                            <h3 class="summary-title">
-                                Lowlights
-                            </h3>
-                            <ul id="lowlights-list"></ul>
-                        </div>
-                    
-                        <div class="summary-grid">
-                            <div>
-                                <span class="label">Status</span>
-                                <span id="status-class"></span>
-                            </div>
-                            <div>
-                                <span class="label">Target Launch</span>
-                                <span id="target-launch"></span>
-                            </div>
-                            <div>
-                                <span class="label">Last Updated</span>
-                                <span id="last-updated"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <aside class="summary-sidebar">
-                    <div id="okr-container">
-                        <div class="related-okrs">
-                            <div class="okr-reference-list"></div>
-                        </div>
-                    </div>
-                </aside>
-            </div>
+                <button class="tab-button" data-tab="delivery">
+                    Delivery
+                </button>
 
-            <div class="health-strip">
-                <div class="health-metric">
-                    <span class="metric-label"></span>
-                    <span class="metric-value"></span>
-                </div>
+                <button class="tab-button" data-tab="operations">
+                    Operations
+                </button>
 
-                <div class="health-metric">
-                    <span class="metric-label"></span>
-                    <span class="metric-value"></span>
-                </div>
-
-                <div class="health-metric">
-                    <span class="metric-label"></span>
-                    <span class="metric-value"></span>
-                </div>
-
-                <div class="health-metric">
-                    <span class="metric-label"></span>
-                    <span class="metric-value"></span>
-                </div>
+                <button class="tab-button" data-tab="governance">
+                    Governance
+                </button>
             </div>
         </header>
-
         <main>
-            <section class="panel panel-full-width">
-                <h2>Attention Queue</h2>
-                <div id="attention-container" class="attention-grid"></div>
-            </section>
+            <div id="tab-overview" class="tab-content active">
+                <div class="summary-layout">
+                    <div class="summary-main">
+                        <div class="summary-card">
+                            <h2>Executive Summary</h2>
+                            <p id="executive-summary"></p>
 
-            <section class="panel panel-full-width">
-                <h2 id="milestones-title"></h2>
-                <div id="milestones-container"></div>
-            </section>
+                            <div class="summary-column">
+                                <h3 class="summary-title">
+                                    Highlights
+                                </h3>
+                                <ul id="highlights-list"></ul>
 
-            <section class="panel">
-                <h2 id="features-title"></h2>
-                <div id="features-container"></div>
-            </section>
+                                <h3 class="summary-title">
+                                    Lowlights
+                                </h3>
+                                <ul id="lowlights-list"></ul>
+                            </div>
+                        
+                            <div class="summary-grid">
+                                <div>
+                                    <span class="label">Status</span>
+                                    <span id="status-class"></span>
+                                </div>
+                                <div>
+                                    <span class="label">Target Launch</span>
+                                    <span id="target-launch"></span>
+                                </div>
+                                <div>
+                                    <span class="label">Last Updated</span>
+                                    <span id="last-updated"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="summary-sidebar">
+                        <div id="okr-container">
+                            <div class="related-okrs">
+                                <div class="okr-reference-list"></div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
 
-            <section class="panel">
-                <h2 id="risks-title"></h2>
-                <div id="risks-container"></div>
-            </section>
+                <div class="health-strip">
+                    <div class="health-metric">
+                        <span class="metric-label"></span>
+                        <span class="metric-value"></span>
+                    </div>
 
-            <section class="panel panel-full-width">
-                <h2>Program Dependencies</h2>
-                <div id="dependencies-container"></div>
-            </section>
+                    <div class="health-metric">
+                        <span class="metric-label"></span>
+                        <span class="metric-value"></span>
+                    </div>
 
-            <section class="panel panel-full-width">
-                <h2 id="decisions-title"></h2>
-                <div id="decisions-container"></div>
-            </section>
+                    <div class="health-metric">
+                        <span class="metric-label"></span>
+                        <span class="metric-value"></span>
+                    </div>
 
-            <section class="panel panel-full-width governance-panel">
-                <h2>Governance Warnings</h2>
-                <div id="governance-warnings-container"></div>
-            </section>
+                    <div class="health-metric">
+                        <span class="metric-label"></span>
+                        <span class="metric-value"></span>
+                    </div>
+                </div>
+
+                <section class="panel panel-full-width">
+                    <h2>Attention Queue</h2>
+                    <div id="attention-container" class="attention-grid"></div>
+                </section>
+            </div>
+
+            <div id="tab-delivery" class="tab-content">
+                <section class="panel panel-full-width">
+                    <h2 id="milestones-title"></h2>
+                    <div id="milestones-container"></div>
+                </section>
+
+                <section class="panel">
+                    <h2 id="features-title"></h2>
+                    <div id="features-container"></div>
+                </section>
+            </div>
+
+            <div id="tab-operations" class="tab-content">
+                <section class="panel">
+                    <h2 id="risks-title"></h2>
+                    <div id="risks-container"></div>
+                </section>
+
+                <section class="panel panel-full-width">
+                    <h2>Program Dependencies</h2>
+                    <div id="dependencies-container"></div>
+                </section>
+            </div>
+
+            <div id="tab-governance" class="tab-content">
+                <section class="panel panel-full-width">
+                    <h2 id="decisions-title"></h2>
+                    <div id="decisions-container"></div>
+                </section>
+
+                <section class="panel panel-full-width governance-panel">
+                    <h2>Governance Warnings</h2>
+                    <div id="governance-warnings-container"></div>
+                </section>
+            </div>
         </main>
 
         <div id="mitigation-modal" class="modal hidden" aria-hidden="true">
@@ -151,6 +177,7 @@
     <script src="js/schema/attention-schema.js"></script>
     <script src="js/schema/feature-schema.js"></script>
 
+    <script src="js/engine/tab-engine.js"></script>
     <script src="js/engine/validation-engine.js"></script>
     <script src="js/engine/risk-engine.js"></script>
     <script src="js/engine/governance-engine.js"></script>

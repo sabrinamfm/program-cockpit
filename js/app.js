@@ -24,6 +24,7 @@ async function loadData() {
         const latestSnapshot = sortedSnapshots[sortedSnapshots.length - 1];
 
         renderSnapshotSelector(sortedSnapshots, latestSnapshot);
+        initializeTabs();
 
         await loadSnapshot(latestSnapshot, sortedSnapshots);
 

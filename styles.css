@@ -1089,3 +1089,39 @@ section {
 .modal-body p {
     margin-bottom: 1rem;
 }
+
+.tab-navigation {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.tab-button {
+    border: none;
+    background-color: transparent;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab-button:hover {
+    background-color: var(--surface-secondary);
+}
+
+.tab-button.active {
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
