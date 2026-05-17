@@ -69,6 +69,96 @@ function validateProgramSnapshot(snapshot = {}) {
     return warnings;
 }
 
+function validateUniqueField(entities = [], field, entityType, severity = "Medium") {
+    const warnings = [];
+    const seen = new Map();
+
+    (entities || []).forEach((entity) => {
+        const value = entity?.[field];
+
+        if (!value) {
+            return;
+        }
+
+        if (seen.has(value)) {
+            warnings.push({
+                severity,
+                category: "Schema Validation",
+                message: `Duplicate ${entityType} ${field}: ${value}`
+            });
+            return;
+        }
+
+        seen.set(value, true);
+    });
+
+    return warnings;
+}
+
+function validateSnapshotUniqueness(snapshot = {}) {
+    const entityGroups = [
+        ["risks", "Risk"],
+        ["dependencies", "Dependency"],
+        ["milestones", "Milestone"],
+        ["decisions", "Decision"],
+        ["features", "Feature"],
+        ["attentionQueue", "Attention"],
+        ["relatedOKRs", "OKR"]
+    ];
+
+    return entityGroups.flatMap(([collectionKey, entityType]) => [
+        ...validateUniqueField(snapshot[collectionKey] || [], "id", entityType, "High"),
+        ...validateUniqueField(snapshot[collectionKey] || [], "title", entityType, "Medium")
+    ]);
+}
+
+function getSnapshotCollectionMap(snapshot = {}) {
+    return {
+        risks: snapshot.risks || [],
+        dependencies: snapshot.dependencies || [],
+        milestones: snapshot.milestones || [],
+        decisions: snapshot.decisions || [],
+        okrs: snapshot.relatedOKRs || [],
+        features: snapshot.features || []
+    };
+}
+
+function validateRelationshipReferences(snapshot = {}) {
+    const warnings = [];
+    const collectionMap = getSnapshotCollectionMap(snapshot);
+    const sourceGroups = [
+        ["risks", "Risk"],
+        ["dependencies", "Dependency"],
+        ["milestones", "Milestone"],
+        ["decisions", "Decision"],
+        ["features", "Feature"]
+    ];
+
+    sourceGroups.forEach(([collectionKey, entityType]) => {
+        (collectionMap[collectionKey] || []).forEach((entity) => {
+            Object.entries(entity.relationships || {}).forEach(([relationshipType, ids]) => {
+                if (!Array.isArray(ids) || !collectionMap[relationshipType]) {
+                    return;
+                }
+
+                ids.forEach((id) => {
+                    const targetExists = collectionMap[relationshipType].some((target) => target.id === id);
+
+                    if (!targetExists) {
+                        warnings.push({
+                            severity: "High",
+                            category: "Topology",
+                            message: `${entityType}${getEntityLabel(entity)} references missing ${relationshipType} entity: ${id}`
+                        });
+                    }
+                });
+            });
+        });
+    });
+
+    return warnings;
+}
+
 function validateAttentionsSchema(attentions = []) {
     return (attentions || []).flatMap((attention) => [
         ...validateEntity(attention, attentionSchema, "Attention"),
@@ -212,6 +302,9 @@ if (typeof module !== "undefined" && module.exports) {
     module.exports = {
         validateEntity,
         validateRelationshipsStructure,
-        validateAllowedValue
+        validateAllowedValue,
+        validateUniqueField,
+        validateSnapshotUniqueness,
+        validateRelationshipReferences
     };
 }

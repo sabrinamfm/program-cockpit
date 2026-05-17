@@ -4,6 +4,7 @@ const milestoneSchema = {
         "title",
         "date",
         "status",
-        "owner"
+        "owner",
+        "relationships"
     ]
 };

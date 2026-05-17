@@ -7,6 +7,7 @@ const decisionSchema = {
         "lastUpdated",
         "status",
         "severity",
-        "owner"
+        "owner",
+        "relationships"
     ]
 };

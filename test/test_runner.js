@@ -74,6 +74,49 @@ function testValidateAllowedValue() {
     assert(warnings[0].message.includes('invalid attention: Watch'));
 }
 
+function testValidateSnapshotUniqueness() {
+    const warnings = val.validateSnapshotUniqueness({
+        risks: [
+            { id: 'R1', title: 'Risk One' },
+            { id: 'R2', title: 'Risk One' }
+        ]
+    });
+
+    assert(Array.isArray(warnings));
+    assert(warnings.length === 1, 'should report duplicate titles');
+    assert(warnings[0].message.includes('Duplicate Risk title'));
+}
+
+function testValidateRelationshipReferences() {
+    const warnings = val.validateRelationshipReferences({
+        risks: [
+            {
+                id: 'R1',
+                title: 'Risk One',
+                relationships: {
+                    dependencies: ['D1']
+                }
+            }
+        ],
+        dependencies: []
+    });
+
+    assert(Array.isArray(warnings));
+    assert(warnings.length === 1, 'should report missing relationship targets');
+    assert(warnings[0].category === 'Topology');
+}
+
+function testValidateRisksUsesAttentionEntityIds() {
+    const warnings = risk.validateRisks(
+        [{ id: 'R1', title: 'Risk One', state: 'Unresolved', introduced: 's1' }],
+        [],
+        [{ entityType: 'Risk', entityId: 'R1' }],
+        ['s1', 's2', 's3']
+    );
+
+    assert(warnings.every((warning) => warning.category !== 'Governance Attention'));
+}
+
 function testResolveAttentionEntitiesOrdering() {
     global.uiConfig = { queueLevels: ['Informational', 'Review', 'Urgent'] };
 
@@ -122,6 +165,15 @@ function runAll() {
 
         testValidateAllowedValue();
         console.log('testValidateAllowedValue passed');
+
+        testValidateSnapshotUniqueness();
+        console.log('testValidateSnapshotUniqueness passed');
+
+        testValidateRelationshipReferences();
+        console.log('testValidateRelationshipReferences passed');
+
+        testValidateRisksUsesAttentionEntityIds();
+        console.log('testValidateRisksUsesAttentionEntityIds passed');
 
         testResolveAttentionEntitiesOrdering();
         console.log('testResolveAttentionEntitiesOrdering passed');

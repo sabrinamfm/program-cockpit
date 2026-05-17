@@ -44,12 +44,17 @@
                 "dependencies": [],
                 "milestones": [],
                 "decisions": [],
-                "okrs": []
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
+                ]
             }
         },
         {
             "id": "MS-002",
-            "title": "Customer Launch Go/No-Go Decision",
+            "title": "Launch Readiness Review",
             "date": "2026-07-25",
             "status": "At Risk",
             "owner": "Executive Team",
@@ -59,7 +64,10 @@
                 "dependencies": [],
                 "milestones": [],
                 "decisions": [],
-                "okrs": []
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
             }
         },
         {
@@ -72,7 +80,19 @@
             "relationships": {
                 "risks": [
                     "RISK-002"
-                ]
+                ],
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [],
+                "decisions": [
+                    "DEC-001",
+                    "DEC-002"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
             }
         },
         {
@@ -83,11 +103,20 @@
             "owner": "Governance Team",
             "confidence": "Medium",
             "relationships": {
-                "risks": [],
-                "dependencies": [],
+                "risks": [
+                    "RISK-002"
+                ],
+                "dependencies": [
+                    "DEP-001"
+                ],
                 "milestones": [],
-                "decisions": [],
-                "okrs": []
+                "decisions": [
+                    "DEC-001"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
             }
         },
         {
@@ -102,7 +131,8 @@
                 "dependencies": [],
                 "milestones": [],
                 "decisions": [],
-                "okrs": []
+                "okrs": [],
+                "features": []
             }
         },
         {
@@ -116,8 +146,13 @@
                 "risks": [],
                 "dependencies": [],
                 "milestones": [],
-                "decisions": [],
-                "okrs": []
+                "decisions": [
+                    "DEC-003"
+                ],
+                "okrs": [],
+                "features": [
+                    "FEAT-001"
+                ]
             }
         },
         {
@@ -132,7 +167,8 @@
                 "dependencies": [],
                 "milestones": [],
                 "decisions": [],
-                "okrs": []
+                "okrs": [],
+                "features": []
             }
         },
         {
@@ -145,9 +181,14 @@
             "relationships": {
                 "risks": [],
                 "dependencies": [],
-                "milestones": [],
+                "milestones": [
+                    "MS-002"
+                ],
                 "decisions": [],
-                "okrs": []
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
             }
         }
     ],
@@ -165,7 +206,7 @@
             "entityType": "Risk",
             "entityId": "RISK-002",
             "queueLevel": "Review",
-            "reason": "Customer launch path blocked pending ownership clarification.",
+            "reason": "Specification approval is still blocking cross-org alignment.",
             "owner": "Governance Team"
         },
         {
@@ -173,23 +214,38 @@
             "entityType": "Dependency",
             "entityId": "DEP-001",
             "queueLevel": "Urgent",
-            "reason": "Customer launch path blocked pending ownership clarification.",
+            "reason": "Governance approval remains blocked for downstream validation.",
             "owner": "Governance Team"
         }
     ],
     "features": [
         {
+            "id": "FEAT-001",
             "title": "Customer Configuration Flow",
             "estimate": "5 weeks",
             "owner": "Platform Team",
             "status": "In Progress",
             "confidence": "Medium",
-            "risk": "Elevated",
-            "dependencies": [
-                "Platform Approval",
-                "Security Review",
-                "Customer Validation"
-            ]
+            "risk": "High",
+            "relationships": {
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "risks": [
+                    "RISK-001",
+                    "RISK-002"
+                ],
+                "milestones": [
+                    "MS-001",
+                    "MS-006"
+                ],
+                "decisions": [
+                    "DEC-003"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ]
+            }
         }
     ],
     "risks": [
@@ -202,67 +258,138 @@
             "severity": "Medium",
             "impact": "Delivery",
             "owner": "Platform Team",
-            "attention": "Watch",
+            "attention": "Monitor",
             "description": "Multiple teams assume partial ownership of downstream validation.",
             "mitigation": {
                 "status": "In Progress",
                 "description": "Clarify ownership during governance review."
+            },
+            "relationships": {
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [
+                    "MS-001"
+                ],
+                "decisions": [
+                    "DEC-001"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
+                ]
+            }
+        },
+        {
+            "id": "RISK-002",
+            "title": "Specification approval blocked",
+            "description": "Specification governance path is blocking downstream configuration work.",
+            "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-13-v1",
+            "owner": "Governance Team",
+            "state": "Unresolved",
+            "severity": "High",
+            "attention": "Active",
+            "mitigation": {
+                "status": "In Progress",
+                "description": "Drive governance review and document exception path."
+            },
+            "relationships": {
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [
+                    "MS-003",
+                    "MS-004"
+                ],
+                "decisions": [
+                    "DEC-002"
+                ],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
+                ]
             }
         }
     ],
     "decisions": [
         {
             "id": "DEC-001",
-            "title": "Specification Path Still Undefined",
+            "title": "Specification Path Decision",
             "introduced": "2026-05-06-v1",
             "lastUpdated": "2026-05-13-v1",
-            "status": "Pending",
+            "status": "Proposed",
             "severity": "High",
             "owner": "Governance Team",
             "relationships": {
                 "risks": [
                     "RISK-001"
                 ],
-                "dependencies": [],
-                "milestones": [],
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [
+                    "MS-004"
+                ],
                 "decisions": [],
-                "okrs": []
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
             },
             "description": "Awaiting alignment between governance process and accelerated customer delivery expectations."
         },
         {
             "id": "DEC-002",
-            "title": "Specification Path Still Undefined",
+            "title": "Governance Exception Review",
             "introduced": "2026-05-13-v1",
             "lastUpdated": "2026-05-13-v1",
-            "status": "Pending",
+            "status": "Under Review",
             "severity": "High",
             "owner": "Governance Team",
             "relationships": {
                 "risks": [
                     "RISK-002"
                 ],
-                "dependencies": [],
-                "milestones": [],
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [
+                    "MS-003"
+                ],
                 "decisions": [],
-                "okrs": []
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
             },
-            "description": "Awaiting alignment between governance process and accelerated customer delivery expectations."
+            "description": "Reviewing whether customer delivery can proceed under a temporary governance exception."
         },
         {
             "id": "DEC-003",
-            "title": "Parallel Validation Approved",
+            "title": "Parallel Validation Approval",
             "introduced": "2026-05-13-v1",
             "lastUpdated": "2026-05-13-v1",
-            "status": "Approved",
+            "status": "Accepted",
             "severity": "Medium",
             "owner": "Governance Team",
             "relationships": {
                 "risks": [],
                 "dependencies": [],
-                "milestones": [],
+                "milestones": [
+                    "MS-006"
+                ],
                 "decisions": [],
-                "okrs": []
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
+                ]
             },
             "description": "Teams agreed to begin technical validation before full specification completion."
         }
@@ -279,15 +406,23 @@
             "description": "Specification approval required before downstream customer validation can finalize.",
             "relationships": {
                 "risks": [
-                    "RISK-001"
+                    "RISK-001",
+                    "RISK-002"
                 ],
                 "dependencies": [],
                 "milestones": [
-                    "MS-003"
+                    "MS-003",
+                    "MS-004"
                 ],
-                "decisions": [],
+                "decisions": [
+                    "DEC-001",
+                    "DEC-002"
+                ],
                 "okrs": [
                     "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
                 ]
             }
         }

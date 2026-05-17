@@ -31,7 +31,15 @@ function detectMilestoneDrift(currentMilestones, previousMilestones) {
 
     (currentMilestones || []).forEach(
         (currentMilestone) => {
-            const previousMilestone = (previousMilestones || []).find((milestone) => milestone.title === currentMilestone.title);
+            const previousMilestone = (previousMilestones || []).find(
+                (milestone) => {
+                    if (currentMilestone.id && milestone.id) {
+                        return milestone.id === currentMilestone.id;
+                    }
+
+                    return milestone.title === currentMilestone.title;
+                }
+            );
 
             if (!previousMilestone) {
                 return;
@@ -202,15 +210,25 @@ function validateDependencyHealth(dependencies) {
 
 function validateAttentionQueueReferences(attentionQueue, snapshot) {
     const warnings = [];
+    const attentionEntityTypeMap = {
+        Risk: "risks",
+        Dependency: "dependencies",
+        Milestone: "milestones",
+        Decision: "decisions",
+        Feature: "features",
+        OKR: "okrs"
+    };
 
     (attentionQueue || []).forEach(
         (item) => {
-            const entity =
-                findEntityById(
-                    `${item.entityType.toLowerCase()}s`,
+            const collectionKey = attentionEntityTypeMap[item.entityType];
+            const entity = collectionKey
+                ? findEntityById(
+                    collectionKey,
                     item.entityId,
                     snapshot
-                );
+                )
+                : null;
 
             if (!entity) {
                 warnings.push({
@@ -267,6 +285,14 @@ function collectGovernanceWarnings(currentSnapshot, previousSnapshot, availableS
         ),
 
         ...validateProgramSnapshot(
+            currentSnapshot
+        ),
+
+        ...validateSnapshotUniqueness(
+            currentSnapshot
+        ),
+
+        ...validateRelationshipReferences(
             currentSnapshot
         ),
 

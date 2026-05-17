@@ -28,12 +28,12 @@ function validateRisks(currentRisks, previousRisks, attentionQueue, availableSna
         }
     });
 
-    const attentionTitles = (attentionQueue || []).map((item) => item.title);
-
     currentRiskList.forEach((risk) => {
         const riskAge = calculateRiskAge(risk, availableSnapshots);
         const requiresAttention = riskAge >= 3 && risk.state === "Unresolved";
-        const alreadyTracked = attentionTitles.includes(risk.title);
+        const alreadyTracked = (attentionQueue || []).some(
+            (item) => item.entityType === "Risk" && item.entityId === risk.id
+        );
 
         if (requiresAttention && !alreadyTracked) {
             warnings.push({

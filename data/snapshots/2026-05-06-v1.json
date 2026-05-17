@@ -1,4 +1,9 @@
 {
+    "metadata": {
+        "snapshotId": "2026-05-06-v1",
+        "createdBy": "TPM",
+        "note": "Initial launch readiness review"
+    },
     "declaredDeliveryConfidence": 80,
     "executiveSummary": "Customer launch dependent on specification approval and downstream configuration readiness.",
     "targetLaunch": "2026-09-30",
@@ -31,18 +36,38 @@
             "status": "At Risk",
             "owner": "QA Team",
             "confidence": "Medium",
-            "relatedRisks": [
-                "RISK-001"
-            ]
+            "relationships": {
+                "risks": [
+                    "RISK-001"
+                ],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
+                ]
+            }
         },
         {
             "id": "MS-002",
-            "title": "Customer Launch Go/No-Go Decision",
+            "title": "Launch Readiness Review",
             "date": "2026-07-25",
             "status": "At Risk",
             "owner": "Executive Team",
             "confidence": "Low",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
+            }
         },
         {
             "id": "MS-003",
@@ -51,9 +76,20 @@
             "status": "Off Track",
             "owner": "Governance Team",
             "confidence": "Low",
-            "relatedRisks": [
-                "RISK-002"
-            ]
+            "relationships": {
+                "risks": [
+                    "RISK-002"
+                ],
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
+            }
         },
         {
             "id": "MS-004",
@@ -62,7 +98,20 @@
             "status": "At Risk",
             "owner": "Governance Team",
             "confidence": "Medium",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [
+                    "RISK-002"
+                ],
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
+            }
         },
         {
             "id": "MS-005",
@@ -71,7 +120,14 @@
             "status": "On Track",
             "owner": "Security Team",
             "confidence": "High",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": [],
+                "features": []
+            }
         },
         {
             "id": "MS-006",
@@ -80,7 +136,16 @@
             "status": "On Track",
             "owner": "QA Team",
             "confidence": "Medium",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": [],
+                "features": [
+                    "FEAT-001"
+                ]
+            }
         },
         {
             "id": "MS-007",
@@ -89,7 +154,14 @@
             "status": "At Risk",
             "owner": "Operations Team",
             "confidence": "Medium",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [],
+                "decisions": [],
+                "okrs": [],
+                "features": []
+            }
         },
         {
             "id": "MS-008",
@@ -98,34 +170,108 @@
             "status": "At Risk",
             "owner": "Executive Team",
             "confidence": "Low",
-            "relatedRisks": []
+            "relationships": {
+                "risks": [],
+                "dependencies": [],
+                "milestones": [
+                    "MS-002"
+                ],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": []
+            }
         }
     ],
     "features": [
         {
+            "id": "FEAT-001",
             "title": "Customer Configuration Flow",
             "estimate": "5 weeks",
             "owner": "Platform Team",
             "status": "In Progress",
             "confidence": "Medium",
-            "risk": "Elevated",
-            "dependencies": [
-                "Platform Approval",
-                "Security Review",
-                "Customer Validation"
-            ]
+            "risk": "High",
+            "relationships": {
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "risks": [
+                    "RISK-001",
+                    "RISK-002"
+                ],
+                "milestones": [
+                    "MS-001",
+                    "MS-006"
+                ],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ]
+            }
         }
     ],
     "risks": [
         {
+            "id": "RISK-001",
             "title": "Customer dependency ownership unclear",
-            "state": "Unresolved",
+            "description": "Multiple teams assume partial ownership of downstream validation.",
             "introduced": "2026-05-06-v1",
-            "impact": "Medium",
-            "attention": "Watch",
+            "lastUpdated": "2026-05-06-v1",
+            "owner": "Platform Team",
+            "attention": "Monitor",
+            "state": "Unresolved",
+            "severity": "Medium",
             "mitigation": {
                 "description": "Clarify ownership model during governance review.",
                 "status": "Proposed"
+            },
+            "relationships": {
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [
+                    "MS-001"
+                ],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
+                ]
+            }
+        },
+        {
+            "id": "RISK-002",
+            "title": "Specification approval blocked",
+            "description": "Specification governance path is blocking downstream configuration work.",
+            "introduced": "2026-05-06-v1",
+            "lastUpdated": "2026-05-06-v1",
+            "owner": "Governance Team",
+            "attention": "Active",
+            "state": "Unresolved",
+            "severity": "High",
+            "mitigation": {
+                "description": "Prepare governance review materials and escalation path.",
+                "status": "Proposed"
+            },
+            "relationships": {
+                "dependencies": [
+                    "DEP-001"
+                ],
+                "milestones": [
+                    "MS-003",
+                    "MS-004"
+                ],
+                "decisions": [],
+                "okrs": [
+                    "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
+                ]
             }
         }
     ],
@@ -148,17 +294,24 @@
             "status": "Blocked",
             "severity": "High",
             "introduced": "2026-05-06-v1",
-            "lastUpdated": "2026-05-13-v1",
+            "lastUpdated": "2026-05-06-v1",
             "description": "Specification approval required before downstream customer validation can finalize.",
             "relationships": {
                 "risks": [
-                    "RISK-001"
+                    "RISK-001",
+                    "RISK-002"
                 ],
+                "dependencies": [],
                 "milestones": [
-                    "MS-003"
+                    "MS-003",
+                    "MS-004"
                 ],
+                "decisions": [],
                 "okrs": [
                     "OKR-001"
+                ],
+                "features": [
+                    "FEAT-001"
                 ]
             }
         }

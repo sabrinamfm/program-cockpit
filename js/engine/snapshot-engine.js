@@ -30,6 +30,7 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
         }
 
         const snapshotIndex = availableSnapshots.indexOf(snapshotId);
+        const availableSnapshotsThroughCurrent = availableSnapshots.slice(0, snapshotIndex + 1);
         const historicalSnapshotsThroughCurrent = historicalSnapshots.slice(0, snapshotIndex + 1);
 
         let previousSnapshot = {
@@ -56,7 +57,7 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
         const program = await programResponse.json();
 
         clearLoading();
-        renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshots, historicalSnapshotsThroughCurrent);
+        renderProgram(program, currentSnapshot, previousSnapshot, availableSnapshotsThroughCurrent, historicalSnapshotsThroughCurrent);
     } catch (err) {
         console.error(err);
         clearLoading();
