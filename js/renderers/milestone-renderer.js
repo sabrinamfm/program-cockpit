@@ -1,11 +1,11 @@
-function renderMilestones(milestones) {
+function renderMilestones(milestones = []) {
     const container = document.getElementById("milestones-container");
     container.innerHTML = "";
 
     const timeline = document.createElement("div");
     timeline.className = "horizontal-timeline";
 
-    milestones.forEach((milestone) => {
+    (milestones || []).forEach((milestone) => {
         const item = document.createElement("div");
 
         let statusClass = "unknown";
@@ -27,6 +27,7 @@ function renderMilestones(milestones) {
                 statusClass = "unknown";
         }
 
+        const safeMilestone = milestone || {};
         item.className = "horizontal-timeline-item";
 
         item.innerHTML = `
@@ -36,10 +37,10 @@ function renderMilestones(milestones) {
             "></div>
 
             <div class="horizontal-content">
-                <h3>${milestone.title}</h3>
-                <p>${milestone.date}</p>
+                <h3>${escapeHtml(safeMilestone.title || "Untitled milestone")}</h3>
+                <p>${escapeHtml(safeMilestone.date || "—")}</p>
                 <span class="status ${statusClass}">
-                    ${milestone.status}
+                    ${escapeHtml(safeMilestone.status || "Unknown")}
                 </span>
             </div>
         `;

@@ -1,6 +1,4 @@
-function renderOKRs(
-    relatedOKRs
-) {
+function renderOKRs(relatedOKRs = []) {
     const container =
         document.getElementById(
             "okr-container"
@@ -29,8 +27,10 @@ function renderOKRs(
         <div class="okr-reference-list">
             ${relatedOKRs
                 .map((okr) => {
+                    const safeOKR = okr || {};
+                    const status = safeOKR.status || "Unknown";
                     const statusClass =
-                        okr.status
+                        status
                             .toLowerCase()
                             .replace(
                                 /\s+/g,
@@ -40,17 +40,17 @@ function renderOKRs(
                     return `
                         <div class="okr-reference">
                             <div class="okr-id">
-                                ${okr.id}
+                                ${escapeHtml(safeOKR.id || "N/A")}
                             </div>
                             <div class="okr-objective">
-                                ${okr.objective}
+                                ${escapeHtml(safeOKR.objective || "Untitled objective")}
                             </div>
                             <div class="okr-status-wrapper">
                                 <span class="
                                     okr-status-badge
                                     okr-${statusClass}
                                 ">
-                                    ${okr.status}
+                                    ${escapeHtml(status)}
                                 </span>
                             </div>
                         </div>

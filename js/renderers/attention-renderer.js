@@ -1,37 +1,38 @@
-function renderAttentionQueue(items) {
+function renderAttentionQueue(items = []) {
     const container = document.getElementById("attention-container");
 
     container.innerHTML = "";
 
-    items.forEach((item) => {
-        const queueLevelClass = item.queueLevel.toLowerCase().replace(/\s/g, "-");
+    (items || []).forEach((item) => {
+        const safeItem = item || {};
+        const queueLevel = safeItem.queueLevel || "Unknown";
+        const queueLevelClass = queueLevel.toLowerCase().replace(/\s/g, "-");
+        const entity = safeItem.entity || {};
 
         const card = createCard(`
             <div class="attention-header">
                 <span class="badge attention-queue-${queueLevelClass}">
-                    ${item.queueLevel}
+                    ${escapeHtml(queueLevel)}
                 </span>
             </div>
-            <h3>
-                ${item.entity.title}
-            </h3>
+            <h3>${escapeHtml(entity.title || "Untitled item")}</h3>
             <p>
                 <strong>Type:</strong>
-                ${item.entityType}
+                ${escapeHtml(safeItem.entityType || "Unknown")}
             </p>
             ${
-                item.entity.owner
+                entity.owner
                     ? `
                         <p>
                             <strong>Owner:</strong>
-                            ${item.entity.owner}
+                            ${escapeHtml(entity.owner)}
                         </p>
                     `
                     : ""
             }
 
             <p>
-                ${item.reason}
+                ${escapeHtml(safeItem.reason || "—")}
             </p>
         `);
         container.appendChild(card);

@@ -1,4 +1,4 @@
-function renderFeatures(features, currentSnapshot) {
+function renderFeatures(features = [], currentSnapshot = {}) {
     const container = document.getElementById("features-container");
 
     container.innerHTML = "";
@@ -26,10 +26,11 @@ function renderFeatures(features, currentSnapshot) {
 
     const tbody = table.querySelector("tbody");
 
-    features.forEach(
+    (features || []).forEach(
         (feature) => {
             const row = document.createElement("tr");
-            const relatedEntities = resolveRelationships(feature.relationships, currentSnapshot);
+            const safeFeature = feature || {};
+            const relatedEntities = resolveRelationships(safeFeature.relationships || {}, currentSnapshot);
             const dependencies = relatedEntities.filter((entity) => entity.type === "dependencies");
 
             const dependenciesHtml =
@@ -38,51 +39,52 @@ function renderFeatures(features, currentSnapshot) {
                         .map((dependency) => 
                                 `
                                     <span class="relationship-pill">
-                                        ${dependency.id} — ${dependency.title}
+                                        ${escapeHtml(dependency.id)} — ${escapeHtml(dependency.title)}
                                     </span>
                                 `
                             )
                         .join("")
                     : "—";
 
-            const statusClass = feature.status.toLowerCase().replace(/\s+/g, "-");
-            const confidenceClass =feature.confidence.toLowerCase();
-            const riskClass = feature.risk.toLowerCase();
+            const status = safeFeature.status || "Unknown";
+            const confidence = safeFeature.confidence || "Unknown";
+            const risk = safeFeature.risk || "Unknown";
+            const statusClass = status.toLowerCase().replace(/\s+/g, "-");
+            const confidenceClass = confidence.toLowerCase().replace(/\s+/g, "-");
+            const riskClass = risk.toLowerCase().replace(/\s+/g, "-");
 
             row.innerHTML = `
                 <td>
-                    <strong>
-                        ${feature.id}
-                    </strong>
+                    <strong>${escapeHtml(safeFeature.id || "N/A")}</strong>
                 </td>
 
                 <td>
-                    ${feature.title}
+                    ${escapeHtml(safeFeature.title || "Untitled feature")}
                 </td>
 
                 <td>
-                    ${feature.owner}
+                    ${escapeHtml(safeFeature.owner || "—")}
                 </td>
 
                 <td>
-                    ${feature.estimate}
+                    ${escapeHtml(safeFeature.estimate || "—")}
                 </td>
 
                 <td>
                     <span class="badge feature-status-${statusClass}">
-                        ${feature.status}
+                        ${escapeHtml(status)}
                     </span>
                 </td>
 
                 <td>
                     <span class="badge feature-confidence-${confidenceClass}">
-                        ${feature.confidence}
+                        ${escapeHtml(confidence)}
                     </span>
                 </td>
 
                 <td>
                     <span class="badge feature-risk-${riskClass}">
-                        ${feature.risk}
+                        ${escapeHtml(risk)}
                     </span>
                 </td>
 

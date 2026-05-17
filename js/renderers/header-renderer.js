@@ -1,19 +1,20 @@
-function renderHeader(program, currentSnapshot, previousSnapshot) {
-    document.getElementById("program-name").innerText = program.programName;
-    document.getElementById("executive-summary").innerText = currentSnapshot.executiveSummary;
+function renderHeader(program = {}, currentSnapshot = {}, previousSnapshot = {}) {
+    document.getElementById("program-name").innerText = program.programName || "Program Cockpit";
+    document.getElementById("executive-summary").innerText = currentSnapshot.executiveSummary || "";
     
     const statusElement = document.getElementById("status-class");
-    const statusClass = currentSnapshot.programStatus.toLowerCase().replace(/\s+/g, "-");
-    statusElement.innerText = currentSnapshot.programStatus;
+    const status = currentSnapshot.programStatus || "Unknown";
+    const statusClass = status.toLowerCase().replace(/\s+/g, "-");
+    statusElement.innerText = status;
     statusElement.className = `program-status ${statusClass}`;
 
-    document.getElementById("target-launch").innerText = currentSnapshot.targetLaunch;
-    document.getElementById("last-updated").innerText = currentSnapshot.lastUpdated;
+    document.getElementById("target-launch").innerText = currentSnapshot.targetLaunch || "—";
+    document.getElementById("last-updated").innerText = currentSnapshot.lastUpdated || "—";
     document.getElementById("snapshot-note").innerText = currentSnapshot.metadata?.note || "";
-    document.getElementById("milestones-title").innerText = program.sections.milestones;
-    document.getElementById("risks-title").innerText = program.sections.risks;
-    document.getElementById("features-title").innerText = program.sections.features;
-    document.getElementById("decisions-title").innerText = program.sections.decisionLog;
+    document.getElementById("milestones-title").innerText = program.sections?.milestones || "Milestones";
+    document.getElementById("risks-title").innerText = program.sections?.risks || "Risks";
+    document.getElementById("features-title").innerText = program.sections?.features || "Features";
+    document.getElementById("decisions-title").innerText = program.sections?.decisionLog || "Decisions";
 
     const labels = document.querySelectorAll(".metric-label");
     const values = document.querySelectorAll(".metric-value");
@@ -22,17 +23,19 @@ function renderHeader(program, currentSnapshot, previousSnapshot) {
         if (labels[index]) labels[index].innerText = metric;
     });
 
-    const declaredDeliveryConfidence = currentSnapshot.declaredDeliveryConfidence - previousSnapshot.declaredDeliveryConfidence;
+    const currentConfidence = Number(currentSnapshot.declaredDeliveryConfidence ?? 0);
+    const previousConfidence = Number(previousSnapshot.declaredDeliveryConfidence ?? currentConfidence);
+    const declaredDeliveryConfidence = currentConfidence - previousConfidence;
     const deltaClass = declaredDeliveryConfidence >= 0 ? "delta-positive" : "delta-negative";
     const deltaArrow = declaredDeliveryConfidence >= 0 ? "↑" : "↓";
 
     if (values[0]) {
         values[0].innerHTML = `
             <span class="metric-main">
-                ${currentSnapshot.declaredDeliveryConfidence}%
+                ${escapeHtml(currentConfidence)}%
             </span>
             <span class="metric-delta ${deltaClass}">
-                (${deltaArrow}${Math.abs(declaredDeliveryConfidence)}%)
+                (${deltaArrow}${escapeHtml(Math.abs(declaredDeliveryConfidence))}%)
             </span>
         `;
     }

@@ -1,5 +1,13 @@
 let uiConfig = {};
 
+function escapeHtml(value) {
+	return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function safeText(value, placeholder = "—") {
+	return escapeHtml(value ?? placeholder);
+}
+
 function showError(message) {
 	let el = document.getElementById("app-error");
 

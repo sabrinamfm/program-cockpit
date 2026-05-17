@@ -1,45 +1,43 @@
-function renderDependencies(dependencies) {
+function renderDependencies(dependencies = []) {
     const container = document.getElementById("dependencies-container");
 
     container.innerHTML = "";
 
-    dependencies.forEach(
+    (dependencies || []).forEach(
         (dependency) => {
-            const statusClass = dependency.status.toLowerCase().replace(/\s+/g, "-");
-            const severityClass = dependency.severity.toLowerCase().replace(/\s+/g, "-");
+            const safeDependency = dependency || {};
+            const status = safeDependency.status || "Unknown";
+            const severity = safeDependency.severity || "Unknown";
+            const statusClass = status.toLowerCase().replace(/\s+/g, "-");
+            const severityClass = severity.toLowerCase().replace(/\s+/g, "-");
 
-            const card =
-                createCard(`
-                    <div class="dependency-status-wrapper">
-                        <h3>
-                            ${dependency.title}
-                        </h3>
-                        <span class="badge dependency-${statusClass}">
-                            ${dependency.status}
-                        </span>
-                    </div>
+            const card = createCard(`
+                <div class="dependency-status-wrapper">
+                    <h3>${escapeHtml(safeDependency.title || "Untitled dependency")}</h3>
+                    <span class="badge dependency-${statusClass}">
+                        ${escapeHtml(status)}
+                    </span>
+                </div>
 
-                    <p>
-                        <strong>Description:</strong>
-                        ${dependency.description}
-                    </p>
+                <p>
+                    <strong>Description:</strong>
+                    ${escapeHtml(safeDependency.description || "—")}
+                </p>
 
-                    <p>
-                        <strong>Owner:</strong>
-                        ${dependency.owner}
-                    </p>
+                <p>
+                    <strong>Owner:</strong>
+                    ${escapeHtml(safeDependency.owner || "—")}
+                </p>
 
-                    <p>
-                        <strong>Severity:</strong>
-                        <span class="badge severity-${severityClass}">
-                            ${dependency.severity}
-                        </span>
-                    </p>
-                `);
+                <p>
+                    <strong>Severity:</strong>
+                    <span class="badge severity-${severityClass}">
+                        ${escapeHtml(severity)}
+                    </span>
+                </p>
+            `);
 
-            container.appendChild(
-                card
-            );
+            container.appendChild(card);
         }
     );
 }
