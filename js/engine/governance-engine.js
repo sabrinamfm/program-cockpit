@@ -338,6 +338,44 @@ function collectGovernanceWarnings(currentSnapshot, previousSnapshot, availableS
         ...detectOperationalContradictions(
             currentSnapshot,
             previousSnapshot
+        ),
+
+        ...validateFeatureMilestoneAlignment(
+            currentSnapshot.features,
+            currentSnapshot.milestones
         )
     ];
+}
+
+function validateFeatureMilestoneAlignment(features, milestones) {
+    const warnings = [];
+
+    features.forEach(
+        (feature) => {
+            const milestoneIds = feature.relationships ?.milestones || [];
+
+            milestoneIds.forEach(
+                (milestoneId) => {
+                    const milestone = milestones.find((item) => item.id === milestoneId);
+
+                    if (!milestone) {
+                        return;
+                    }
+
+                    const featureDate = new Date(feature.dueDate);
+                    const milestoneDate = new Date(milestone.date);
+
+                    if (featureDate > milestoneDate) {
+                        warnings.push({
+                            severity: "High",
+                            category: "Topology",
+                            message: `${feature.id} due date exceeds milestone ${milestone.id}`
+                        });
+                    }
+                }
+            );
+        }
+    );
+
+    return warnings;
 }

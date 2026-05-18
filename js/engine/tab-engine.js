@@ -1,20 +1,15 @@
 function initializeTabs() {
     const buttons =
-        document.querySelectorAll(
-            ".tab-button"
-        );
+        document.querySelectorAll(".tab-button");
 
     buttons.forEach((button) => {
         button.addEventListener(
             "click",
             () => {
-                const targetTab =
-                    button.dataset.tab;
+                const targetTab = button.dataset.tab;
 
                 document
-                    .querySelectorAll(
-                        ".tab-button"
-                    )
+                    .querySelectorAll(".tab-button")
                     .forEach((button) =>
                         button.classList.remove(
                             "active"
@@ -22,26 +17,18 @@ function initializeTabs() {
                     );
 
                 document
-                    .querySelectorAll(
-                        ".tab-content"
-                    )
+                    .querySelectorAll(".tab-content")
                     .forEach((tab) =>
                         tab.classList.remove(
                             "active"
                         )
                     );
 
-                button.classList.add(
-                    "active"
-                );
+                button.classList.add("active");
 
                 document
-                    .getElementById(
-                        `tab-${targetTab}`
-                    )
-                    .classList.add(
-                        "active"
-                    );
+                    .getElementById(`tab-${targetTab}`)
+                    .classList.add("active");
             }
         );
     });

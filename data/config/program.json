@@ -1,13 +1,15 @@
 {
     "programName": "Customer Configuration Program",
-
+    "programSponsor": {
+        "name": "Sponsor Name",
+        "organization": "Sponsor Org"
+    },
     "sections": {
         "milestones": "Milestones",
         "risks": "Program Risks",
         "features": "Feature Delivery",
         "decisionLog": "Decision Log"
     },
-
     "healthMetrics": [
         "Delivery Confidence",
         "Active Risks",

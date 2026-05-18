@@ -11,7 +11,6 @@ async function loadSnapshot(snapshotId, availableSnapshots) {
         if (!currentSnapshotResponse.ok) throw new Error(`Failed to load snapshot ${snapshotId}: ${currentSnapshotResponse.status}`);
 
         const currentSnapshot = await currentSnapshotResponse.json();
-
         const historicalSnapshots = [];
 
         for (const sId of availableSnapshots) {

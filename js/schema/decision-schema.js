@@ -8,6 +8,8 @@ const decisionSchema = {
         "status",
         "severity",
         "owner",
+        "deadline",
+        "outcome",
         "relationships"
     ]
 };

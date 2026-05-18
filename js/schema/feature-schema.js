@@ -3,6 +3,7 @@ const featureSchema = {
         "id",
         "title",
         "owner",
+        "dueDate",
         "estimate",
         "status",
         "confidence",

@@ -29,6 +29,10 @@
 
             <div class="tab-navigation">
 
+                <button class="tab-button" data-tab="about">
+                    About
+                </button>
+
                 <button class="tab-button active" data-tab="overview">
                     Overview
                 </button>
@@ -47,6 +51,16 @@
             </div>
         </header>
         <main>
+            <div id="tab-about" class="tab-content">
+                <section class="section">
+                    <div class="section-header">
+                        <h2>
+                            Operational Interfaces
+                        </h2>
+                    </div>
+                    <div id="interfaces-container"></div>
+                </section>
+            </div>
             <div id="tab-overview" class="tab-content active">
                 <section class="summary-layout">
                     <div class="summary-main">
@@ -199,6 +213,7 @@
     <script src="js/renderers/attention-renderer.js"></script>
     <script src="js/renderers/governance-renderer.js"></script>
     <script src="js/renderers/okr-renderer.js"></script>
+    <script src="js/renderers/interface-renderer.js"></script>
 
     <script src="js/app.js"></script>
 </body>

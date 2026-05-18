@@ -1,3 +1,30 @@
+const ENTITY_ID_PATTERNS = {
+    attentions:/^ATTN-\d+$/,
+    risks:/^RISK-\d+$/,
+    dependencies: /^DEP-\d+$/,
+    milestones: /^MS-\d+$/,
+    features: /^FEAT-\d+$/,
+    decisions: /^DEC-\d+$/
+};
+
+function validateEntityIdFormat(entity, collectionName, entityType) {
+    const pattern = ENTITY_ID_PATTERNS[collectionName];
+
+    if (!pattern) {
+        return [];
+    }
+
+    if (pattern.test(entity.id)) {
+        return [];
+    }
+
+    return [{
+        severity: "High",
+        category: "Schema",
+        message: `${entityType} has invalid ID format: ${entity.id}`
+    }];
+}
+
 function validateEntity(entity, schema, entityType) {
     const warnings = [];
 
@@ -162,6 +189,7 @@ function validateRelationshipReferences(snapshot = {}) {
 function validateAttentionsSchema(attentions = []) {
     return (attentions || []).flatMap((attention) => [
         ...validateEntity(attention, attentionSchema, "Attention"),
+        ...validateEntityIdFormat(attention, "attention", "Attention"),
         ...validateAllowedValue(attention, "queueLevel", getConfiguredValues("queueLevels"), "Attention")
     ]);
 }
@@ -169,6 +197,7 @@ function validateAttentionsSchema(attentions = []) {
 function validateDecisionsSchema(decisions = []) {
     return (decisions || []).flatMap((decision) => [
         ...validateEntity(decision, decisionSchema, "Decision"),
+        ...validateEntityIdFormat(decision, "decision", "Decision"),
         ...validateAllowedValue(decision, "status", getConfiguredValues("decisionStatuses"), "Decision"),
         ...validateAllowedValue(decision, "severity", getConfiguredValues("riskSeverityLevels"), "Decision")
     ]);
@@ -177,70 +206,41 @@ function validateDecisionsSchema(decisions = []) {
 function validateMilestonesSchema(milestones = []) {
     return (milestones || []).flatMap((milestone) => [
         ...validateEntity(milestone, milestoneSchema, "Milestone"),
+        ...validateEntityIdFormat(milestone, "milestone", "Milestone"),
         ...validateAllowedValue(milestone, "status", getConfiguredValues("milestoneStatuses"), "Milestone")
     ]);
 }
 
 function validateRisksSchema(risks = []) {
     return (risks || []).flatMap((risk) => [
-        ...validateEntity(
-            risk,
-            riskSchema,
-            "Risk"
-        ),
-
+        ...validateEntity(risk, riskSchema, "Risk"),
+        ...validateEntityIdFormat(risk, "risk", "Risk"),
         ...validateAllowedValue(risk, "state", getConfiguredValues("riskStates"), "Risk"),
-
         ...validateAllowedValue(risk, "severity", getConfiguredValues("riskSeverityLevels"), "Risk"),
-
         ...validateAllowedValue(risk, "attention", getConfiguredValues("riskAttentionLevels"), "Risk"),
-
         ...validateAllowedValue(risk, "mitigation.status", getConfiguredValues("riskMitigationStates"), "Risk"),
-
-        ...validateRelationshipsStructure(
-            risk,
-            "Risk"
-        )
+        ...validateRelationshipsStructure(risk, "Risk")
     ]);
 }
 
 function validateDependenciesSchema(dependencies = []) {
     return (dependencies || []).flatMap((dependency) => [
-        ...validateEntity(
-            dependency,
-            dependencySchema,
-            "Dependency"
-        ),
-
+        ...validateEntity(dependency, dependencySchema, "Dependency"),
+        ...validateEntityIdFormat(dependency, "dependency", "Dependency"),
         ...validateAllowedValue(dependency, "status", getConfiguredValues("dependencyStatuses"), "Dependency"),
-
         ...validateAllowedValue(dependency, "severity", getConfiguredValues("dependencySeverity"), "Dependency"),
-
-        ...validateRelationshipsStructure(
-            dependency,
-            "Dependency"
-        )
+        ...validateRelationshipsStructure(dependency, "Dependency")
     ]);
 }
 
 function validateFeaturesSchema(features = []) {
     return (features || []).flatMap((feature) => [
-        ...validateEntity(
-            feature,
-            featureSchema,
-            "Feature"
-        ),
-
+        ...validateEntity(feature, featureSchema, "Feature"),
+        ...validateEntityIdFormat(feature, "features", "Feature"),
         ...validateAllowedValue(feature, "status", getConfiguredValues("featureStatuses"), "Feature"),
-
         ...validateAllowedValue(feature, "confidence", getConfiguredValues("featureConfidence"), "Feature"),
-
         ...validateAllowedValue(feature, "risk", getConfiguredValues("featureRisks"), "Feature"),
-
-        ...validateRelationshipsStructure(
-            feature,
-            "Feature"
-        )
+        ...validateRelationshipsStructure(feature,"Feature")
     ]);
 }
 
@@ -264,9 +264,9 @@ function validateRelationshipsStructure(entity, entityType) {
 
             if (!validRelationshipTypes.includes(relationshipType)) {
                 warnings.push({
-                severity: "High",
-                category: "Schema",
-                message: `${entityType} ${entity.id} has invalid relationship type: ${relationshipType}`
+                    severity: "High",
+                    category: "Schema",
+                    message: `${entityType} ${entity.id} has invalid relationship type: ${relationshipType}`
                 });
 
                 return;
@@ -297,10 +297,46 @@ function validateRelationshipsStructure(entity, entityType) {
     return warnings;
 }
 
+function validateFeatureMilestoneAlignment(features, milestones) {
+    const warnings = [];
+
+    features.forEach(
+        (feature) => {
+            const milestoneIds =
+                feature.relationships
+                    ?.milestones || [];
+
+            milestoneIds.forEach(
+                (milestoneId) => {
+                    const milestone = milestones.find((item) => item.id === milestoneId);
+
+                    if (!milestone) {
+                        return;
+                    }
+
+                    const featureDate = new Date(feature.dueDate);
+                    const milestoneDate = new Date(milestone.date);
+
+                    if (featureDate > milestoneDate) {
+                        warnings.push({
+                            severity: "High",
+                            category: "Topology",
+                            message: `${feature.id} due date exceeds milestone ${milestone.id}`
+                        });
+                    }
+                }
+            );
+        }
+    );
+
+    return warnings;
+}
+
 // Expose for Node unit tests
 if (typeof module !== "undefined" && module.exports) {
     module.exports = {
         validateEntity,
+        validateEntityIdFormat,
         validateRelationshipsStructure,
         validateAllowedValue,
         validateUniqueField,

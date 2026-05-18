@@ -268,6 +268,7 @@
             "title": "Customer Configuration Flow",
             "estimate": "5 weeks",
             "owner": "Platform Team",
+            "dueDate": "2026-08-15",
             "status": "Completed",
             "confidence": "Low",
             "risk": "High",
@@ -298,6 +299,7 @@
             "estimate": "5 weeks",
             "owner": "Platform Team",
             "status": "In Progress",
+            "dueDate": "2026-08-15",
             "confidence": "High",
             "risk": "Low",
             "relationships": {
@@ -326,6 +328,7 @@
             "estimate": "5 weeks",
             "owner": "Platform Team",
             "status": "Blocked",
+            "dueDate": "2026-08-15",
             "confidence": "Medium",
             "risk": "Medium",
             "relationships": {
@@ -348,6 +351,7 @@
             "estimate": "5 weeks",
             "owner": "Platform Team",
             "status": "Planned",
+            "dueDate": "2026-08-15",
             "confidence": "Medium",
             "risk": "Medium",
             "relationships": {
@@ -442,6 +446,8 @@
             "status": "Proposed",
             "severity": "High",
             "owner": "Governance Team",
+            "deadline": "2026-05-13",
+            "outcome": "",
             "relationships": {
                 "risks": [
                     "RISK-001"
@@ -472,6 +478,8 @@
             "status": "Under Review",
             "severity": "High",
             "owner": "Governance Team",
+            "deadline": "2026-05-13",
+            "outcome": "",
             "relationships": {
                 "risks": [
                     "RISK-002"
@@ -500,6 +508,8 @@
             "status": "Accepted",
             "severity": "Medium",
             "owner": "Governance Team",
+            "deadline": "2026-05-13",
+            "outcome": "",
             "relationships": {
                 "risks": [],
                 "dependencies": [],
@@ -525,6 +535,8 @@
             "status": "Implemented",
             "severity": "Medium",
             "owner": "Governance Team",
+            "deadline": "2026-05-13",
+            "outcome": "",
             "relationships": {
                 "risks": [],
                 "dependencies": [
@@ -549,6 +561,8 @@
             "status": "Rejected",
             "severity": "Medium",
             "owner": "Governance Team",
+            "deadline": "2026-05-13",
+            "outcome": "",
             "relationships": {
                 "risks": [],
                 "dependencies": [],
@@ -668,6 +682,20 @@
                     "FEAT-004"
                 ]
             }
+        }
+    ],
+    "operationalInterfaces": [
+        {
+            "team": "Platform Team",
+            "poc": "Alice Johnson",
+            "programNeeds": [
+                "Security approval",
+                "Validation ownership"
+            ],
+            "teamNeeds": [
+                "Requirement stability",
+                "Launch prioritization"
+            ]
         }
     ]
 }

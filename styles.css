@@ -1128,11 +1128,50 @@ section {
 
 .attention-table {
     width: 100%;
-
     border-collapse: collapse;
 }
 
 .attention-table th {
+    text-align: left;
+    padding: 14px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+}
+
+.attention-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.attention-level-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.interface-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 18px;
+}
+
+.interfaces-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.interfaces-table th {
     text-align: left;
 
     padding: 14px;
@@ -1151,31 +1190,22 @@ section {
         var(--text-secondary);
 }
 
-.attention-table td {
-    padding: 16px 14px;
+.interfaces-table td {
+    padding: 18px 14px;
+
+    vertical-align: top;
 
     border-bottom:
         1px solid
         var(--border-color);
-
-    vertical-align: top;
 }
 
-.attention-level-badge {
-    display: inline-flex;
+.interfaces-table ul {
+    margin: 0;
 
-    align-items: center;
+    padding-left: 18px;
+}
 
-    padding:
-        4px 10px;
-
-    border-radius: 999px;
-
-    font-size: 0.72rem;
-
-    font-weight: 700;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.02em;
+.interfaces-table li {
+    margin-bottom: 6px;
 }
